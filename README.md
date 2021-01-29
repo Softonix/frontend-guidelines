@@ -1,7 +1,9 @@
 # Softonix Frontend Guidelines
-###### Due to standardization purposes among our teams in Softonix, we would like to have a pretty strict standard project structure based on top of Vue.js CLI.
-###### This repository includes 3 project structure examples: Vue2, Vue2 + Typescript, Vue3 + Typescript. 
-###### Besides this, we also propose a list of frontend best practices which we must follow for consistancy reasons.
+Due to standardization purposes among our teams in Softonix, we would like to have a pretty strict standard project structure based on top of Vue.js CLI.
+
+This repository includes 3 project structure examples: Vue2, Vue2 + Typescript, Vue3 + Typescript. 
+
+Besides this, we also propose a list of frontend best practices which we must follow for consistancy reasons.
 ---
 ### Vue project structure
 - Vue2 project structure: Link TBA
