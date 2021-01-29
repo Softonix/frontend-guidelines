@@ -86,16 +86,16 @@ All 3 projects inherit 1 base folder:
 ### Store - Services relations
 Very important to keep in mind - we use **/services/** ... not just for API calls but also for any logic relative to that service data. In store modules, we usually call Service methods, to **get()** data for example, but store should include actions only which in the end will store some data into state. If you have dummy action() in store which doesn't do **commit** and just doing some logic with data, move it to **some.service.js** or **/core/helpers.js**
 
-### Naming conventions
+### Naming convention
+
 - Name folders with lowercase and Vue components capitalized like: Dashboard.vue
-- In Vue’s <template> write components capitalized, e.g: <template> <Header /> instead of: <header>
-- Do not prefix shared components. If you want to create a Button component, name it either ButtonModule.vue or ButtonComponent or AppButton so it would not conflict with native HTML button tag
+- In Vue's `<template>` write components capitalized, e.g: `<Header />` instead of: `<header>`
+- If you want to create a Button component, name it either `ButtonModule.vue` or `ButtonComponent` or `AppButton` so it would not conflict with native HTML button tag.
 - Name root-level components exactly the same like route name: Login.vue === /auth/login route
-- Name js files with dash case, like: **leave-route.mixin.js** instead of **leaveRoute.mixin.js**
-- Name all files inside /services & /store with middleware names like: auth.service.js and auth.store.js - it will help you to quickly determine what type of file you are editing now.
+- Name js files with dash case, like: `leave-route.mixin.js` instead of `leaveRoute.mixin.js`
+- Name all files inside `/services/` and `/store/` with middleware names like: `auth.service.js` and `auth.store.js` - it will help you to quickly determine what type of file you are editing now.
 
 ### Best practices
-Here we will store a list of best practices, patterns, naming conventions and good things to keep in mind when we speak about project structure:
 
 - Use Vue order convention for [component options](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
 - Use Vue order convention for [element attributes](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
@@ -139,4 +139,3 @@ module.exports = {
 }
 
 ```
-
