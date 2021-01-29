@@ -4,7 +4,7 @@ Due to standardization purposes among our teams in Softonix, we would like to ha
 This repository includes 3 project structure examples: Vue2, Vue2 + Typescript, Vue3 + Typescript. 
 
 Besides this, we also propose a list of frontend best practices which we must follow for consistancy reasons.
----
+
 ### Vue project structure
 - Vue2 project structure: Link TBA
 - Vue2 + Typescript project structure: Link TBA
