@@ -1,7 +1,7 @@
 export const exampleViewRouteNames = {
-  exampleView: 'example-view',
-  exampleViewCreate: 'example-view-create',
-  exampleViewDetails: 'example-view-details'
+  exampleView: 'exampleView',
+  exampleViewCreate: 'exampleViewCreate',
+  exampleViewDetails: 'exampleViewDetails'
 }
 
 export const exampleViewRoutes = [

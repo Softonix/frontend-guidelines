@@ -1,6 +1,6 @@
 export const authRouteNames = {
   login: 'login',
-  signUp: 'sign-up'
+  signUp: 'signUp'
 }
 
 export const authRoutes = [
