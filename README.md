@@ -1,13 +1,12 @@
 # Softonix Frontend Guidelines
 Due to standardization purposes among our teams in Softonix, we would like to have a pretty strict standard project structure based on top of Vue.js CLI.
 
-This repository includes 3 project structure examples: Vue2, Vue2 + Typescript, Vue3 + Typescript. 
+This repository includes 2 project structure examples: Vue2, Vue3 + Typescript. 
 
 Besides this, we also propose a list of frontend best practices which we must follow for consistancy reasons.
 
 ### Vue project structure
-- Vue2 project structure: Link TBA
-- Vue2 + Typescript project structure: Link TBA
+- Vue2 project structure: [link](https://github.com/Softonix/frontend-guidelines/tree/main/vue2)
 - Vue3 + Typescript project structure: Link TBA
 
 All 3 projects inherit 1 base folder:
@@ -93,7 +92,8 @@ Very important to keep in mind - we use **/services/** ... not just for API call
 - If you want to create a Button component, name it either `ButtonModule.vue` or `ButtonComponent` or `AppButton` so it would not conflict with native HTML button tag.
 - Name root-level components exactly the same like route name: Login.vue === /auth/login route
 - Name js files with dash case, like: `leave-route.mixin.js` instead of `leaveRoute.mixin.js`
-- Name all files inside `/services/` and `/store/` with middleware names like: `auth.service.js` and `auth.store.js` - it will help you to quickly determine what type of file you are editing now.
+- Name all files inside `/services/` and `/store/` with middleware names like: `auth.service.js` and `auth.store.js` - it will help you to quickly determine what type of file you are editing now
+- Component name must exist and should be in pascal case as well as usage in template
 
 ### Best practices
 
@@ -111,7 +111,7 @@ Very important to keep in mind - we use **/services/** ... not just for API call
 - Use routeNames object for IDE assistance during names usage.
 - Do not use: `export default settingsService` , instead use `export const settingsService`. Always omit default export.
 
-### Linter recommended snippet
+### Linter recommended snippet for Vue2 (no-ts)
 ```js
 module.exports = {
   root: true,
