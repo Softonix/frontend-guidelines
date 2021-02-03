@@ -94,6 +94,8 @@ Very important to keep in mind - we use **/services/** ... not just for API call
 - Name root-level components exactly the same like route name: Login.vue === /auth/login route
 - Name js files with dash case, like: `leave-route.mixin.js` instead of `leaveRoute.mixin.js`
 - Name all files inside `/services/` and `/store/` with middleware names like: `auth.service.js` and `auth.store.js` - it will help you to quickly determine what type of file you are editing now.
+- Component name must exist and should be in PascalCase as well as usage in template.
+- Route name must be provided in camelCase to be the same as its key.
 
 ### Best practices
 
