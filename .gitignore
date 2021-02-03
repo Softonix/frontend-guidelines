@@ -1,6 +1,6 @@
 .DS_Store
-node_modules
-/dist
+/*/node_modules
+/*/dist/
 
 
 # local env files
@@ -21,28 +21,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-#vue2 folder
-vue2/.DS_Store
-vue2/node_modules
-vue2/dist
-
-vue2/# local env files
-vue2/.env.local
-vue2/.env.*.local
-
-vue2/# Log files
-vue2/npm-debug.log*
-vue2/yarn-debug.log*
-vue2/yarn-error.log*
-vue2/pnpm-debug.log*
-
-vue2/# Editor directories and files
-vue2/.idea
-vue2/.vscode
-vue2/*.suo
-vue2/*.ntvs*
-vue2/*.njsproj
-vue2/*.sln
-vue2/*.sw?
-
