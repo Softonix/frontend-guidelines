@@ -10,7 +10,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    exampleGeneralStore,
-    exampleViewStore
+    exampleGeneral: exampleGeneralStore,
+    exampleView: exampleViewStore
   }
 })
