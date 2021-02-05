@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export const date = (value) => {
+export const date = (value, format) => {
   return value
 }
 
