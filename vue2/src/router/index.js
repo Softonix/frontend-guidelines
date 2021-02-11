@@ -45,7 +45,7 @@ export const routes = [
   }
 ]
 
-export const router = new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
@@ -54,6 +54,7 @@ export const router = new VueRouter({
 router.beforeEach(routeGuard)
 
 export {
+  router,
   routesNames,
   routeGuard
 }

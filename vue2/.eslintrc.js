@@ -19,6 +19,13 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/no-v-html': 'off',
-    'vue/custom-event-name-casing': 'off'
+    'vue/custom-event-name-casing': 'off',
+    'vue/v-slot-style': ['error', {
+      'atComponent': 'shorthand',
+      'default': 'shorthand',
+      'named': 'shorthand'
+    }],
+    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    'vue/attribute-hyphenation': 'off'
   }
 }
