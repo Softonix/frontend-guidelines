@@ -1,5 +1,10 @@
+import { http } from '@/services'
+import { IExampleView } from '@/views/example-view/example-view.types'
+
 class ExampleGeneralService {
-  // register some logic for the service
+  getSomeData (): Promise<IExampleView[]> {
+    return http.get('/some-url')
+  }
 }
 
 export const exampleGeneralService = new ExampleGeneralService()
