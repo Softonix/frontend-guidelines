@@ -1,4 +1,4 @@
 export interface IExampleView {
-  a: string
-  b: number
+  a: string;
+  b: number;
 }
