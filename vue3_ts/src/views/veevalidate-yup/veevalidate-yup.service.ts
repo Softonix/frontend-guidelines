@@ -1,5 +1,5 @@
 import { http } from '@/services'
-import { ILoginType } from '@/types'
+import { ILoginType } from './veevalidate-yup.types'
 
 const prefix = 'auth'
 

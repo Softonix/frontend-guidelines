@@ -1,5 +1,5 @@
 import { object, string, ref, SchemaOf } from 'yup'
-import { VALIDATION } from '@/core/enums'
+import { VALIDATION } from './veevalidate-yup.enums'
 import { ILoginType } from './veevalidate-yup.types'
 
 export const emailSchema = object({
