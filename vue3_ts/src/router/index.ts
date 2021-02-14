@@ -5,9 +5,11 @@ import { routeGuard } from './route-guard'
 
 import { exampleViewRoutes } from '@/views/example-view/example-view.routes'
 import { authRoutes } from '@/views/auth/auth.routes'
+import { veevalidateYupRoutes } from '@/views/veevalidate-yup/veevalidate-yup.routes'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
+import VeevalidateYupLayout from '@/layouts/VeevalidateYupLayout.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -33,10 +35,17 @@ export const routes: Array<RouteRecordRaw> = [
     component: BlankLayout,
     children: authRoutes
   },
+  {
+    path: '/veevalidate-yup',
+    name: routesNames.veevalidateYup,
+    redirect: { name: routesNames.modelExample },
+    component: VeevalidateYupLayout,
+    children: veevalidateYupRoutes
+  },
 
   // If you need some page to be out of both layouts, just register it down below
   {
-    path: 'additional-no-layout-route',
+    path: '/additional-no-layout-route',
     name: routesNames.additionalNoLayoutRoute,
     component: () => import('@/views/example-view/ExampleView.vue') // path to respective view
   }

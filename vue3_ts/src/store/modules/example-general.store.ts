@@ -1,4 +1,4 @@
-import {actionTree, mutationTree} from 'typed-vuex'
+import { actionTree, mutationTree } from 'typed-vuex'
 
 const state = () => ({})
 

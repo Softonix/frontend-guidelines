@@ -4,3 +4,4 @@ export * from './example-general.service'
 
 export * from '@/views/example-view/example-view.service'
 export * from '@/views/auth/auth.service'
+export * from '@/views/veevalidate-yup/veevalidate-yup.service'
