@@ -3,7 +3,7 @@
     <h1 class="mb-30 text-center">Form example</h1>
     <Form #default="{ values }" :validation-schema="loginSchema" @submit="onSubmit">
       <div>{{ values }}</div>
-      <AppInput
+      <VeeValidateInput
         name="email"
         type="email"
         label="Email"
@@ -11,7 +11,7 @@
         class="mb-10"
       />
 
-      <AppInput
+      <VeeValidateInput
         name="password"
         type="password"
         label="Password"
@@ -19,7 +19,7 @@
         class="mb-10"
       />
 
-      <AppInput
+      <VeeValidateInput
         v-model="customValue"
         name="custom"
         label="Custom event"
@@ -35,20 +35,20 @@
 import { defineComponent, ref } from 'vue'
 
 import { Form } from 'vee-validate'
-import AppInput from './components/AppInput.vue'
+import VeeValidateInput from './components/VeeValidateInput.vue'
 
-import { loginSchema } from './veevalidate-yup.schemas'
-import { ILoginType } from './veevalidate-yup.types'
+import { loginSchema } from '@/schemas'
+import { IVeeValidateLogin } from '@/types'
 
 export default defineComponent({
-  name: 'CustomComponents',
+  name: 'VeeValidateCustomInput',
 
-  components: { Form, AppInput },
+  components: { Form, VeeValidateInput },
 
   setup () {
     const customValue = ref('')
 
-    function onSubmit (values: ILoginType) {
+    function onSubmit (values: IVeeValidateLogin) {
       console.log(values)
     }
 
@@ -60,7 +60,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-
-</style>

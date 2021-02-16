@@ -27,7 +27,7 @@ export default defineComponent({
       { link: routesNames.eventsExample, label: 'Events Example' },
       { link: routesNames.manuallyErrors, label: 'Manually Errors Example' },
       { link: routesNames.formExample, label: 'Form Example' },
-      { link: routesNames.customComponents, label: 'Custom Components Example' }
+      { link: routesNames.customInput, label: 'Custom Inputs Example' }
     ]
     return {
       links
@@ -35,7 +35,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-
-</style>

@@ -35,11 +35,11 @@ import { defineComponent } from 'vue'
 import { veevalidateYupService } from './veevalidate-yup.service'
 
 import { useForm, useField } from 'vee-validate'
-import { loginSchema } from './veevalidate-yup.schemas'
-import { ILoginType, ILoginResponse } from './veevalidate-yup.types'
+import { loginSchema } from '@/schemas'
+import { IVeeValidateLogin, IVeeValidateLoginResponse } from '@/types'
 
 export default defineComponent({
-  name: 'ManuallyErrors',
+  name: 'VeeValidateManuallyErrors',
 
   setup () {
     const { handleSubmit, setFieldError } = useForm({ validationSchema: loginSchema })
@@ -54,7 +54,7 @@ export default defineComponent({
       // for example doing request and receiving an error
       try {
         // Send data to the API
-        const response = await veevalidateYupService.login(values as ILoginType) as ILoginResponse
+        const response = await veevalidateYupService.login(values as IVeeValidateLogin) as IVeeValidateLoginResponse
 
         console.log(response)
       } catch ({ response }) {

@@ -48,10 +48,10 @@
 import { defineComponent, computed } from 'vue'
 
 import { useForm, useField } from 'vee-validate'
-import { loginSchema } from './veevalidate-yup.schemas'
+import { loginSchema } from '@/schemas'
 
 export default defineComponent({
-  name: 'EventsExample',
+  name: 'VeeValidateEventsExample',
 
   setup () {
     const initialValues = {
@@ -124,6 +124,7 @@ export default defineComponent({
       return meta.value.valid
     })
 
+    // hanldeSubmit prevent form behavior
     const onSubmit = handleSubmit(values => {
       console.log('onSubmit - ', values)
 

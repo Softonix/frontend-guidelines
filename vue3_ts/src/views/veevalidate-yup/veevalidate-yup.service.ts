@@ -1,10 +1,10 @@
 import { http } from '@/services'
-import { ILoginType } from './veevalidate-yup.types'
+import { IVeeValidateLogin } from '@/types'
 
 const prefix = 'auth'
 
 class VeevalidateYupService {
-  login (data: ILoginType) {
+  login (data: IVeeValidateLogin) {
     return http.post(`/${prefix}/login`, data)
   }
 }

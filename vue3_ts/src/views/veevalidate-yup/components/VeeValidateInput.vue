@@ -1,5 +1,5 @@
 <template>
-  <div :class="['flex flex-col', { 'has-error': !!errorMessage, success: meta.valid }]">
+  <div :class="['flex flex-col', { 'has-error': !!errorMessage }]">
     <label :for="name" class="cursor-pointer">{{ label }}</label>
 
     <input
@@ -23,7 +23,7 @@ import { defineComponent } from 'vue'
 import { useField } from 'vee-validate'
 
 export default defineComponent({
-  name: 'AppInput',
+  name: 'VeeValidateInput',
 
   props: {
     type: {
@@ -75,7 +75,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-
-</style>

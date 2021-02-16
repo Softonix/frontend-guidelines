@@ -5,37 +5,37 @@ export const veevalidateYupRouteNames = {
   eventsExample: 'eventsExample',
   manuallyErrors: 'manuallyErrors',
   formExample: 'formExample',
-  customComponents: 'customComponents'
+  customInput: 'customInput'
 }
 
 export const veevalidateYupRoutes: Array<RouteRecordRaw> = [
   {
     path: 'model',
     name: veevalidateYupRouteNames.modelExample,
-    component: () => import('./ModelExample.vue')
+    component: () => import('./VeeValidateModelExample.vue')
   },
 
   {
     path: 'events',
     name: veevalidateYupRouteNames.eventsExample,
-    component: () => import('./EventsExample.vue')
+    component: () => import('./VeeValidateEventsExample.vue')
   },
 
   {
     path: 'manually-errors',
     name: veevalidateYupRouteNames.manuallyErrors,
-    component: () => import('./ManuallyErrors.vue')
+    component: () => import('./VeeValidateManuallyErrors.vue')
   },
 
   {
     path: 'form-example',
     name: veevalidateYupRouteNames.formExample,
-    component: () => import('./FormExample.vue')
+    component: () => import('./VeeValidateFormExample.vue')
   },
 
   {
-    path: 'custom-components',
-    name: veevalidateYupRouteNames.customComponents,
-    component: () => import('./CustomComponents.vue')
+    path: 'custom-input',
+    name: veevalidateYupRouteNames.customInput,
+    component: () => import('./VeeValidateCustomInput.vue')
   }
 ]

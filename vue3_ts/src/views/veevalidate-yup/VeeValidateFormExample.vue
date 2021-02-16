@@ -29,12 +29,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { loginSchema } from './veevalidate-yup.schemas'
+import { loginSchema } from '@/schemas'
 
 import { Form, Field } from 'vee-validate'
 
 export default defineComponent({
-  name: 'FormExample',
+  name: 'VeeValidateFormExample',
 
   components: {
     Form,

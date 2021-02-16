@@ -18,10 +18,10 @@
 import { defineComponent } from 'vue'
 
 import { useForm, useField } from 'vee-validate'
-import { loginSchema } from './veevalidate-yup.schemas'
+import { loginSchema } from '@/schemas'
 
 export default defineComponent({
-  name: 'ModelExample',
+  name: 'VeeValidateModelExample',
 
   setup () {
     // Create a form context with the validation schema

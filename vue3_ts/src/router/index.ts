@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import { routesNames } from './route-names'
 import { routeGuard } from './route-guard'
@@ -9,9 +9,9 @@ import { veevalidateYupRoutes } from '@/views/veevalidate-yup/veevalidate-yup.ro
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
-import VeevalidateYupLayout from '@/layouts/VeevalidateYupLayout.vue'
+import VeevalidateYupLayout from '@/layouts/vee-validate-yup/VeevalidateYupLayout.vue'
 
-export const routes: Array<RouteRecordRaw> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: { name: routesNames.exampleView },
@@ -60,5 +60,7 @@ router.beforeEach(routeGuard)
 
 export {
   routesNames,
-  routeGuard
+  routes,
+  onBeforeRouteUpdate,
+  useRoute
 }
