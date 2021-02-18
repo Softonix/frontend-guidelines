@@ -1,15 +1,17 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import { routesNames } from './route-names'
 import { routeGuard } from './route-guard'
 
 import { exampleViewRoutes } from '@/views/example-view/example-view.routes'
 import { authRoutes } from '@/views/auth/auth.routes'
+import { veevalidateYupRoutes } from '@/views/veevalidate-yup/veevalidate-yup.routes'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
+import VeevalidateYupLayout from '@/layouts/vee-validate-yup/VeevalidateYupLayout.vue'
 
-export const routes: Array<RouteRecordRaw> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: { name: routesNames.exampleView },
@@ -33,10 +35,17 @@ export const routes: Array<RouteRecordRaw> = [
     component: BlankLayout,
     children: authRoutes
   },
+  {
+    path: '/veevalidate-yup',
+    name: routesNames.veevalidateYup,
+    redirect: { name: routesNames.modelExample },
+    component: VeevalidateYupLayout,
+    children: veevalidateYupRoutes
+  },
 
   // If you need some page to be out of both layouts, just register it down below
   {
-    path: 'additional-no-layout-route',
+    path: '/additional-no-layout-route',
     name: routesNames.additionalNoLayoutRoute,
     component: () => import('@/views/example-view/ExampleView.vue') // path to respective view
   }
@@ -51,5 +60,7 @@ router.beforeEach(routeGuard)
 
 export {
   routesNames,
-  routeGuard
+  routes,
+  onBeforeRouteUpdate,
+  useRoute
 }

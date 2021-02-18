@@ -1,4 +1,4 @@
-import {RouteRecordRaw} from "vue-router";
+import { RouteRecordRaw } from 'vue-router'
 
 export const authRouteNames = {
   login: 'login',
