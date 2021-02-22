@@ -37,9 +37,9 @@ All 2 projects inherit basic folders structure (files extensions, of course, dep
     │   │── filters.js                 # Vue core filters
     │   └── helpers.js                 # Combination of separated helper functions like prefentBodyScroll()
     │  
-    ├── layouts                        # Nuxt-like layouts
-    │   ├── BlankLayout.vue            # Blank layout (no header, no sidebar)
-    │   └── DefaultLayout.vue          # Default layout for most of the pages
+    ├── layouts                    # Nuxt-like layouts
+    │   ├── BlankLayout.vue        # Blank layout (no header, no sidebar)
+    │   └── DefaultLayout.vue      # Default layout for most of the pages
     │   
     ├── mixins (for Vue 2 only)                         
     │   ├── index.js                   # Export all 
