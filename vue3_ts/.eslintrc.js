@@ -31,6 +31,24 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/interface-name-prefix': [
       'error', { 'prefixWithI': 'always' }
+    ],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'interface',
+        format: ['PascalCase'],
+        prefix: ['I'],
+      },
+      {
+        selector: 'typeAlias',
+        format: ['PascalCase'],
+        prefix: ['T'],
+      },
+      {
+        selector: 'enum',
+        format: ['PascalCase'],
+        prefix: ['E'],
+      },
     ]
   }
 }
