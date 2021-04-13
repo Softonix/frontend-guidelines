@@ -51,4 +51,10 @@ class HttpService {
   }
 }
 
-export const httpService = new HttpService(process.env.VUE_APP_API_URL as string)
+export const http = new HttpService(process.env.VUE_APP_API_URL as string + '/api')
+
+// Can contain multiple instances, eg. =>
+/* export const httpService = {
+  auth: new HttpService(process.env.VUE_APP_AUTH_API_URL as string + '/api'),
+  main: new HttpService(process.env.VUE_APP_API_URL as string)
+} */
