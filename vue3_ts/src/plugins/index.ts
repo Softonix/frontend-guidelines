@@ -1,1 +1,1 @@
-import './element'
+export * from './portal'
