@@ -11,7 +11,7 @@ class HttpService {
   private axios = {} as AxiosInstance
 
   constructor (apiUrl: string) {
-    this.apiUrl = apiUrl + '/api'
+    this.apiUrl = apiUrl
     this.createAxiosInstance()
     this.registerInterceptors()
   }
