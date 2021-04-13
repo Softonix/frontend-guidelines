@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 import {
   requestInterceptor,
   requestErrorInterceptor,
-  unwrapResponseInterceptor,
-  responseErrorInterceptor
+  responseInterceptor,
+  errorInterceptor
 } from './interceptors'
 
 class HttpService {
@@ -43,8 +43,8 @@ class HttpService {
 
   private registerInterceptors () {
     this.axios.interceptors.response.use(
-      (res: AxiosResponse) => unwrapResponseInterceptor(res),
-      (err: AxiosError) => responseErrorInterceptor(err)
+      (res: AxiosResponse) => responseInterceptor(res),
+      (err: AxiosError) => errorInterceptor(err)
     )
 
     this.axios.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
