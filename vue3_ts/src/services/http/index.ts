@@ -33,6 +33,10 @@ class HttpService {
     return this.axios.patch(this.apiUrl + url, payload, config)
   }
 
+  delete<T> (url: string, config?: AxiosRequestConfig): Promise<T> {
+    return this.axios.delete(this.apiUrl + url, config)
+  }
+
   private createAxiosInstance () {
     this.axios = axios.create()
   }
