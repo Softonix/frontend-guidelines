@@ -29,10 +29,9 @@ export default defineComponent({
     }
 
     onMounted(async () => {
+      registerPortal(props.to, mountPortal)
       if (document.getElementById(props.to)) {
         mountPortal()
-      } else {
-        registerPortal(props.to, mountPortal)
       }
     })
 
