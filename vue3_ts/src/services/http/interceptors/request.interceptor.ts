@@ -1,8 +1,15 @@
-import { AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
 
-export const requestInterceptor = async (requestConfig: AxiosRequestConfig) => {
-  // some request handler, eg registering token for every request
-  // requestConfig.headers.Authorization = `${store.user.state.token}`
-
+const requestInterceptor = (requestConfig: AxiosRequestConfig): AxiosRequestConfig => {
+  // requestConfig.headers.Authorization = `Bearer ${modules.user.tokenInfo.accessToken}`
   return requestConfig
+}
+
+const requestErrorInterceptor = (error: AxiosError): Promise<AxiosError> => {
+  return Promise.reject(error)
+}
+
+export {
+  requestInterceptor,
+  requestErrorInterceptor
 }

@@ -1,5 +1,7 @@
-export interface IIndexedObject<T = any> {
+export type TIndexedObject<T = any> = {
   [key: string]: T;
 }
 
-export type INullableField<T> = T | null
+export type TNullableField<T> = T | null
+
+export type TCallbackFn<T extends unknown[] = [], R = void> = (...args: T) => R

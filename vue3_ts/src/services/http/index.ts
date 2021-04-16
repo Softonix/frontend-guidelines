@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import {
   requestInterceptor,
+  requestErrorInterceptor,
   responseInterceptor,
   errorInterceptor
-} from '@/services/http/interceptors'
+} from './interceptors'
 
 class HttpService {
   readonly apiUrl: string
@@ -16,18 +17,19 @@ class HttpService {
   }
 
   get<T> (url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.axios.get(this.apiUrl + url, config)
+    const parsedUrl = url.includes('http') ? url : this.apiUrl + url
+    return this.axios.get(parsedUrl, config)
   }
 
-  put<T> (url: string, payload: object, config?: AxiosRequestConfig): Promise<T> {
-    return this.axios.put(this.apiUrl + url, payload, config)
+  put<T> (url: string, payload: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
+    return this.axios.put(url, payload, config)
   }
 
-  post<T> (url: string, payload: object, config?: AxiosRequestConfig): Promise<T> {
+  post<T> (url: string, payload?: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
     return this.axios.post(this.apiUrl + url, payload, config)
   }
 
-  patch<T> (url: string, payload: object, config?: AxiosRequestConfig): Promise<T> {
+  patch<T> (url: string, payload: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
     return this.axios.patch(this.apiUrl + url, payload, config)
   }
 
@@ -45,7 +47,7 @@ class HttpService {
       (err: AxiosError) => errorInterceptor(err)
     )
 
-    this.axios.interceptors.request.use(requestInterceptor)
+    this.axios.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
   }
 }
 
