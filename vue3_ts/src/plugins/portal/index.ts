@@ -3,9 +3,9 @@ import PortalTarget from '@/plugins/portal/PortalTarget.vue'
 import Portal from '@/plugins/portal/Portal.vue'
 import { TCallbackFn, TIndexedObject } from '@/types'
 
-const portalNames = {
-  sidebar: 'sidebar-portal',
-  header: 'header-portal'
+enum EPortalNames {
+  SIDEBAR = 'sidebar-portal',
+  HEADER = 'header-portal'
 }
 
 class PortalService {
@@ -53,7 +53,7 @@ const PortalPlugin: Plugin = {
 }
 
 export {
-  portalNames,
+  EPortalNames,
   PortalPlugin,
   TRenderPortals,
   TRegisterPortal,
