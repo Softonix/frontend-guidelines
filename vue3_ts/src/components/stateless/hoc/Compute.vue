@@ -1,12 +1,12 @@
 <template>
-  <PortalTarget :name="$portalNames.HEADER" />
-  <router-view />
+  <slot v-bind="$attrs" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'Compute',
+  inheritAttrs: true
 })
 </script>

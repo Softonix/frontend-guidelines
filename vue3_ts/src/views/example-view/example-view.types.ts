@@ -1,4 +1,4 @@
-export interface IExampleView {
+export interface IExampleInterface {
   a: string;
   b: number;
 }

@@ -1,15 +1,10 @@
-import { actionTree, mutationTree } from 'typed-vuex'
+import { Module, VuexModule } from 'vuex-class-modules'
+import { store } from '@/store/create-store'
 
-const state = () => ({})
+@Module
+class ExampleViewStore extends VuexModule {}
 
-const mutations = mutationTree(state, {})
-
-const actions = actionTree({ state, mutations }, {})
-
-export const exampleViewStore = {
-  namespaced: true,
-
-  state,
-  mutations,
-  actions
-}
+export const exampleViewStore = new ExampleViewStore({
+  store,
+  name: 'ExampleViewStore'
+})

@@ -5,6 +5,7 @@ import {
   responseInterceptor,
   errorInterceptor
 } from './interceptors'
+import { TIndexedObject } from '@/types'
 
 class HttpService {
   readonly apiUrl: string
@@ -21,15 +22,15 @@ class HttpService {
     return this.axios.get(parsedUrl, config)
   }
 
-  put<T> (url: string, payload: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
-    return this.axios.put(url, payload, config)
+  put<T> (url: string, payload: TIndexedObject, config?: AxiosRequestConfig): Promise<T> {
+    return this.axios.put(this.apiUrl + url, payload, config)
   }
 
-  post<T> (url: string, payload?: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
+  post<T> (url: string, payload?: TIndexedObject, config?: AxiosRequestConfig): Promise<T> {
     return this.axios.post(this.apiUrl + url, payload, config)
   }
 
-  patch<T> (url: string, payload: Record<string, unknown>, config?: AxiosRequestConfig): Promise<T> {
+  patch<T> (url: string, payload: TIndexedObject, config?: AxiosRequestConfig): Promise<T> {
     return this.axios.patch(this.apiUrl + url, payload, config)
   }
 
@@ -51,10 +52,4 @@ class HttpService {
   }
 }
 
-export const http = new HttpService(process.env.VUE_APP_API_URL as string + '/api')
-
-// Can contain multiple instances, eg. =>
-/* export const httpService = {
-  auth: new HttpService(process.env.VUE_APP_AUTH_API_URL as string + '/api'),
-  main: new HttpService(process.env.VUE_APP_API_URL as string)
-} */
+export const httpService = new HttpService((process.env.VUE_APP_API_URL as string))

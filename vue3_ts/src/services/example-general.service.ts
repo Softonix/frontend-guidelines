@@ -1,9 +1,9 @@
-import { http } from '@/services'
-import { IExampleView } from '@/views/example-view/example-view.types'
+import { httpService } from '@/services'
+import { IExampleInterface } from '@/views/example-view/example-view.types'
 
 class ExampleGeneralService {
-  getSomeData (): Promise<IExampleView[]> {
-    return http.get('/some-url')
+  getSomeData (): Promise<IExampleInterface> {
+    return httpService.get('/some-url')
   }
 }
 
