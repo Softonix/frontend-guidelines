@@ -34,7 +34,7 @@
 import { defineComponent } from 'vue'
 import { veevalidateYupService } from './veevalidate-yup.service'
 
-import { useForm, useField } from 'vee-validate'
+import { useField, useForm } from 'vee-validate'
 import { loginSchema } from '@/schemas'
 import { IVeeValidateLogin, IVeeValidateLoginResponse } from '@/types'
 
@@ -57,10 +57,10 @@ export default defineComponent({
         const response = await veevalidateYupService.login(values as IVeeValidateLogin) as IVeeValidateLoginResponse
 
         console.log(response)
-      } catch ({ response }) {
+      } catch (error: any) {
         // set single field error
-        if (response?.data?.error?.message) {
-          setFieldError('email', response.data.error.message)
+        if (error.response?.data?.error?.message) {
+          setFieldError('email', error.response.data.error.message)
         }
 
         // set multiple errors, assuming the keys are the names of the fields
