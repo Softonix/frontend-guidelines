@@ -34,6 +34,7 @@ module.exports = {
       named: 'shorthand'
     }],
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    'vue/script-setup-uses-vars': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/custom-event-name-casing': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

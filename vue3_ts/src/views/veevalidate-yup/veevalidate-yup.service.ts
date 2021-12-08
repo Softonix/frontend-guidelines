@@ -1,11 +1,11 @@
-import { http } from '@/services'
+import { httpService } from '@/services'
 import { IVeeValidateLogin } from '@/types'
 
 const prefix = 'auth'
 
 class VeevalidateYupService {
   login (data: IVeeValidateLogin) {
-    return http.post(`/${prefix}/login`, data)
+    return httpService.post(`/${prefix}/login`, data)
   }
 }
 
