@@ -5,11 +5,14 @@ This repository includes 2 project structure examples: Vue2, Vue3 + Typescript.
 
 Besides this, we also propose a list of frontend best practices which we must follow for consistency reasons.
 
+### Prerequisition
+- Node v14 or latest
+- VueCLI5, currently in RC stage (https://next.cli.vuejs.org/migrations/migrate-from-v4.html)
+
 ### Vue project structure
-- Vue2 project structure: [link](https://github.com/Softonix/frontend-guidelines/tree/main/vue2)
 - Vue3 + Typescript project structure: [link](https://github.com/Softonix/frontend-guidelines/tree/main/vue3_ts)
 
-All 2 projects inherit basic folders structure (files extensions, of course, depend on the language you use): 
+Vue project structure:
 
     src
     ├── assets
