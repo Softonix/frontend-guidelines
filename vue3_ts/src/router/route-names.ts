@@ -4,8 +4,6 @@ import { veevalidateYupRouteNames } from '@/views/veevalidate-yup/veevalidate-yu
 
 export const routesNames = {
   rootPage: 'rootPage',
-  auth: 'auth',
-  veevalidateYup: 'veevalidateYup',
 
   ...exampleViewRouteNames,
   ...authRouteNames,

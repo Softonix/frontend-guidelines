@@ -9,8 +9,7 @@ module.exports = {
     '@vue/typescript/recommended'
   ],
   parserOptions: {
-    ecmaVersion: 2020,
-    parser: '@typescript-eslint/parser'
+    ecmaVersion: 2020
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -28,6 +27,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/no-v-html': 'off',
+    'vue/multi-word-component-names': 'off',
     'vue/v-slot-style': ['error', {
       atComponent: 'shorthand',
       default: 'shorthand',

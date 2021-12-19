@@ -1,6 +1,8 @@
 import { RouteRecordRaw } from 'vue-router'
+import VeevalidateYupLayout from '@/layouts/vee-validate-yup/VeevalidateYupLayout.vue'
 
 export const veevalidateYupRouteNames = {
+  veevalidateYup: 'veevalidateYup',
   modelExample: 'modelExample',
   eventsExample: 'eventsExample',
   manuallyErrors: 'manuallyErrors',
@@ -10,32 +12,40 @@ export const veevalidateYupRouteNames = {
 
 export const veevalidateYupRoutes: Array<RouteRecordRaw> = [
   {
-    path: 'model',
-    name: veevalidateYupRouteNames.modelExample,
-    component: () => import('./VeeValidateModelExample.vue')
-  },
+    path: '/veevalidate-yup',
+    name: veevalidateYupRouteNames.veevalidateYup,
+    redirect: { name: veevalidateYupRouteNames.modelExample },
+    component: VeevalidateYupLayout,
+    children: [
+      {
+        path: 'model',
+        name: veevalidateYupRouteNames.modelExample,
+        component: () => import('./VeeValidateModelExample.vue')
+      },
 
-  {
-    path: 'events',
-    name: veevalidateYupRouteNames.eventsExample,
-    component: () => import('./VeeValidateEventsExample.vue')
-  },
+      {
+        path: 'events',
+        name: veevalidateYupRouteNames.eventsExample,
+        component: () => import('./VeeValidateEventsExample.vue')
+      },
 
-  {
-    path: 'manually-errors',
-    name: veevalidateYupRouteNames.manuallyErrors,
-    component: () => import('./VeeValidateManuallyErrors.vue')
-  },
+      {
+        path: 'manually-errors',
+        name: veevalidateYupRouteNames.manuallyErrors,
+        component: () => import('./VeeValidateManuallyErrors.vue')
+      },
 
-  {
-    path: 'form-example',
-    name: veevalidateYupRouteNames.formExample,
-    component: () => import('./VeeValidateFormExample.vue')
-  },
+      {
+        path: 'form-example',
+        name: veevalidateYupRouteNames.formExample,
+        component: () => import('./VeeValidateFormExample.vue')
+      },
 
-  {
-    path: 'custom-input',
-    name: veevalidateYupRouteNames.customInput,
-    component: () => import('./VeeValidateCustomInput.vue')
+      {
+        path: 'custom-input',
+        name: veevalidateYupRouteNames.customInput,
+        component: () => import('./VeeValidateCustomInput.vue')
+      }
+    ]
   }
 ]

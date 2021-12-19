@@ -4,15 +4,15 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "types": [
       "webpack-env"
     ],
@@ -31,12 +31,12 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.js",
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

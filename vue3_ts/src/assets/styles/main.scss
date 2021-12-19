@@ -1,5 +1,6 @@
 @tailwind base;
 
-@import 'animations';
+@import './base/base.scss';
+@import './utils/animations.scss';
 
 @tailwind utilities;

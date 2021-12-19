@@ -12,8 +12,8 @@ import {
   VueGlobalPrototypesPlugin
 } from '@/plugins'
 
-import '@/assets/styles/element-reset/_index.scss'
 import '@/assets/styles/main.scss'
+import '@/assets/styles/element-reset/index.scss'
 
 import './registerServiceWorker'
 

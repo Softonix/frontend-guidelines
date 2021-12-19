@@ -1,17 +1,38 @@
 <template>
-  <div>
-    <header>example header</header>
+  <div class="flex flex-col h-full overflow-hidden">
+    <header class="p-4 bg-green-400 text-white capitalize">
+      <button
+        v-for="r in routes"
+        :key="r.name"
+        class="hover:underline mr-1"
+        @click="$router.push({ name: r.name })"
+      >
+        {{ r.label }}
+      </button>
+    </header>
 
-    <router-view />
+    <div class="flex-grow p-4">
+      <router-view />
+    </div>
 
-    <footer>example footer</footer>
+    <footer class="p-4 bg-red-200 capitalize">example footer</footer>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { routesNames } from '@/router'
 
 export default defineComponent({
-  name: 'DefaultLayout'
+  name: 'DefaultLayout',
+
+  setup () {
+    const routes = [
+      { label: 'Home', name: routesNames.rootPage },
+      { label: 'VeeValidate', name: routesNames.veevalidateYup },
+      { label: 'Login', name: routesNames.login }
+    ]
+    return { routes }
+  }
 })
 </script>
