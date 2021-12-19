@@ -6,3 +6,9 @@ export const VueGlobalPrototypesPlugin: Plugin = {
     app.config.globalProperties.$portalNames = EPortalNames
   }
 }
+
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $portalNames: typeof EPortalNames
+  }
+}

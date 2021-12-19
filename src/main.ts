@@ -17,7 +17,7 @@ import '@/assets/styles/element-reset/index.scss'
 
 import './registerServiceWorker'
 
-export const app = createApp(App)
+const app = createApp(App)
 
 app
   .use(store)
@@ -30,3 +30,7 @@ app
 router.isReady().then(() => {
   app.mount('#app')
 })
+
+export {
+  app
+}

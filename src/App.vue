@@ -13,11 +13,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { ElConfigProvider } from 'element-plus'
+import { app } from './main'
 
 export default defineComponent({
   name: 'App',
+
   components: {
     [ElConfigProvider.name]: ElConfigProvider
+  },
+
+  setup () {
+    console.log(app.config.globalProperties.$portalNames)
   }
 })
 </script>
