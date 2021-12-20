@@ -4,4 +4,7 @@ export const routeGuard = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
-) => { next() }
+) => {
+  // todo: please write your own route guard
+  next()
+}

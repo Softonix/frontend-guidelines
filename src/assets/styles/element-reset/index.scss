@@ -1,4 +1,13 @@
-/* icon font path, required */
-$--font-path: "~element-plus/theme-chalk/fonts";
+@use "../variables/colors";
 
-@import "~element-plus/theme-chalk/src/index";
+@forward '~element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': colors.$primary, // todo: this MUST be a valid 6-digit HEX color in order to make it correctly work
+    ),
+  )
+);
+
+@use "~element-plus/theme-chalk/src/base";
+@use "~element-plus/theme-chalk/src/button";
+@use "~element-plus/theme-chalk/src/message";

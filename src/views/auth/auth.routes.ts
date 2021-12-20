@@ -7,23 +7,21 @@ export const authRouteNames = {
   signUp: 'signUp'
 }
 
-export const authRoutes: Array<RouteRecordRaw> = [
-  {
-    name: authRouteNames.auth,
-    path: '/auth',
-    redirect: { name: authRouteNames.login },
-    component: BlankLayout,
-    children: [
-      {
-        path: 'login',
-        name: authRouteNames.login,
-        component: () => import('./Login.vue')
-      },
-      {
-        path: 'sign-up',
-        name: authRouteNames.signUp,
-        component: () => import('./SignUp.vue')
-      }
-    ]
-  }
-]
+export const authRoutes: RouteRecordRaw = {
+  name: authRouteNames.auth,
+  path: '/auth',
+  redirect: { name: authRouteNames.login },
+  component: BlankLayout,
+  children: [
+    {
+      path: 'login',
+      name: authRouteNames.login,
+      component: () => import('./Login.vue')
+    },
+    {
+      path: 'sign-up',
+      name: authRouteNames.signUp,
+      component: () => import('./SignUp.vue')
+    }
+  ]
+}

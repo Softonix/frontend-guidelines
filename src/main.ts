@@ -9,12 +9,12 @@ import {
   PortalPlugin,
   I18nPlugin,
   ElementPlugin,
-  VueGlobalPrototypesPlugin
+  VueGlobalPrototypesPlugin,
+  FontAwesomePlugin
 } from '@/plugins'
 
 import '@/assets/styles/main.scss'
 import '@/assets/styles/element-reset/index.scss'
-
 import './registerServiceWorker'
 
 const app = createApp(App)
@@ -25,6 +25,7 @@ app
   .use(PortalPlugin)
   .use(I18nPlugin)
   .use(ElementPlugin)
+  .use(FontAwesomePlugin)
   .use(VueGlobalPrototypesPlugin)
 
 router.isReady().then(() => {

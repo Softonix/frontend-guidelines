@@ -1,32 +1,31 @@
 import { createRouter, createWebHistory, RouteRecordRaw, onBeforeRouteUpdate, useRoute } from 'vue-router'
 
-import { routesNames } from './route-names'
+import { routeNames } from './route-names'
 import { routeGuard } from './route-guard'
 
-import { exampleViewRoutes } from '@/views/example-view/example-view.routes'
 import { authRoutes } from '@/views/auth/auth.routes'
-import { veevalidateYupRoutes } from '@/views/veevalidate-yup/veevalidate-yup.routes'
+import { exampleViewRoutes } from '@/views/example-view/example-view.routes'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
+const defaultLayoutRoutes: RouteRecordRaw = {
+  path: '/',
+  name: routeNames.rootPage,
+  redirect: { name: routeNames.exampleView },
+  component: DefaultLayout,
+  children: [
+    // list of views that use default layout
+    ...exampleViewRoutes
+  ]
+}
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/:pathMatch(.*)*',
     redirect: '/'
   },
 
-  ...authRoutes,
-
-  {
-    path: '/',
-    name: routesNames.rootPage,
-    redirect: { name: routesNames.exampleView },
-    component: DefaultLayout,
-    children: [ // list of views that use default layout
-      ...exampleViewRoutes,
-      ...veevalidateYupRoutes
-    ]
-  }
+  authRoutes,
+  defaultLayoutRoutes
 ]
 
 export const router = createRouter({
@@ -37,8 +36,12 @@ export const router = createRouter({
 router.beforeEach(routeGuard)
 
 export {
-  routesNames,
+  routeNames,
   routes,
+
+  // todo: you can use it for navigation
+  defaultLayoutRoutes,
+
   onBeforeRouteUpdate,
   useRoute
 }

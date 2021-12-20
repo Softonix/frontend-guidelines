@@ -1,2 +1,2 @@
-export * from './en/index'
-export * from './fr/index'
+export * from './en'
+export * from './de'

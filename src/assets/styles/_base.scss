@@ -23,6 +23,10 @@ img, svg {
   display: initial;
 }
 
+label {
+  @apply block text-sm font-semibold text-gray-600;
+}
+
 *::-webkit-scrollbar {
   width: 12px;
   height: 12px;
