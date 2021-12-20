@@ -1,0 +1,13 @@
+@use "../variables/colors";
+
+@forward '~element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': colors.$primary, // todo: this MUST be a valid 6-digit HEX color in order to make it correctly work
+    ),
+  )
+);
+
+@use "~element-plus/theme-chalk/src/var";
+@use "~element-plus/theme-chalk/src/button";
+@use "~element-plus/theme-chalk/src/message";
