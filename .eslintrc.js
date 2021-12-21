@@ -36,6 +36,7 @@ module.exports = {
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     'vue/script-setup-uses-vars': 'off',
     'vue/attribute-hyphenation': 'off',
+    'vue/v-on-event-hyphenation': 'off',
     'vue/custom-event-name-casing': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
