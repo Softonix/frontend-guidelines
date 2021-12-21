@@ -11,8 +11,7 @@ module.exports = defineConfig({
       navigateFallback: 'index.html',
       runtimeCaching: [
         {
-          // eslint-disable-next-line prefer-regex-literals
-          urlPattern: new RegExp('^https://fonts.'),
+          urlPattern: /^https:\/\/fonts./,
           handler: 'CacheFirst',
           options: { cacheName: 'vue3-external-fonts' }
         }
