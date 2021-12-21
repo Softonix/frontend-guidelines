@@ -1,7 +1,7 @@
 # Softonix Frontend Guidelines
 Due to standardization purposes among our teams in Softonix, we would like to have a pretty strict standard project structure based on top of Vue.js CLI.
 
-This repository includes 2 project structure examples: Vue2, Vue3 + Typescript. 
+This repository includes Vue3 + Typescript structure example. 
 
 Besides this, we also propose a list of frontend best practices which we must follow for consistency reasons.
 
@@ -43,14 +43,10 @@ Vue project structure:
     ├── layouts                        # Nuxt-like layouts
     │   ├── BlankLayout.vue            # Blank layout (no header, no sidebar)
     │   └── DefaultLayout.vue          # Default layout for most of the pages
-    │   
-    ├── mixins (for Vue 2 only)                         
-    │   ├── index.js                   # Export all 
-    │   └── leave-route.mixin.js       # Global mixin that being used across the application
     │ 
     ├── plugins                    
-    │   ├── index.js                   # Import all plugins
-    │   ├── element.js                 # ElementUI library import
+    │   ├── index.js                   # export all plugins
+    │   ├── element.js                 # Element library import
     │   └── sentry.js                  # JS Errors tracking library
     │ 
     ├── router         
@@ -96,7 +92,7 @@ If you have a dummy action() in a store which doesn't do **commit** and just doe
 
 ### Naming convention
 
-- Name folders with lowercase and Vue components capitalized like: Dashboard.vue
+- Name folders with kebab case e.g. human-resources and Vue components with PascalCase like: HumanResources.vue
 - In Vue's `<template>` write components capitalized, e.g: `<Header />` instead of: `<header>`
 - If you want to create a Button component, name it either `ButtonModule.vue` or `ButtonComponent` or `AppButton` to prevent conflicts with native HTML button tag.
 - Name root-level components exactly the same as route name: Login.vue === /auth/login route
@@ -107,8 +103,8 @@ If you have a dummy action() in a store which doesn't do **commit** and just doe
 
 ### Best practices
 
-- Use Vue order convention for [component options](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
-- Use Vue order convention for [element attributes](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+- Use Vue order convention for [component options](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended)
+- Use Vue order convention for [element attributes](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended)
 - Use Vue linter recommended extensions (see snippets below)
 - Use new line after all component's options and between methods & computed properties
 - Feel free to split your structure into subfolders. For example, you have a lot of APIs axios interceptors -- please create a folder: `/services/api/` & put the file `interceptors.js` inside of it. Move all your interceptors inside this file. Rename file `api.service.js` into `index.js` and move into `/services/api` as well.
@@ -121,62 +117,5 @@ If you have a dummy action() in a store which doesn't do **commit** and just doe
 - Use routeNames object for IDE assistance during names usage.
 - Do not use: `export default settingsService` , instead use `export const settingsService`. Always omit default export.
 
-### Linter recommended snippet for Vue2 (no TS)
-```js
-module.exports = {
-  root: true,
-  env: {
-    node: true
-  },
-  extends: [
-    'plugin:vue/recommended',
-    '@vue/standard'
-  ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'max-len': ['error', { code: 120 }],
-    'vue/max-attributes-per-line': 'off',
-    'vue/attribute-hyphenation': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/singleline-html-element-content-newline': 'off',
-    'vue/no-v-html': 'off',
-    'vue/custom-event-name-casing': 'off'
-  }
-}
-
-```
-
 ### Linter recommended snippet for Vue3 + TS
-```js
-module.exports = {
-  root: true,
-  env: {
-    node: true
-  },
-  extends: [
-    'plugin:vue/vue3-recommended',
-    '@vue/standard',
-    '@vue/typescript/recommended'
-  ],
-  parserOptions: {
-    ecmaVersion: 2020,
-    parser: '@typescript-eslint/parser'
-  },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'max-len': ['error', { code: 120 }],
-    'vue/max-attributes-per-line': 'off',
-    'vue/attribute-hyphenation': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/singleline-html-element-content-newline': 'off',
-    'vue/no-v-html': 'off',
-    'vue/custom-event-name-casing': 'off'
-  }
-}
-
-```
+- Please check .eslintrc.js file.
