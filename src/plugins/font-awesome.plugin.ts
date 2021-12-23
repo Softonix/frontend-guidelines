@@ -25,12 +25,19 @@ for (const key in FontAwesomeIconsList) {
 const IconComponent = defineComponent({
   name: 'Icon',
   props: {
-    name: Object as PropType<IconDefinition>
+    name: Object as PropType<IconDefinition | [IconDefinition, boolean][]>
   },
   render () {
-    return this.name
-      ? h(FontAwesomeIcon, { icon: this.name })
-      : null
+    if (this.name) {
+      if (Array.isArray(this.name)) {
+        const iconToRender = this.name.find(([, key]) => key)
+        return iconToRender ? h(FontAwesomeIcon, { icon: iconToRender[0] }) : null
+      } else {
+        return h(FontAwesomeIcon, { icon: this.name })
+      }
+    } else {
+      return null
+    }
   }
 })
 

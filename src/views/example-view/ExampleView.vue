@@ -58,6 +58,18 @@
       <Icon class="mr-4 text-green-500" :name="$icons.farBell" />
       <Icon class="text-gray-500" :name="$icons.farEnvelope" />
     </div>
+
+    <div class="p-4">
+      <label>Fontawesome dynamic icon</label>
+      <Icon
+        :name="[
+          [$icons.farBell, false],
+          [$icons.fasUser, true],
+          [$icons.farEnvelope, false]
+        ]"
+        class="mr-4 text-success"
+      />
+    </div>
   </div>
 </template>
 
