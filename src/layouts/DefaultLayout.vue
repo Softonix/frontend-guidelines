@@ -1,7 +1,10 @@
 <template>
   <!--todo: This layout is just an example. Please create your own depending on your projects needs  -->
   <div class="flex flex-col h-full overflow-hidden">
-    <header class="p-4 bg-primary text-white capitalize">
+    <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center">
+      <div class="w-40 mr-10">
+        <img :src="require('@/assets/images/logo.png')" alt="logo">
+      </div>
       <el-button
         v-for="nav in navigation"
         :key="nav.name"
