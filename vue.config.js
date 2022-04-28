@@ -23,6 +23,7 @@ module.exports = defineConfig({
     plugins: [
       Components({
         dirs: [], // todo: now unplugin-vue-component will not automatically import components from @/components folder,
+        dts: false, // disables creaition of components.d.ts for global types definition since we don't use components auto-import
         resolvers: [ElementPlusResolver({
           importStyle: true
         })]
