@@ -42,13 +42,26 @@
     </div>
 
     <div v-loading="loading" class="p-4 inline-flex flex-col items-start">
-      <label>Vuex example</label>
-      <p class="mb-2">{{ exampleVuexVar }}</p>
+      <label>example siew store var</label>
+      <p class="mb-2">{{ exampleViewVar }}</p>
       <el-button
         :type="$componentType.SUCCESS"
-        @click="changeVuexValue"
+        @click="changeExampleViewVar"
       >
         Change value
+      </el-button>
+    </div>
+
+    <br>
+
+    <div v-loading="generalLoading" class="p-4 inline-flex flex-col items-start">
+      <label>general store var</label>
+      <p class="mb-2">{{ exampleGeneralVar }}</p>
+      <el-button
+        :type="$componentType.SUCCESS"
+        @click="generalStore.getGeneralStoreVar"
+      >
+        get general store value
       </el-button>
     </div>
 
@@ -73,71 +86,56 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue'
 import { ElSelect } from 'element-plus'
 
 import { useComponentRef, useElementRef, useGlobalProperties } from '@/composables'
-import { exampleViewStore } from '@/store'
+import { useExampleViewStore, useGeneralStore } from '@/store'
+import { storeToRefs } from 'pinia'
 
-import Compute from '@/components/stateless/hoc/Compute.vue'
+const generalStore = useGeneralStore()
+const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
-export default defineComponent({
-  name: 'ExampleView',
+const loading = ref(false)
 
-  components: { Compute },
+// todo: use the following syntax or import directly from @/core/filters
+const { $filters } = useGlobalProperties()
 
-  setup () {
-    const loading = ref(false)
+const date = ref(new Date())
 
-    // todo: use the following syntax or import directly from @/core/filters
-    const { $filters } = useGlobalProperties()
+const filteredDate = $filters.date(date.value).full
 
-    const date = ref(new Date())
+const exampleElementRef = useElementRef()
+const elementSelectRef = useComponentRef<InstanceType<typeof ElSelect>>()
 
-    const filteredDate = $filters.date(date.value).full
-
-    const exampleElementRef = useElementRef()
-    const elementSelectRef = useComponentRef<InstanceType<typeof ElSelect>>()
-
-    const computeExample = {
-      firstLevel: {
-        secondLevel: {
-          thirdLevel: 'I\'m the last level'
-        }
-      }
-    }
-
-    const exampleVuexVar = computed(() => exampleViewStore.exampleVar)
-    function changeVuexValue () {
-      exampleViewStore.CHANGE_VALUE()
-    }
-
-    async function getSomeExampleVar () {
-      try {
-        loading.value = true
-      } finally {
-        await exampleViewStore.getTestVar()
-        loading.value = false
-      }
-    }
-
-    onMounted(() => {
-      getSomeExampleVar()
-
-      console.log('Html element ref', exampleElementRef)
-      console.log('element input ref blur method', elementSelectRef.value?.blur)
-    })
-
-    return {
-      loading,
-      exampleElementRef,
-      elementSelectRef,
-      computeExample,
-      exampleVuexVar,
-      changeVuexValue,
-      filteredDate
+const computeExample = {
+  firstLevel: {
+    secondLevel: {
+      thirdLevel: 'I\'m the last level'
     }
   }
+}
+
+const exampleViewStore = useExampleViewStore()
+const exampleViewVar = computed(() => exampleViewStore.exampleVar)
+function changeExampleViewVar () {
+  exampleViewStore.setStaticData()
+}
+
+async function getSomeExampleVar () {
+  try {
+    loading.value = true
+  } finally {
+    await exampleViewStore.getTestVar()
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  getSomeExampleVar()
+
+  console.log('Html element ref', exampleElementRef)
+  console.log('element input ref blur method', elementSelectRef.value?.blur)
 })
 </script>

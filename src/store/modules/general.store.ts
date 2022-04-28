@@ -1,25 +1,26 @@
-import { Action, Module, Mutation, VuexModule } from 'vuex-class-modules'
-import { store } from '@/store/create-store'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import { IExampleInterface, TNullableField } from '@/types'
 import { exampleGeneralService } from '@/services'
 
-@Module
-class GeneralStore extends VuexModule {
-  exampleVar: TNullableField<IExampleInterface> = null
+// the first argument is a unique id of the store across your application
+export const useGeneralStore = defineStore('generalStore', () => {
+  const exampleGeneralVar = ref<TNullableField<IExampleInterface>>(null)
+  const generalLoading = ref(false)
 
-  @Mutation
-  SET_TEST_VAR (testVar: IExampleInterface) {
-    this.exampleVar = testVar
+  async function getGeneralStoreVar () {
+    console.log(1)
+    try {
+      generalLoading.value = true
+      exampleGeneralVar.value = await exampleGeneralService.getSomeData()
+    } finally {
+      generalLoading.value = false
+    }
   }
 
-  @Action
-  async getTestVar () {
-    const res = await exampleGeneralService.getSomeData()
-    this.SET_TEST_VAR(res)
+  return {
+    exampleGeneralVar,
+    generalLoading,
+    getGeneralStoreVar
   }
-}
-
-export const generalStore = new GeneralStore({
-  store,
-  name: 'GeneralStore'
 })
