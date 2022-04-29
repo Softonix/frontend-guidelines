@@ -1,33 +1,26 @@
-import { Action, Module, Mutation, VuexModule } from 'vuex-class-modules'
-import { store } from '@/store/create-store'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import { IExampleInterface, TNullableField } from '@/types'
 import { exampleViewService } from '@/services'
 
-@Module
-class ExampleViewStore extends VuexModule {
-  exampleVar: TNullableField<IExampleInterface> = null
+// the first argument is a unique id of the store across your application
+export const useExampleViewStore = defineStore('exampleViewStore', () => {
+  const exampleVar = ref<TNullableField<IExampleInterface>>(null)
 
-  @Mutation
-  SET_TEST_VAR (testVar: IExampleInterface) {
-    this.exampleVar = testVar
-  }
-
-  @Mutation
-  CHANGE_VALUE () {
-    this.exampleVar = {
+  function setStaticData () {
+    exampleVar.value = {
       a: 'changed string',
       b: 12
     }
   }
 
-  @Action
-  async getTestVar () {
-    const res = await exampleViewService.getSomeData()
-    this.SET_TEST_VAR(res)
+  async function getTestVar () {
+    exampleVar.value = await exampleViewService.getSomeData()
   }
-}
 
-export const exampleViewStore = new ExampleViewStore({
-  store,
-  name: 'ExampleViewStore'
+  return {
+    exampleVar,
+    setStaticData,
+    getTestVar
+  }
 })

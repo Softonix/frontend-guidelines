@@ -1,2 +1,2 @@
-import { createStore } from 'vuex'
-export const store = createStore({})
+import { createPinia } from 'pinia'
+export const store = createPinia()

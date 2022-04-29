@@ -23,6 +23,7 @@ module.exports = {
       ignoreStrings: true,
       ignoreRegExpLiterals: true
     }],
+    'vue/script-setup-uses-vars': 'error',
     'vue/max-attributes-per-line': 'off',
     'vue/require-default-prop': 'off',
     'vue/singleline-html-element-content-newline': 'off',
@@ -34,7 +35,6 @@ module.exports = {
       named: 'shorthand'
     }],
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-    'vue/script-setup-uses-vars': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/v-on-event-hyphenation': 'off',
     'vue/first-attribute-linebreak': ['error', {

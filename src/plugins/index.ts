@@ -1,5 +1,6 @@
 export * from './portal'
 export * from './vue-global-prototypes.plugin'
+export * from './vue-global-components.plugin'
 export * from './element.plugin'
 export * from './i18n'
 export * from './font-awesome.plugin'

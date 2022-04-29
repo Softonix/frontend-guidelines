@@ -5,11 +5,13 @@ import App from '@/App.vue'
 
 import { router } from '@/router'
 import { store } from '@/store/create-store'
+
 import {
   PortalPlugin,
   I18nPlugin,
   ElementPlugin,
   VueGlobalPrototypesPlugin,
+  VueGlobalComponentsPlugin,
   FontAwesomePlugin
 } from '@/plugins'
 
@@ -27,6 +29,7 @@ app
   .use(ElementPlugin)
   .use(FontAwesomePlugin)
   .use(VueGlobalPrototypesPlugin)
+  .use(VueGlobalComponentsPlugin)
 
 router.isReady().then(() => {
   app.mount('#app')
