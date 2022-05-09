@@ -7,7 +7,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
 
 ### Prerequisition
 - Node v14 or latest
-- VueCLI5, currently in RC stage (https://next.cli.vuejs.org/migrations/migrate-from-v4.html)
+- VueCLI5 (https://next.cli.vuejs.org/migrations/migrate-from-v4.html)
 
 ### Vue project structure
 - Vue3 + Typescript project structure: [link](https://github.com/Softonix/frontend-guidelines/tree/main/vue3_ts)
