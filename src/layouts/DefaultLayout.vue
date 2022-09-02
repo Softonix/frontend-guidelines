@@ -1,20 +1,23 @@
 <template>
-  <!--todo: This layout is just an example. Please create your own depending on your projects needs  -->
+  <!--
+    This layout is just an example.
+    Please create your own depending on your projects needs
+  -->
   <div class="flex flex-col h-full overflow-hidden">
     <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center">
       <div class="w-40 mr-10">
-        <img :src="require('@/assets/images/logo.png')" alt="logo">
+        <img src="@/assets/images/logo.png" alt="logo">
       </div>
+
       <el-button
         v-for="nav in navigation"
         :key="nav.name"
         :type="$componentType.PRIMARY"
         plain
-        class="hover:underline mr-4"
+        class="hover:underline capitalize"
         @click="$router.push({ name: nav.name })"
       >
-        <Icon class="mr-2" :name="nav.icon" />
-        <span class="capitalize">{{ $t(nav.label) }}</span>
+        {{ $t(nav.label) }}
       </el-button>
     </header>
 
@@ -26,36 +29,22 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { defaultLayoutRoutes, routeNames } from '@/router'
-import { useGlobalProperties } from '@/composables'
+<script lang="ts" setup>
+import { defaultLayoutRoutes } from '@/router/routes'
+const { $routeNames } = useGlobalProperties()
 
-export default defineComponent({
-  name: 'DefaultLayout',
+// todo: you can import your default layout routes and map them with your navigation needs
+const navigation = [
+  ...defaultLayoutRoutes.children?.map(route => ({
+    name: route.name as string,
+    label: route.meta?.label || ''
+    // ...
+  })) || [],
 
-  setup () {
-    // todo: check this composable
-    const { $icons } = useGlobalProperties()
-
-    // todo: you can import your default layout routes and map them with your navigation needs
-    const navigation = [
-      ...defaultLayoutRoutes.children?.map(route => ({
-        name: route.name as string,
-        label: route.meta?.label || '',
-        icon: route.meta?.icon
-        // ...
-      })) || [],
-
-      // todo: you add here your custom and not dependant to any layouts nav items
-      {
-        label: 'auth.login',
-        name: routeNames.login,
-        icon: $icons.farBell
-      }
-    ]
-
-    return { navigation }
+  // todo: you add here your custom and not dependant to any layouts nav items
+  {
+    label: 'auth.login',
+    name: $routeNames.login
   }
-})
+]
 </script>

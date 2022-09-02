@@ -2,23 +2,17 @@
   <div class="h-full flex items-center justify-center">
     <el-card class="w-1/3 m-auto">
       <el-form
-        :ref="loginFormConfig.ref"
-        :model="loginForm"
-        :rules="loginFormConfig.rules"
+        ref="formRef"
+        :model="formModel"
+        :rules="formRules"
         label-position="top"
       >
-        <el-form-item
-          :label="loginFormConfig.data.email.label"
-          :prop="loginFormConfig.data.email.prop"
-        >
-          <el-input v-model="loginForm.email" />
+        <el-form-item label="email" prop="email">
+          <el-input v-model="formModel.email" />
         </el-form-item>
 
-        <el-form-item
-          :label="loginFormConfig.data['passwordNestedObject.password'].label"
-          :prop="loginFormConfig.data['passwordNestedObject.password'].prop"
-        >
-          <el-input v-model="loginForm.passwordNestedObject.password" />
+        <el-form-item label="Password" prop="password">
+          <el-input v-model="formModel.password" />
         </el-form-item>
 
         <el-form-item>
@@ -31,45 +25,33 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { useFormConfig } from '@/composables'
-import { useI18n } from 'vue-i18n'
-
-export default defineComponent({
-  name: 'Login',
-
-  setup () {
-    const { t } = useI18n()
-    const loginFormConfig = useFormConfig({
-      email: { label: t('auth.login'), required: true, type: 'email' },
-      'passwordNestedObject.password': { label: t('auth.password'), required: true, minChar: 5 }
-    })
-
-    const loginForm = reactive({
-      email: '',
-      passwordNestedObject: {
-        password: ''
-      }
-    })
-
-    async function submitForm () {
-      await loginFormConfig.validate()
-      alert('submit!')
-    }
-
-    function resetForm () {
-      loginFormConfig.resetFields()
-      console.log(loginForm)
-    }
-
-    return {
-      loginForm,
-      loginFormConfig,
-
-      submitForm,
-      resetForm
-    }
-  }
+<script lang="ts" setup>
+const formRef = useElFormRef()
+const formModel = reactive({
+  email: '',
+  password: ''
 })
+
+const formRules = useElFormRules({
+  email: [
+    useRequiredRule(),
+    useEmailRule()
+  ],
+  password: [
+    useRequiredRule(),
+    useMinLenRule(5)
+  ]
+})
+
+async function submitForm () {
+  console.log(formRef)
+
+  await formRef.value.validate()
+  alert('submit!')
+}
+
+function resetForm () {
+  formRef.value.resetFields()
+  console.log(formModel)
+}
 </script>

@@ -1,26 +1,22 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import { IExampleInterface, TNullableField } from '@/types'
+import type { IExampleInterface } from '@/types'
 import { exampleViewService } from '@/services'
 
 // the first argument is a unique id of the store across your application
 export const useExampleViewStore = defineStore('exampleViewStore', () => {
-  const exampleVar = ref<TNullableField<IExampleInterface>>(null)
+  const exampleVar = ref<Partial<IExampleInterface>>({})
 
-  function setStaticData () {
-    exampleVar.value = {
-      a: 'changed string',
-      b: 12
-    }
+  function setExampleVar () {
+    exampleVar.value.title = 'changed title'
   }
 
-  async function getTestVar () {
+  async function getExampleVar () {
     exampleVar.value = await exampleViewService.getSomeData()
+    console.log(exampleVar.value)
   }
 
   return {
     exampleVar,
-    setStaticData,
-    getTestVar
+    setExampleVar,
+    getExampleVar
   }
 })

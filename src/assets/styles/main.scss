@@ -1,7 +1,4 @@
-@tailwind base;
-
 @import 'base';
-@import './utils/animations.scss';
-@import './utils/animations.scss';
-
-@tailwind utilities;
+@import './utils/animations';
+@import './tailwind';
+@import './element-reset';

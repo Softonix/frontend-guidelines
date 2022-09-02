@@ -3,11 +3,6 @@
 
   <div ref="exampleElementRef" class="h-full overflow-hidden">
     <div class="p-4">
-      <label>Date Filter</label>
-      <p>{{ filteredDate }}</p>
-    </div>
-
-    <div class="p-4">
       <label>Compute Example</label>
       <Compute
         #default="{ lastLevel }"
@@ -22,7 +17,7 @@
       <label>Translation example</label>
       <p>{{ $t('exampleView.exampleViewKey') }}</p>
 
-      <el-select ref="elementSelectRef" v-model="$i18n.locale">
+      <ElSelect ref="elementSelectRef" v-model="$i18n.locale">
         <!--todo: create your own locales config, for example with full label, icon, etc...-->
         <el-option
           v-for="lang in $i18n.availableLocales"
@@ -30,7 +25,7 @@
           :label="lang"
           :value="lang"
         />
-      </el-select>
+      </ElSelect>
     </div>
 
     <div class="p-4">
@@ -41,9 +36,17 @@
       <span class="text-danger">danger</span>
     </div>
 
-    <div v-loading="loading" class="p-4 inline-flex flex-col items-start">
-      <label>example siew store var</label>
-      <p class="mb-2">{{ exampleViewVar }}</p>
+    <div v-loading="loading" class="p-4 w-1/2">
+      <label>example view store var</label>
+      <el-card class="mb-2">
+        <template #header>
+          <div class="flex justify-between">
+            <span>{{ exampleVar?.title }}</span>
+            <el-button :type="$componentType.PRIMARY" plain>{{ exampleVar?.userId }}</el-button>
+          </div>
+        </template>
+        <p>{{ exampleVar?.body }}</p>
+      </el-card>
       <el-button
         :type="$componentType.SUCCESS"
         @click="changeExampleViewVar"
@@ -64,50 +67,24 @@
         get general store value
       </el-button>
     </div>
-
-    <div class="p-4">
-      <label>Fontawesome example</label>
-      <Icon class="mr-4 text-red-500" :name="$icons.fasUser" />
-      <Icon class="mr-4 text-green-500" :name="$icons.farBell" />
-      <Icon class="text-gray-500" :name="$icons.farEnvelope" />
-    </div>
-
-    <div class="p-4">
-      <label>Fontawesome dynamic icon</label>
-      <Icon
-        :name="[
-          [$icons.farBell, false],
-          [$icons.fasUser, true],
-          [$icons.farEnvelope, false]
-        ]"
-        class="mr-4 text-success"
-      />
-    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
 import { ElSelect } from 'element-plus'
 
-import { useComponentRef, useElementRef, useGlobalProperties } from '@/composables'
 import { useExampleViewStore, useGeneralStore } from '@/store'
-import { storeToRefs } from 'pinia'
+
+import colors from 'colors'
+console.log(colors)
 
 const generalStore = useGeneralStore()
 const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
 const loading = ref(false)
 
-// todo: use the following syntax or import directly from @/core/filters
-const { $filters } = useGlobalProperties()
-
-const date = ref(new Date())
-
-const filteredDate = $filters.date(date.value).full
-
-const exampleElementRef = useElementRef()
-const elementSelectRef = useComponentRef<InstanceType<typeof ElSelect>>()
+const exampleElementRef = ref()
+const elementSelectRef = ref<InstanceType<typeof ElSelect>>()
 
 const computeExample = {
   firstLevel: {
@@ -117,17 +94,17 @@ const computeExample = {
   }
 }
 
-const exampleViewStore = useExampleViewStore()
-const exampleViewVar = computed(() => exampleViewStore.exampleVar)
+const exampleStore = useExampleViewStore()
+const { exampleVar } = storeToRefs(exampleStore)
 function changeExampleViewVar () {
-  exampleViewStore.setStaticData()
+  exampleStore.setExampleVar()
 }
 
 async function getSomeExampleVar () {
   try {
     loading.value = true
   } finally {
-    await exampleViewStore.getTestVar()
+    await exampleStore.getExampleVar()
     loading.value = false
   }
 }

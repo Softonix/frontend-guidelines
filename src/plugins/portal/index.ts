@@ -1,8 +1,5 @@
-import { Plugin } from 'vue'
-import { TCallbackFn, TIndexedObject } from '@/types'
-
-import PortalTarget from '@/plugins/portal/PortalTarget.vue'
-import Portal from '@/plugins/portal/Portal.vue'
+import type { Plugin } from 'vue'
+import type { TCallbackFn, TIndexedObject } from '@/types'
 
 enum EPortalNames {
   SIDEBAR = 'sidebar-portal',
@@ -48,15 +45,15 @@ const PortalPlugin: Plugin = {
     app.provide('registerPortal', portalService.registerPortal)
     app.provide('removePortal', portalService.removePortal)
 
-    app.component(Portal.name, Portal)
-    app.component(PortalTarget.name, PortalTarget)
-
     app.config.globalProperties.$portalNames = EPortalNames
   }
 }
 
 export {
-  PortalPlugin,
+  PortalPlugin
+}
+
+export type {
   TRenderPortals,
   TRegisterPortal,
   TRemovePortal

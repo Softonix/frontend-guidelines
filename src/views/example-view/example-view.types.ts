@@ -1,4 +1,6 @@
 export interface IExampleInterface {
-  a: string;
-  b: number;
+  body: string
+  id: number
+  title: string
+  userId: number
 }

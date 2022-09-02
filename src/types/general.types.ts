@@ -1,15 +1,12 @@
 export type TIndexedObject<T = any> = {
-  [key: string]: T;
+  [key: string]: T
 }
-
-export type TNullableField<T> = T | null
 
 export type TCallbackFn<T extends unknown[] = [], R = void> = (...args: T) => R
 
 export enum EComponentSize {
-  MINI = 'mini',
   SMALL = 'small',
-  MEDIUM = 'medium',
+  DEFAULT = 'default',
   LARGE = 'large'
 }
 

@@ -1,18 +1,16 @@
 <template>
   <ElConfigProvider
     :locale="{
-      name: $i18n.locale,
-      el: $i18n.messages[$i18n.locale]?.el
+      name: locale,
+      el: messages[$i18n.locale]?.el as TranslatePair
     }"
   >
     <router-view />
   </ElConfigProvider>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import type { TranslatePair } from 'element-plus/lib/locale'
 
-export default defineComponent({
-  name: 'App'
-})
+const { messages, locale } = useI18n()
 </script>

@@ -1,9 +1,10 @@
-import { Plugin } from 'vue'
+import type { Plugin } from 'vue'
 import { createI18n } from 'vue-i18n'
 
 import { en, de } from './translations'
 
 const i18n = createI18n({
+  legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
   datetimeFormats: {
@@ -31,7 +32,6 @@ const i18n = createI18n({
 
 const I18nPlugin: Plugin = {
   install: (app) => {
-    app.config.globalProperties.$df = (date: number | Date, type: 'short' | 'long' | 'narrow' = 'short') => i18n.global.d(date, type)
     app.use(i18n)
   }
 }

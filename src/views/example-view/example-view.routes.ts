@@ -1,5 +1,4 @@
-import { RouteRecordRaw } from 'vue-router'
-import { FontAwesomeIconsList } from '@/plugins'
+import type { RouteRecordRaw } from 'vue-router'
 
 export const exampleViewRouteNames = {
   exampleView: 'exampleView',
@@ -12,8 +11,7 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
     path: 'example',
     name: exampleViewRouteNames.exampleView,
     meta: {
-      label: 'general.navigation.exampleView', // translation key
-      icon: FontAwesomeIconsList.farEnvelope
+      label: 'general.navigation.exampleView' // translation key
     },
     component: () => import('./ExampleView.vue'),
     children: [
