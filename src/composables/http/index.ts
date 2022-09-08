@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios from 'axios'
 import {
   errorInterceptor,
   requestErrorInterceptor,
@@ -6,28 +6,15 @@ import {
   responseInterceptor
 } from './interceptors'
 
-class HttpService {
-  instance = {} as AxiosInstance
+const instance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL
+})
 
-  constructor (apiUrl: string) {
-    this.createAxiosInstance(apiUrl)
-    this.registerInterceptors()
-  }
+instance.interceptors.response.use(
+  res => responseInterceptor(res),
+  err => errorInterceptor(err)
+)
 
-  private createAxiosInstance (apiUrl: string) {
-    this.instance = axios.create({
-      baseURL: apiUrl
-    })
-  }
+instance.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
 
-  private registerInterceptors () {
-    this.instance.interceptors.response.use(
-      res => responseInterceptor(res),
-      err => errorInterceptor(err)
-    )
-
-    this.instance.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
-  }
-}
-
-export const useHttp = new HttpService(import.meta.env.VITE_API_URL).instance
+export const useHttp = instance
