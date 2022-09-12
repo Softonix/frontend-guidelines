@@ -63,72 +63,75 @@ Besides this, we also propose a list of frontend best practices which we must fo
 
 Vue project structure:
 
+    dts                                # definition files
+    │
+    public                             # public resources
+    │
     src
     ├── assets
     │   │── images                     # global images 
-    │   └── styles                     # base styles,  /base, /components, /utils, /vendors, main.scss
+    │   └── styles                     # scss styles including element-reset, tailwind, etc.
     │ 
     ├── components
     │   ├── editor                     # BusinessLogic component, shared acrosss the application which require a folder
-    │       ├── Editor.vue             # Main editor component         
-    │       ├── EditorBar.vue    
-    │       └── editor.js              # Additional logic of Editor component, should be outsourced to js file
-    │   ├── stateless                  # Only generic UI components: buttons, tables, 
-    │       ├── hoc                    # High Order Components folder
-    │       ├── Avatar.vue
-    │       ├── Pagination.vue
-    │       ├── Tabs.vue
-    │       └── MenuList.vue           # Generic Menu List
-    │   └── ContactList.vue            # BusinessLogic component shared across the application.
-    │
-    ├── core 
-    │   │── utils  
-    │       ├── localstorage.utils.js  # Some generic utility functions related to specific object: e.g.: localstorage
-    │       ├── scroll.utils.js        # Scroll utils 
-    │       └── tracking.utils.js      # Analytics and tracking functions
-    │   │── filters.js                 # Vue core filters
-    │   └── helpers.js                 # Combination of separated helper functions like prefentBodyScroll()
+    │   │   ├── Editor.vue             # Main editor component         
+    │   │   ├── EditorBar.vue    
+    │   │   └── editor.ts              # Additional logic of Editor component, should be outsourced to ts file
+    │   ├── Avatar.vue
+    │   ├── Pagination.vue
+    │   ├── Tabs.vue
+    │   └── MenuList.vue               # Generic Menu List
+    │  
+    ├── composables                    # Composition functions used for logic sharing. Can include setup related methods or be just a pure helper function
+    │   ├── useFormConfig.ts           # Set of helpers function related to forms and their validation
+    │   └── useGlobalProperties.ts     # Composable for getting global properties from Vue instance
     │  
     ├── layouts                        # Nuxt-like layouts
     │   ├── BlankLayout.vue            # Blank layout (no header, no sidebar)
     │   └── DefaultLayout.vue          # Default layout for most of the pages
     │ 
     ├── plugins                    
-    │   ├── index.js                   # export all plugins
-    │   ├── element.js                 # Element library import
-    │   └── sentry.js                  # JS Errors tracking library
+    │   ├── index.ts                   # exports all plugins
+    │   ├── i18n                       # Library for internationalization
+    │   ├── portal                     # Set of components for dynamic dom elements teleportation
     │ 
     ├── router         
-    │   ├── index.js                   # Export router, routeNames, invoke guards
-    │   ├── route-guard.js             # Declare all router guards
-    │   └── route-names.js             # Declare all route names object
+    │   ├── index.ts                   # Exports router, invokes guards
+    │   ├── route-guard.ts             # Declares all router guards
+    │   ├── route-names.ts             # Declares all route names object
+    │   └── routes.ts                  # Declares all routes
     │ 
     ├── services     
-    │   ├── index.js                   # Export * from all services accross an app
-    │   ├── api.service.js             # Axios config, interceptors. If needed may be moved to folder
-    │   ├── tags.service.js            # Tags service - tags used across the app and doesn't have own page
-    │   └── auth.service.js            # Auth service - user data, tokens used across the app, sidebar, settings.
+    │   ├── index.ts                   # Export * from all services accross an app
+    │   ├── api.service.ts             # Axios config, interceptors. If needed may be moved to folder
+    │   ├── tags.service.ts            # Tags service - tags used across the app and doesn't have own page
+    │   └── auth.service.ts            # Auth service - user data, tokens used across the app, sidebar, settings
     │ 
     ├── store
     │   ├── modules                        
-    │       ├── index.js               # Export * from all vuex modules accross an app
-    │       ├── tags.store.js          # Tags module - tags used across the app and doesn't have own page
-    │       └── auth.store.js          # Auth module - user data, tokens used across the app, sidebar, settings.
-    │   ├── index.js                   # Import all modules and initialize store
+    │       ├── tags.store.ts          # Tags module - tags used across the app and doesn't have own page
+    │       └── auth.store.ts          # Auth module - user data, tokens used across the app, sidebar, settings
+    │   ├── create-store.ts            # Initializes store
+    │   ├── index.ts                   # Exports all modules
+    │ 
+    ├── types
+    │   ├── general.types.ts           # Some general types used everywhere in the project
+    │   ├── index.ts                   # Exports all types
     │ 
     ├── views
     │   ├── settings     
     │   │   ├── components  
     │   │   │   └── SettingsFilter.vue # Components, related only to settings pages        
-    │   │   ├── settings.routes.js     # Route file with declaration for all settings pages.
-    │   │   ├── settings.service.js    # Service with API for settings pages 
-    │   │   ├── settings.store.js      # Store for all settings pages
+    │   │   ├── settings.routes.ts     # Route file with declaration for all settings pages.
+    │   │   ├── settings.service.ts    # Service with API for settings pages 
+    │   │   ├── settings.translations.ts # Settings specific types
+    │   │   ├── settings.store.ts      # Store for all settings pages
     │   │   ├── Settings.vue           # Settings root page
     │   │   └── SettingsDetails.vue    # SettingsDetails page
     │   └── users       
-    │   │   ├── users.routes.js     
-    │   │   ├── users.service.js   
-    │   │   ├── users.store.js  
+    │   │   ├── users.routes.ts     
+    │   │   ├── users.service.ts   
+    │   │   ├── users.store.ts  
     │   │   ├── Users.vue  
     │   │   └── UserDetails.vue  
     └── ...
