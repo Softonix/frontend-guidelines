@@ -49,6 +49,8 @@ module.exports = {
       multiline: 'below'
     }],
     'vue/custom-event-name-casing': 'off',
+    'func-call-spacing': 'off',
+    '@typescript-eslint/func-call-spacing': ['error', 'never'],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
