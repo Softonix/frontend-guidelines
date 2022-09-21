@@ -1,5 +1,7 @@
 <template>
-  <div :id="name" />
+  <div :id="name">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts" setup>
