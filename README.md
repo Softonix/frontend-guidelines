@@ -60,8 +60,6 @@ Besides this, we also propose a list of frontend best practices which we must fo
 
 ### Vue project structure
 
-Vue project structure:
-
     dts                                # definition files
     │
     public                             # public resources
