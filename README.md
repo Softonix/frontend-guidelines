@@ -59,7 +59,6 @@ Besides this, we also propose a list of frontend best practices which we must fo
 - Create .env file in the project root and place VITE_API_URL=https://jsonplaceholder.typicode.com there.
 
 ### Vue project structure
-- Vue3 + Typescript + Vite project structure: [link](https://github.com/Softonix/frontend-guidelines/tree/main/vue3_ts)
 
 Vue project structure:
 
