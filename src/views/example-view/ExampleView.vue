@@ -78,6 +78,7 @@ import { useExampleViewStore, useGeneralStore } from '@/store'
 import colors from 'colors'
 console.log(colors)
 
+
 const generalStore = useGeneralStore()
 const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
