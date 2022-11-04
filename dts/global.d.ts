@@ -1,5 +1,5 @@
 import 'vue-router'
-import { routeNames } from '@/router'
+import { routeNames } from '@/router/route-names'
 import { EPortalNames } from '@/plugins'
 import { EComponentSize, EComponentType } from '@/types'
 
