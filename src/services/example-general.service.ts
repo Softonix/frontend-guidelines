@@ -1,10 +1,11 @@
-// import { httpService } from '@/services'
 import type { IExampleInterface } from '@/types'
 
-class ExampleGeneralService {
-  getSomeData (): Promise<IExampleInterface> {
-    return useHttp.get('/posts/1')
+export const useExampleGeneralService = () => {
+  function getSomeData () {
+    return useHttp.get<IExampleInterface>('/posts/1')
+  }
+
+  return {
+    getSomeData
   }
 }
-
-export const exampleGeneralService = new ExampleGeneralService()

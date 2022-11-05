@@ -2,6 +2,8 @@
   <Portal :to="$portalNames.HEADER" />
 
   <div ref="exampleElementRef" class="h-full overflow-hidden">
+    <ExampleViewComponent />
+
     <div class="p-4">
       <label>Compute Example</label>
       <Compute
@@ -72,8 +74,6 @@
 
 <script lang="ts" setup>
 import { ElSelect } from 'element-plus'
-
-import { useExampleViewStore, useGeneralStore } from '@/store'
 
 import colors from 'colors'
 console.log(colors)

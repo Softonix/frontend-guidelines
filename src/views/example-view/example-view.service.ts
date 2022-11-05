@@ -1,9 +1,11 @@
 import type { IExampleInterface } from '@/types'
 
-class ExampleViewService {
-  getSomeData (): Promise<IExampleInterface> {
-    return useHttp.get('/posts/1')
+export const useExampleViewService = () => {
+  function getSomeData () {
+    return useHttp.get<IExampleInterface>('/posts/1')
+  }
+
+  return {
+    getSomeData
   }
 }
-
-export const exampleViewService = new ExampleViewService()

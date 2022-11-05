@@ -1,5 +1,3 @@
-class AuthService {
-
+export const useAuthService = () => {
+  return {}
 }
-
-export const authService = new AuthService()
