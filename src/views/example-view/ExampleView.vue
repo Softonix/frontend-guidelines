@@ -1,5 +1,7 @@
 <template>
-  <Portal :to="$portalNames.HEADER" />
+  <Portal :to="$portalNames.header">
+    <p class="ml-4 text-primary">teleported from example view</p>
+  </Portal>
 
   <div ref="exampleElementRef" class="h-full">
     <AuthButton />

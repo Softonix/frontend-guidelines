@@ -22,6 +22,8 @@ export const ImportsBuilder = (config: ConfigEnv) => AutoImport({
   imports: [
     'vue',
     'vue-router',
+    '@vueuse/core',
+    '@vueuse/head',
     'pinia',
     'vue-i18n'
   ],

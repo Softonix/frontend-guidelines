@@ -1,6 +1,6 @@
 import 'vue-router'
 import { routeNames } from '@/router/route-names'
-import { EPortalNames } from '@/plugins'
+import { portalNames } from '@/plugins'
 import { EComponentSize, EComponentType } from '@/types'
 
 declare module 'vue-router' {
@@ -15,7 +15,7 @@ declare module 'vue-router' {
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     // todo: Here you define you global vue definitions.
-    $portalNames: typeof EPortalNames
+    $portalNames: typeof portalNames
     $routeNames: typeof routeNames
 
     // todo: These ones are used only for element library for size and type props;

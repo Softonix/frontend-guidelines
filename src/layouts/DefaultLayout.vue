@@ -19,6 +19,8 @@
       >
         {{ $t(nav.label) }}
       </el-button>
+
+      <PortalTarget :name="$portalNames.header" />
     </header>
 
     <div class="flex-grow overflow-auto p-4">

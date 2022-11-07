@@ -2,8 +2,8 @@ import type { Plugin } from 'vue'
 import type { TCallbackFn, TIndexedObject } from '@/types'
 
 const portalNames = {
-  sidebarPortal: 'sidebar-portal',
-  headerPortal: 'header-portal'
+  sidebar: 'sidebar',
+  header: 'header'
 }
 
 class PortalService {
@@ -50,6 +50,7 @@ const PortalPlugin: Plugin = {
 }
 
 export {
+  portalNames,
   PortalPlugin
 }
 
