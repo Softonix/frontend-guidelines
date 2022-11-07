@@ -10,6 +10,7 @@ export const ImportsBuilder = (config: ConfigEnv) => AutoImport({
     './src/composables',
     './src/composables/**/index.ts',
     './src/store/modules',
+    './src/services',
     './src/views/**/*.store.ts',
     './src/views/**/*.service.ts'
   ],
