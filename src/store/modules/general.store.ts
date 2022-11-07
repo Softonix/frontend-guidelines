@@ -6,7 +6,6 @@ export const useGeneralStore = defineStore('generalStore', () => {
   const generalLoading = ref(false)
 
   async function getGeneralStoreVar () {
-    console.log(1)
     try {
       generalLoading.value = true
       exampleGeneralVar.value = await exampleViewService.getSomeData()
