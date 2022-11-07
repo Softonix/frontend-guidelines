@@ -2,6 +2,7 @@
   <Portal :to="$portalNames.HEADER" />
 
   <div ref="exampleElementRef" class="h-full overflow-hidden">
+    <AuthButton />
     <ExampleViewComponent />
 
     <div class="p-4">
