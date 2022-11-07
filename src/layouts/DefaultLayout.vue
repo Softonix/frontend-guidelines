@@ -21,11 +21,11 @@
       </el-button>
     </header>
 
-    <div class="flex-grow p-4">
+    <div class="flex-grow overflow-auto p-4">
       <router-view />
     </div>
 
-    <footer class="p-4 bg-red-200 capitalize">example footer</footer>
+    <footer class="p-4 bg-red-200 capitalize shrink-0">example footer</footer>
   </div>
 </template>
 

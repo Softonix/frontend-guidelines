@@ -1,7 +1,7 @@
 <template>
   <Portal :to="$portalNames.HEADER" />
 
-  <div ref="exampleElementRef" class="h-full overflow-hidden">
+  <div ref="exampleElementRef" class="h-full">
     <AuthButton />
     <ExampleViewComponent />
 
