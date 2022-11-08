@@ -6,11 +6,15 @@ export function useElFormRef (initialValue: any = null) {
 }
 
 // --------------------------------------------- F O R M  M O D E L ----------------------------------------------------
+export function useElFormModel<T extends object> (model: T) {
+  return reactive<T>(model)
+}
+
+// ------------------------------------------- F O R M  R U L E S ------------------------------------------------------
 export function useElFormRules (model: FormRules) {
   return reactive(model)
 }
 
-// ------------------------------------------- F O R M  R U L E S ------------------------------------------------------
 export function useRequiredRule ({ required = true } = {}) {
   const { t } = useI18n()
   return { required, message: t('validation.required'), trigger: 'change' } as FormItemRule
