@@ -1,5 +1,4 @@
 import type { Plugin } from 'vue'
-import type { TCallbackFn, TIndexedObject } from '@/types'
 
 const portalNames = {
   sidebar: 'sidebar',

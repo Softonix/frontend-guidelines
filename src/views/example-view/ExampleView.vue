@@ -47,13 +47,13 @@
         <template #header>
           <div class="flex justify-between">
             <span>{{ exampleVar?.title }}</span>
-            <el-button :type="$componentType.PRIMARY" plain>{{ exampleVar?.userId }}</el-button>
+            <el-button :type="$elComponentType.primary" plain>{{ exampleVar?.userId }}</el-button>
           </div>
         </template>
         <p>{{ exampleVar?.body }}</p>
       </el-card>
       <el-button
-        :type="$componentType.SUCCESS"
+        :type="$elComponentType.success"
         @click="changeExampleViewVar"
       >
         Change value
@@ -66,7 +66,7 @@
       <label>general store var</label>
       <p class="mb-2">{{ exampleGeneralVar }}</p>
       <el-button
-        :type="$componentType.SUCCESS"
+        :type="$elComponentType.success"
         @click="generalStore.getGeneralStoreVar"
       >
         get general store value

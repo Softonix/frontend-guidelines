@@ -7,7 +7,7 @@ import { store } from '@/store/create-store'
 import {
   PortalPlugin,
   I18nPlugin,
-  VueGlobalPrototypesPlugin
+  VueGlobalPropertiesPlugin
 } from '@/plugins'
 
 import '@/assets/styles/main.scss'
@@ -19,7 +19,7 @@ app
   .use(router)
   .use(PortalPlugin)
   .use(I18nPlugin)
-  .use(VueGlobalPrototypesPlugin)
+  .use(VueGlobalPropertiesPlugin)
 
 router.isReady().then(() => {
   app.mount('#app')

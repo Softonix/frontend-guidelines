@@ -1,3 +1,3 @@
 <template>
-  <el-button>auth test</el-button>
+  <el-button :type="$elComponentType.primary">auth test</el-button>
 </template>

@@ -12,7 +12,7 @@
       <el-button
         v-for="nav in navigation"
         :key="nav.name"
-        :type="$componentType.PRIMARY"
+        :type="$elComponentType.primary"
         plain
         class="hover:underline capitalize"
         @click="$router.push({ name: nav.name })"
