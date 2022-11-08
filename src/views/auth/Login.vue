@@ -46,8 +46,11 @@ const formRules = useElFormRules({
 async function submitForm () {
   console.log(formRef)
 
-  await formRef.value.validate()
-  alert('submit!')
+  formRef.value.validate(valid => {
+    if (valid) {
+      alert('submit!')
+    }
+  })
 }
 
 function resetForm () {
