@@ -51,7 +51,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   └── routes.ts                  # Declares all routes
     │ 
     ├── services     
-    │   ├── index.ts                   # Export * from all services accross an app
+    │   ├── index.ts                   # Export * from all services accross an app (not needed if using auto-imports)
     │   ├── api.service.ts             # Axios config, interceptors. If needed may be moved to folder
     │   ├── tags.service.ts            # Tags service - tags used across the app and doesn't have own page
     │   └── auth.service.ts            # Auth service - user data, tokens used across the app, sidebar, settings
@@ -61,10 +61,10 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │       ├── tags.store.ts          # Tags module - tags used across the app and doesn't have own page
     │       └── auth.store.ts          # Auth module - user data, tokens used across the app, sidebar, settings
     │   ├── create-store.ts            # Initializes store
-    │   ├── index.ts                   # Exports all modules
+    │   ├── index.ts                   # Exports all modules (not needed if using auto-imports)
     │ 
     ├── types
-    │   ├── general.d.ts           # Some general types used everywhere in the project
+    │   ├── general.d.ts               # Some general types used everywhere in the project
     │   ├── index.ts                   # Exports all types
     │ 
     ├── views
@@ -73,7 +73,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   │   │   └── SettingsFilter.vue # Components, related only to settings pages        
     │   │   ├── settings.routes.ts     # Route file with declaration for all settings pages.
     │   │   ├── settings.service.ts    # Service with API for settings pages 
-    │   │   ├── settings.d.ts    # Types for settings pages 
+    │   │   ├── settings.d.ts          # Types for settings pages 
     │   │   ├── settings.translations.ts # Settings specific types
     │   │   ├── settings.store.ts      # Store for all settings pages
     │   │   ├── Settings.vue           # Settings root page
@@ -93,8 +93,8 @@ Very important to keep in mind - we use **/services/** ... not just for API call
 ### Naming convention
 
 - Name folders with kebab case e.g. human-resources and Vue components with PascalCase like: HumanResources.vue
-- In Vue's `<template>` write components capitalized, e.g: `<Header />` instead of: `<header>`
 - If you want to create a Button component, name it either `ButtonModule.vue` or `ButtonComponent` or `AppButton` to prevent conflicts with native HTML button tag.
+- In Vue's `<template>` write components capitalized, e.g: `<AppButton />` instead of: `<app-button />`
 - Name root-level components exactly the same as route name: Login.vue === /auth/login route
 - Name ts files with kebab-case, like: `some-dummy.service.ts` instead of `someDummy.service.ts`
 - Name all files inside `/services/` and `/store/` with middleware names like: `auth.service.ts` and `auth.store.ts` - it will help you to quickly determine what type of file you are editing now
@@ -109,7 +109,7 @@ Very important to keep in mind - we use **/services/** ... not just for API call
 - Write page/components relative CSS inside .vue files, and keep only general styles inside /assets/styles/
 - Always ask the Lead Developer or your Team Leader about project structure best practices and ask for advice.
 - Strictly recommended: Do not register your app components globally, instead import them and register locally whenever you are going to use them.
-- Import order inside Vue file is important: 3rd party libraries, then your .ts files, then components.
+- Import order inside Vue file is important: 3rd party libraries, then your .ts files, then components. (not relevant if using auto-imports)
 - Use routeNames object for IDE assistance during names usage.
 - Do not use: `export default settingsService` , instead use `export const settingsService`. Always omit default export.
 
