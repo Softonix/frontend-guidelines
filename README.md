@@ -64,7 +64,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   ├── index.ts                   # Exports all modules
     │ 
     ├── types
-    │   ├── general.types.ts           # Some general types used everywhere in the project
+    │   ├── general.d.ts           # Some general types used everywhere in the project
     │   ├── index.ts                   # Exports all types
     │ 
     ├── views
@@ -73,6 +73,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   │   │   └── SettingsFilter.vue # Components, related only to settings pages        
     │   │   ├── settings.routes.ts     # Route file with declaration for all settings pages.
     │   │   ├── settings.service.ts    # Service with API for settings pages 
+    │   │   ├── settings.d.ts    # Types for settings pages 
     │   │   ├── settings.translations.ts # Settings specific types
     │   │   ├── settings.store.ts      # Store for all settings pages
     │   │   ├── Settings.vue           # Settings root page
@@ -80,6 +81,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   └── users       
     │   │   ├── users.routes.ts     
     │   │   ├── users.service.ts   
+    │   │   ├── users.d.ts   
     │   │   ├── users.store.ts  
     │   │   ├── Users.vue  
     │   │   └── UserDetails.vue  
