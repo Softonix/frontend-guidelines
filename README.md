@@ -43,6 +43,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   ├── index.ts                   # exports all plugins
     │   ├── i18n                       # Library for internationalization
     │   ├── portal                     # Set of components for dynamic dom elements teleportation
+    │   ├── vue-global-properties      # Plugin for adding something to the vue global properties
     │ 
     ├── router         
     │   ├── index.ts                   # Exports router, invokes guards
