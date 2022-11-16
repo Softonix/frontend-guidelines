@@ -6,7 +6,7 @@
   <div class="flex flex-col h-full overflow-hidden">
     <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center">
       <div class="w-40 mr-10">
-        <img src="@/assets/images/logo.png" alt="logo">
+        <img src="/images/logo.png" alt="logo">
       </div>
 
       <el-button
