@@ -31,7 +31,7 @@ Besides this, we also propose a list of frontend best practices which we must fo
     │   ├── Tabs.vue
     │   └── MenuList.vue               # Generic Menu List
     │  
-    ├── composables                    # Composition functions used for logic sharing. Can include setup related methods or be just a pure helper function
+    ├── composables                    # Composition functions used for logic sharing. Can include vue related methods or be just a pure helper function
     │   ├── useFormConfig.ts           # Set of helpers function related to forms and their validation
     │   └── useGlobalProperties.ts     # Composable for getting global properties from Vue instance
     │  
