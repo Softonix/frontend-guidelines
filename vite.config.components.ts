@@ -25,7 +25,6 @@ function buildViewsComponents () {
       dirs.forEach((dir) => {
         const dirPath = pathJoin(dirName, dir.name)
         if (dirPath.includes('/components')) {
-          console.log(dirPath)
           componentsDirs.push(dirPath)
         }
         getComponentsDirs((dirPath))
