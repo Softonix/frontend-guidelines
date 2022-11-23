@@ -9,15 +9,15 @@ import { ComponentsBuilder } from './vite.config.components'
 import { ImportsBuilder } from './vite.config.imports'
 
 // https://vitejs.dev/config/
-export default defineConfig((config) => ({
+export default defineConfig(() => ({
   plugins: [
     vue(),
     visualizer({
       open: true
     }),
     IconsPluginCustom(),
-    ComponentsBuilder(config),
-    ImportsBuilder(config)
+    ComponentsBuilder(),
+    ImportsBuilder()
   ],
 
   resolve: {
