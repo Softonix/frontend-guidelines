@@ -8,8 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # auto imports definitions
-# ./dts/auto-imports.d.ts
-# ./dts/components.d.ts
+dts/auto-imports.d.ts
+dts/components.d.ts
 
 # local env files
 .env.local
