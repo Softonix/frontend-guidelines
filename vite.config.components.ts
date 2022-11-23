@@ -1,13 +1,12 @@
 import { readdirSync } from 'fs'
 import { join as pathJoin } from 'path'
 import Components from 'unplugin-vue-components/vite'
-import type { ConfigEnv } from 'vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { IconsResolverCustom } from './vite.config.icons'
 
 /* CONFIGURATION FOR COMPONENTS AUTO-IMPORT */
-export const ComponentsBuilder = (config: ConfigEnv) => Components({
-  dts: config.command === 'serve' && './dts/components.d.ts',
+export const ComponentsBuilder = () => Components({
+  dts: './dts/components.d.ts',
   dirs: [
     './src/components',
     './src/plugins/portal',

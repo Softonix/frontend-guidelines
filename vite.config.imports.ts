@@ -4,7 +4,7 @@ import type { ConfigEnv } from 'vite'
 
 /* CONFIGURATION FOR SCRIPTS AUTO-IMPORT */
 export const ImportsBuilder = (config: ConfigEnv) => AutoImport({
-  dts: config.command === 'serve' && './dts/auto-imports.d.ts',
+  dts: './dts/auto-imports.d.ts',
 
   dirs: [
     './src/composables',
