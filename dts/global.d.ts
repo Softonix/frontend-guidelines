@@ -1,12 +1,12 @@
 import 'vue-router'
 import { routeNames } from '@/router/route-names'
 import { globalProperties, portalNames } from '@/plugins'
-import type { EpPropFinalized, EpPropMergeType } from 'element-plus/es/utils';
+import type { EpPropFinalized, EpPropMergeType } from 'element-plus/es/utils'
 
 declare module 'vue-router' {
   interface RouteMeta {
     // todo: this is just an example. Please setup your own route meta params.
-    label?: string;
+    label?: string
     parentName?: string
     requireAuth?: boolean
   }
