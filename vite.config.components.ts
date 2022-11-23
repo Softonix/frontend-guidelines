@@ -3,6 +3,7 @@ import { join as pathJoin } from 'path'
 import Components from 'unplugin-vue-components/vite'
 import type { ConfigEnv } from 'vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { IconsResolverCustom } from './vite.config.icons'
 
 /* CONFIGURATION FOR COMPONENTS AUTO-IMPORT */
 export const ComponentsBuilder = (config: ConfigEnv) => Components({
@@ -13,7 +14,8 @@ export const ComponentsBuilder = (config: ConfigEnv) => Components({
     ...buildViewsComponents()
   ],
   resolvers: [
-    ElementPlusResolver({ importStyle: false })
+    ElementPlusResolver({ importStyle: false }),
+    IconsResolverCustom()
   ]
 })
 

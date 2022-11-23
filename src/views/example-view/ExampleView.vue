@@ -4,6 +4,8 @@
   </Portal>
 
   <div ref="exampleElementRef" class="h-full">
+    <IconCar class="w-6 h-6 text-primary" />
+    <IconCart />
     <AuthButton />
     <ExampleViewComponent />
 
