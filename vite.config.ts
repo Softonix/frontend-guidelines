@@ -9,7 +9,7 @@ import { ComponentsBuilder } from './vite.config.components'
 import { ImportsBuilder } from './vite.config.imports'
 
 // https://vitejs.dev/config/
-export default defineConfig(() => ({
+export default defineConfig({
   plugins: [
     vue(),
     visualizer({
@@ -30,4 +30,4 @@ export default defineConfig(() => ({
   optimizeDeps: {
     include: ['colors']
   }
-}))
+})
