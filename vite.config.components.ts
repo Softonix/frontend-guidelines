@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs'
-import { join as pathJoin } from 'path'
+import { join as pathJoin } from 'pathe'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { IconsResolverCustom } from './vite.config.icons'
