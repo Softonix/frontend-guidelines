@@ -22,12 +22,12 @@
 
     <div class="p-4">
       <label>Translation example</label>
-      <p>{{ $t('exampleView.exampleViewKey') }}</p>
+      <p>{{ t('exampleView.exampleViewKey') }}</p>
 
-      <ElSelect ref="elementSelectRef" v-model="$i18n.locale">
+      <ElSelect ref="elementSelectRef" v-model="locale">
         <!--todo: create your own locales config, for example with full label, icon, etc...-->
         <el-option
-          v-for="lang in $i18n.availableLocales"
+          v-for="lang in availableLocales"
           :key="lang"
           :label="lang"
           :value="lang"
@@ -83,6 +83,8 @@ import { ElSelect } from 'element-plus'
 import colors from 'colors'
 console.log(colors)
 console.log(colors.red[700])
+
+const { availableLocales, locale, t } = useI18n()
 
 const generalStore = useGeneralStore()
 const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)

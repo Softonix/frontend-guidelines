@@ -2,7 +2,7 @@
   <ElConfigProvider
     :locale="{
       name: locale,
-      el: messages[$i18n.locale]?.el as TranslatePair
+      el: messages[locale]?.el as TranslatePair
     }"
   >
     <router-view />

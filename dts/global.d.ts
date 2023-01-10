@@ -1,7 +1,7 @@
 import 'vue-router'
 import { routeNames } from '@/router/route-names'
 import { globalProperties, portalNames } from '@/plugins'
-import type { EpPropFinalized, EpPropMergeType } from 'element-plus/es/utils'
+import { EElComponentSize, EElComponentType } from '@/types/enums'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -19,8 +19,8 @@ declare module '@vue/runtime-core' {
     $routeNames: typeof routeNames
 
     // todo: These ones are used only for element library for size and type props;
-    $elComponentSize: Record<keyof typeof globalProperties.$elComponentSize, EpPropMergeType<StringConstructor, keyof typeof globalProperties.$elComponentSize>>
-    $elComponentType: Record<keyof typeof globalProperties.$elComponentType, EpPropFinalized<StringConstructor, keyof typeof globalProperties.$elComponentType>>
+    $elComponentSize: typeof EElComponentSize
+    $elComponentType: typeof EElComponentType
   }
 }
 

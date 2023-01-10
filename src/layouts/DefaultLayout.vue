@@ -17,7 +17,7 @@
         class="hover:underline capitalize"
         @click="$router.push({ name: nav.name })"
       >
-        {{ $t(nav.label) }}
+        {{ t(nav.label) }}
       </el-button>
 
       <PortalTarget :name="$portalNames.header" />
@@ -34,6 +34,7 @@
 <script lang="ts" setup>
 import { defaultLayoutRoutes } from '@/router/routes'
 const { $routeNames } = useGlobalProperties()
+const { t } = useI18n()
 
 // todo: you can import your default layout routes and map them with your navigation needs
 const navigation = [
