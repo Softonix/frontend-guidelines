@@ -17,3 +17,7 @@ export const useExampleViewStore = defineStore('exampleViewStore', () => {
     getExampleVar
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useExampleViewStore, import.meta.hot))
+}
