@@ -2,8 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 export const exampleViewRouteNames = {
   exampleView: 'exampleView',
-  exampleViewCreate: 'exampleViewCreate',
-  exampleViewDetails: 'exampleViewDetails'
+  exampleColors: 'exampleColors'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
@@ -13,18 +12,14 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
     meta: {
       label: 'general.navigation.exampleView' // translation key
     },
-    component: () => import('./ExampleView.vue'),
-    children: [
-      {
-        path: 'create',
-        name: exampleViewRouteNames.exampleViewCreate,
-        component: () => import('./ExampleViewCreate.vue')
-      },
-      {
-        path: ':id/details',
-        name: exampleViewRouteNames.exampleViewDetails,
-        component: () => import('./ExampleViewDetails.vue')
-      }
-    ]
+    component: () => import('./ExampleView.vue')
+  },
+  {
+    path: 'example-colors',
+    name: exampleViewRouteNames.exampleColors,
+    component: () => import('./ExampleColors.vue'),
+    meta: {
+      label: 'Colors'
+    }
   }
 ]
