@@ -3,13 +3,18 @@
     <p class="ml-4 text-primary">teleported from example view</p>
   </Portal>
 
-  <div ref="exampleElementRef" class="h-full">
-    <IconCar class="w-6 h-6 text-primary" />
-    <IconCart />
-    <AuthButton />
+  <div ref="exampleElementRef">
+    <div class="space-x-4">
+      <IconCar class="w-6 h-6 text-primary" />
+      <IconCart />
+      <AuthButton />
+    </div>
+
     <ExampleViewComponent />
 
-    <div class="p-4">
+    <hr class="my-4">
+
+    <div>
       <label>Compute Example</label>
       <Compute
         #default="{ lastLevel }"
@@ -20,7 +25,9 @@
       </Compute>
     </div>
 
-    <div class="p-4">
+    <hr class="my-4">
+
+    <div>
       <label>Translation example</label>
       <p>{{ t('exampleView.exampleViewKey') }}</p>
 
@@ -35,7 +42,9 @@
       </ElSelect>
     </div>
 
-    <div class="p-4">
+    <hr class="my-4">
+
+    <div>
       <label>Element colors</label>
       <span class="text-primary mr-4">primary</span>
       <span class="text-success mr-4">success</span>
@@ -43,8 +52,11 @@
       <span class="text-danger">danger</span>
     </div>
 
-    <div v-loading="loading" class="p-4 w-1/2">
-      <label>example view store var</label>
+    <hr class="my-4">
+
+    <div v-loading="loading" class="w-1/2">
+      <label>Example view store</label>
+
       <el-card class="mb-2">
         <template #header>
           <div class="flex justify-between">
@@ -54,23 +66,18 @@
         </template>
         <p>{{ exampleVar?.body }}</p>
       </el-card>
-      <el-button
-        :type="$elComponentType.success"
-        @click="changeExampleViewVar"
-      >
+
+      <el-button :type="$elComponentType.success" @click="changeExampleViewVar">
         Change value
       </el-button>
     </div>
 
-    <br>
+    <hr class="my-4">
 
-    <div v-loading="generalLoading" class="p-4 inline-flex flex-col items-start">
-      <label>general store var</label>
+    <div v-loading="generalLoading" class="inline-flex flex-col items-start">
+      <label>General store example</label>
       <p class="mb-2">{{ exampleGeneralVar }}</p>
-      <el-button
-        :type="$elComponentType.success"
-        @click="generalStore.getGeneralStoreVar"
-      >
+      <el-button :type="$elComponentType.success" @click="generalStore.getGeneralStoreVar">
         get general store value
       </el-button>
     </div>
@@ -79,10 +86,6 @@
 
 <script lang="ts" setup>
 import { ElSelect } from 'element-plus'
-
-import colors from 'colors'
-console.log(colors)
-console.log(colors.red[700])
 
 const { availableLocales, locale, t } = useI18n()
 
