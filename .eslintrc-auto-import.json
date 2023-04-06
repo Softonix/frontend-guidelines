@@ -170,6 +170,7 @@
     "useFetch": true,
     "useFileDialog": true,
     "useFileSystemAccess": true,
+    "useFlags": true,
     "useFocus": true,
     "useFocusWithin": true,
     "useFps": true,

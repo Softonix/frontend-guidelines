@@ -15,11 +15,15 @@
           <el-input v-model="formModel.password" />
         </el-form-item>
 
-        <el-form-item>
+        <div>
           <el-button :type="$elComponentType.primary" @click="submitForm">{{ t('auth.login') }}</el-button>
           <el-button @click="resetForm">{{ t('auth.reset') }}</el-button>
           <el-button @click="$router.push({ name: $routeNames.rootPage })">{{ t('auth.backToHome') }}</el-button>
-        </el-form-item>
+        </div>
+
+        <div class="mt-3">
+          <el-button v-if="flags['SX-1924-LOGIN-FLAG-EXAMPLE']">Feature Flag Enabled</el-button>
+        </div>
       </el-form>
     </el-card>
   </div>
@@ -27,6 +31,7 @@
 
 <script lang="ts" setup>
 const { t } = useI18n()
+const { flags } = useFlags()
 
 const formRef = useElFormRef()
 const formModel = reactive({
