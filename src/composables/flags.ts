@@ -9,13 +9,13 @@ type TFlagName = keyof typeof flagNames
 export function useFlags () {
   const activeFlags = reactive(flagNames)
 
-  Object.keys(flagNames).forEach((flag) => {
-    if (!activeFlags[flag as TFlagName]) {
-      activeFlags[flag as TFlagName] = Boolean(localStorageUtils.getItem(flag))
+  Object.keys(flagNames).forEach(flag => {
+    if (!activeFlags[flag]) {
+      activeFlags[flag] = Boolean(localStorageUtils.getItem(flag))
     }
   })
 
-  const changeFlag = (flag: TFlagName, value: boolean) => {
+  function changeFlag (flag: TFlagName, value: boolean) {
     if (value) {
       localStorageUtils.setItem(flag, true)
     } else {
