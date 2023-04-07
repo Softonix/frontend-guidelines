@@ -1,8 +1,8 @@
 <template>
-  <div class="colors-wrapper grid gap-10">
+  <div class="colors-wrapper grid gap-4">
     <div
       v-for="c in transformedColors"
-      :key="c.name" class="h-[80px]"
+      :key="c.name" class="pb-[100%]"
       :style="{ 'background': c.color}"
     />
   </div>
