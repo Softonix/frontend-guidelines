@@ -1,6 +1,6 @@
 class ExampleViewService {
-  getSomeData () {
-    return useHttp.get<IExampleInterface>('/posts/1')
+  getSomeData (id = 1) {
+    return useHttp.get<IExampleInterface>(`/posts/${id}`)
   }
 }
 
