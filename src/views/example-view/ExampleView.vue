@@ -1,6 +1,6 @@
 <template>
   <Portal :to="$portalNames.header">
-    <p class="ml-4 text-primary">teleported from example view</p>
+    <p data-testid="heading-text" class="ml-4 text-primary">teleported from example view</p>
   </Portal>
 
   <div ref="exampleElementRef">
@@ -76,8 +76,12 @@
 
     <div v-loading="generalLoading" class="inline-flex flex-col items-start">
       <label>General store example</label>
-      <p class="mb-2">{{ exampleGeneralVar }}</p>
-      <el-button :type="$elComponentType.success" @click="generalStore.getGeneralStoreVar">
+      <p data-testid="general-store-text" class="mb-2">{{ exampleGeneralVar }}</p>
+      <el-button
+        data-testid="general-store-button"
+        :type="$elComponentType.success"
+        @click="generalStore.getGeneralStoreVar"
+      >
         get general store value
       </el-button>
     </div>

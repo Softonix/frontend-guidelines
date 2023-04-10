@@ -158,3 +158,11 @@ npm run build
 npm run lint
 ```
 
+### E2E Tests with Playwright
+
+Install all browsers for Playwright
+
+```sh
+npx playwright install
+```
+
