@@ -3,14 +3,16 @@
   "include": [
     "dts/*",
     "src/**/*",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "tests"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["unplugin-icons/types/vue", "cypress"]
+    "isolatedModules": false,
+    "types": ["unplugin-icons/types/vue"]
   },
 
   "references": [

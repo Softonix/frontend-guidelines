@@ -20,4 +20,6 @@ test('intro', async ({ page }) => {
   const res = await validateResponse(page, 'https://jsonplaceholder.typicode.com/posts/1')
 
   await expect(res.userId).toBe(1)
+
+  await expect(page.getByTestId('general-store-text')).toHaveText(/"userId"/)
 })
