@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex items-center justify-center">
-    <el-card class="w-1/3 m-auto">
+    <el-card class="w-[450px] max-w-full m-auto">
       <el-form
         ref="formRef"
         :model="formModel"

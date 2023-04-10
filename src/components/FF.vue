@@ -17,5 +17,5 @@ const props = defineProps<{
 
 const component = computed(() => props.showBadge ? ElBadge : 'div')
 
-const isVisible = computed(() => flags.value[props.name])
+const isVisible = computed(() => flags[props.name])
 </script>

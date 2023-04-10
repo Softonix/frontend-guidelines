@@ -7,22 +7,20 @@ const defaultFlags = {
 
 export type TFlagName = keyof typeof defaultFlags
 
-const flags = ref<Record<TFlagName, boolean>>(structuredClone(defaultFlags))
-
-const setFlags = () => {
-  Object.keys(defaultFlags).forEach(flag => {
-    flags.value[flag] = defaultFlags[flag] || !!localStorageUtils.getItem(flag)
-  })
-}
-
-setFlags()
+const flags = reactive<typeof defaultFlags>(structuredClone(defaultFlags))
 
 export function useFlags () {
+  setFlags()
+
+  function setFlags () {
+    Object.keys(defaultFlags).forEach(flag => {
+      flags[flag] = defaultFlags[flag] || !!localStorageUtils.getItem(flag)
+    })
+  }
+
   function changeFlag (flag: TFlagName, value: boolean) {
     if (value) localStorageUtils.setItem(flag, true)
     else localStorageUtils.removeItem(flag)
-
-    setFlags()
   }
 
   return {
