@@ -1,30 +1,33 @@
 import { localStorageUtils } from '@/core/localstorage.utils'
 
-const flagNames = {
-  'SX-1924-LOGIN-FLAG-EXAMPLE': false
+const defaultFlags = {
+  'FF-SX-1924-LOGIN-FLAG-EXAMPLE': false,
+  'FF-SX-1234-TEST': false
 }
 
-type TFlagName = keyof typeof flagNames
+export type TFlagName = keyof typeof defaultFlags
+
+const flags = ref<Record<TFlagName, boolean>>(structuredClone(defaultFlags))
+
+const setFlags = () => {
+  Object.keys(defaultFlags).forEach(flag => {
+    flags.value[flag] = defaultFlags[flag] || !!localStorageUtils.getItem(flag)
+  })
+}
+
+setFlags()
 
 export function useFlags () {
-  const activeFlags = reactive(flagNames)
-
-  Object.keys(flagNames).forEach(flag => {
-    if (!activeFlags[flag]) {
-      activeFlags[flag] = Boolean(localStorageUtils.getItem(flag))
-    }
-  })
-
   function changeFlag (flag: TFlagName, value: boolean) {
-    if (value) {
-      localStorageUtils.setItem(flag, true)
-    } else {
-      localStorageUtils.removeItem(flag)
-    }
+    if (value) localStorageUtils.setItem(flag, true)
+    else localStorageUtils.removeItem(flag)
+
+    setFlags()
   }
 
   return {
-    flags: activeFlags,
+    defaultFlags,
+    flags,
     changeFlag
   }
 }
