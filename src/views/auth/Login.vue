@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex items-center justify-center">
-    <el-card class="w-1/3 m-auto">
+    <el-card class="w-[450px] max-w-full m-auto">
       <el-form
         ref="formRef"
         :model="formModel"
@@ -22,7 +22,9 @@
         </div>
 
         <div class="mt-3">
-          <el-button v-if="flags['SX-1924-LOGIN-FLAG-EXAMPLE']">Feature Flag Enabled</el-button>
+          <FF name="FF-SX-1924-LOGIN-FLAG-EXAMPLE" showBadge>
+            <el-button>Feature Flag Enabled</el-button>
+          </FF>
         </div>
       </el-form>
     </el-card>
@@ -31,7 +33,6 @@
 
 <script lang="ts" setup>
 const { t } = useI18n()
-const { flags } = useFlags()
 
 const formRef = useElFormRef()
 const formModel = reactive({

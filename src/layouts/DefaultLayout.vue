@@ -20,6 +20,10 @@
         {{ t(nav.label) }}
       </el-button>
 
+      <FF name="FF-SX-1234-TEST" show-badge>
+        <span class="text-primary ml-5">Test</span>
+      </FF>
+
       <PortalTarget :name="$portalNames.header" />
     </header>
 
