@@ -2,14 +2,16 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": [
     "dts/*",
-     "src/**/*", 
-     "src/**/*.vue"
-    ],
+    "src/**/*",
+    "src/**/*.vue",
+    "tests"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
+    "isolatedModules": false,
     "types": ["unplugin-icons/types/vue"]
   },
 

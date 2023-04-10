@@ -3,6 +3,7 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
@@ -10,10 +11,23 @@ module.exports = {
     '@vue/eslint-config-typescript/recommended',
     './.eslintrc-auto-import.json'
   ],
+
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser'
   },
+
+  overrides: [
+    {
+      files: ['tests/cypress/**/*.{js,ts}'],
+      extends: [
+        'plugin:cypress/recommended'
+      ],
+      rules: {
+        'no-unused-expressions': 'off'
+      }
+    }
+  ],
 
   ignorePatterns: ['dts/*.d.ts'],
 
