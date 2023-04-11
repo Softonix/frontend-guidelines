@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" v-if="isVisible" value="FF">
+  <component :is="component" v-if="isVisible" :value="badgeLabel">
     <slot />
   </component>
 </template>
@@ -10,10 +10,13 @@ import type { TFlagName } from '@/composables/flags'
 
 const { flags } = useFlags()
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   name: TFlagName
   showBadge: boolean
-}>()
+  badgeLabel: string
+}>(), {
+  badgeLabel: 'new'
+})
 
 const component = computed(() => props.showBadge ? ElBadge : 'div')
 
