@@ -4,7 +4,7 @@
     Please create your own depending on your projects needs
   -->
   <div class="flex flex-col h-full overflow-hidden">
-    <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center">
+    <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-cy="page-header">
       <div class="w-40 mr-10">
         <img src="/images/logo.png" alt="logo">
       </div>
