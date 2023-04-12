@@ -2,7 +2,7 @@ import { GeneralCommands } from '/Users/admin/Desktop/frontend-guidelines/tests/
 
 export class ExamplesPage extends GeneralCommands {
     visitTheExamplesPage() {
-        cy.visit('/example')
+        cy.visit('/example');
     }
     
     interceptGetGeneralStoreRequest(requestAlias: string) {
@@ -21,14 +21,14 @@ export class ExamplesPage extends GeneralCommands {
         cy.wait(`@${requestAlias}`).then((request) => {
             const requestID = `"id": ${request.response.body.id}`;
 
-            cy.wrap(requestID).as(`${requestIdAlias}`)
+            cy.wrap(requestID).as(`${requestIdAlias}`);
         });
     }
 
     assertTheIdAppearedInTheGeneralStoreText(requestId: string) {
         cy.get(`@${requestId}`).then((requestID) => {
           this.getTheGeneralStoreText()
-          .should('contain.text', `${requestID}`)
+          .should('contain.text', `${requestID}`);
         })
       }
 

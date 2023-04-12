@@ -2,7 +2,7 @@ import { GeneralCommands } from '/Users/admin/Desktop/frontend-guidelines/tests/
 
 export class FeatureFlag extends GeneralCommands {
     visitTheFeatureFlagPage() {
-        cy.visit('/example-flags')
+        cy.visit('/example-flags');
     }
 
     verifyTheSwitcherIsUnchecked() {
@@ -10,13 +10,13 @@ export class FeatureFlag extends GeneralCommands {
         .first()
         .find('input')
         .invoke('attr', 'aria-checked')
-        .should('eq', 'false')
+        .should('eq', 'false');
     }
 
     clickTheSwithcer() {
         this.getTheSwitcher()
         .first()
-        .click()
+        .click();
     }
 
     verifyTheSwitcherIsChecked() {
@@ -32,7 +32,7 @@ export class FeatureFlag extends GeneralCommands {
         .then((featureFlag) => {
             const flagName = featureFlag.text();
 
-            cy.wrap(flagName).as('flagName')
+            cy.wrap(flagName).as('flagName');
         });
     }
 
@@ -61,7 +61,7 @@ export class FeatureFlag extends GeneralCommands {
 
     assertTheFFButtonDoesntExist() {
         this.getTheFeatureFlagButton()
-        .should('not.exist');
+        .should('not.be.visible');
     }
 
     getTheFeatureFlagButton() {

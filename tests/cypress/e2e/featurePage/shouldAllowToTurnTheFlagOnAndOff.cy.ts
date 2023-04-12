@@ -1,9 +1,11 @@
 import { featureFlag } from '/Users/admin/Desktop/frontend-guidelines/tests/cypress/support/featureFlagPageObject';
 
 describe('Feature Flag Page', () => {
-    it('should display Feature Enabled when visiting the first time', () => {
-
+    beforeEach(() => {
         featureFlag.visitTheFeatureFlagPage();
+    });
+
+    it('should display Feature Enabled when visiting the first time', () => {
 
         featureFlag.verifyTheSwitcherIsUnchecked();
 
@@ -34,4 +36,4 @@ describe('Feature Flag Page', () => {
 
         featureFlag.assertTheFFButtonDoesntExist();
     });
-  })
+  });

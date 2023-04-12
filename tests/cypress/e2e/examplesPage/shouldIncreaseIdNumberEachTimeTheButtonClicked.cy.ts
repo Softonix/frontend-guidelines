@@ -3,7 +3,8 @@ import { examplesPage } from '/Users/admin/Desktop/frontend-guidelines/tests/cyp
 describe('Examples page', () => {
   beforeEach(() => {
     examplesPage.visitTheExamplesPage();
-  })
+  });
+
     it('should increase the id value each time the [general store] button is clicked', () => {
         examplesPage.interceptGetGeneralStoreRequest('firstRequest');
 
@@ -22,4 +23,5 @@ describe('Examples page', () => {
 
         examplesPage.assertTheIdAppearedInTheGeneralStoreText('secondRequestID');
     });
-  })
+  });
+  
