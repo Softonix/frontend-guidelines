@@ -22,7 +22,7 @@
         </div>
 
         <div class="mt-3" data-cy="feature-flag">
-          <FF name="FF-SX-1924-LOGIN-FLAG-EXAMPLE" showBadge>
+          <FF name="FF-SX-1924-LOGIN-FLAG-EXAMPLE" show-badge>
             <el-button>Feature Flag Enabled</el-button>
           </FF>
         </div>
