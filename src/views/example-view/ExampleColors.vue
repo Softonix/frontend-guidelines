@@ -4,7 +4,7 @@
       v-for="c in transformedColors"
       :key="c.name" class="pb-[100%]"
       :style="{ 'background': c.color}"
-      data-cy="color-bloc"
+      data-cy="color-block"
     />
   </div>
 </template>
