@@ -81,6 +81,7 @@
         data-testid="general-store-button"
         :type="$elComponentType.success"
         @click="generalStore.getGeneralStoreVar"
+        data-cy="general-store-button"
       >
         get general store value
       </el-button>
