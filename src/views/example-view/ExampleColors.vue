@@ -2,7 +2,8 @@
   <div class="colors-wrapper grid gap-4">
     <div
       v-for="c in transformedColors"
-      :key="c.name" class="pb-[100%]"
+      :key="c.name"
+      data-testid="color-block" class="pb-[100%]"
       :style="{ 'background': c.color}"
       data-cy="color-block"
     />
