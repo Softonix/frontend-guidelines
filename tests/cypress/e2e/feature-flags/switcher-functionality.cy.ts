@@ -1,20 +1,20 @@
 import { featureFlags } from '../../support'
 
-describe('Feature Flag Page', () => {
+describe('Feature flag switcher', () => {
   beforeEach(() => {
     featureFlags.visitTheFeatureFlagPage()
   })
 
-  it('should display Feature Enabled when visiting the first time', () => {
+  it('should turn On and Off the Feature flag if clicking', () => {
     featureFlags.verifyTheSwitcherIsUnchecked()
 
     featureFlags.clickTheSwithcer()
 
-    featureFlags.verifyTheSwitcherIsChecked()
+    featureFlags.verifySwitcherIsChecked()
 
     featureFlags.saveTheFeatureFlagName()
 
-    featureFlags.assertFFexistInLocalStorage()
+    featureFlags.assertFFInLocalStorage()
 
     featureFlags.clickTheLoginButton()
 
@@ -22,7 +22,7 @@ describe('Feature Flag Page', () => {
 
     cy.reload()
 
-    featureFlags.assertFFexistInLocalStorage()
+    featureFlags.assertFFInLocalStorage()
 
     featureFlags.visitTheFeatureFlagPage()
 

@@ -8,7 +8,7 @@ describe('Color blocks', () => {
   it('should have different CSS colors', () => {
     colorsPage.countTheColorBlocksOnThePage()
 
-    colorsPage.countTheNumberOfDistinctBlocClolors()
+    colorsPage.countTheDistinctBlockClolors()
 
     colorsPage.assertBlocksHaveDifferentColors()
   })

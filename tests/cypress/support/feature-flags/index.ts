@@ -19,7 +19,7 @@ export class FeatureFlags extends GeneralCommands {
       .click()
   }
 
-  verifyTheSwitcherIsChecked () {
+  verifySwitcherIsChecked () {
     this.getTheSwitcher()
       .first()
       .find('input')
@@ -36,7 +36,7 @@ export class FeatureFlags extends GeneralCommands {
       })
   }
 
-  assertFFexistInLocalStorage () {
+  assertFFInLocalStorage () {
     cy.get('@flagName').then((flagName) => {
       cy.window()
         .its('localStorage')

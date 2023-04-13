@@ -14,7 +14,7 @@ export class ColorsPage extends GeneralCommands {
       })
   }
 
-  countTheNumberOfDistinctBlocClolors () {
+  countTheDistinctBlockClolors () {
     cy.get('@numberOfBlocks').then((numberOfBlocks) => {
       const arrayOfColors: any = []
 
