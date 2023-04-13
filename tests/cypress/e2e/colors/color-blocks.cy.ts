@@ -1,11 +1,11 @@
 import { colorsPage } from '../../support'
 
-describe('Colors page', () => {
+describe('Color blocks', () => {
   beforeEach(() => {
     colorsPage.visitTheColorsPage()
   })
 
-  it('should contain color blocks of different CSS colors', () => {
+  it('should have different CSS colors', () => {
     colorsPage.countTheColorBlocksOnThePage()
 
     colorsPage.countTheNumberOfDistinctBlocClolors()
