@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.only('User should be able to turn the Feature flag On and Off', async ({ page }) => {
+test('User should be able to turn the Feature flag On and Off', async ({ page }) => {
   await page.goto('http://localhost:5173/example-flags')
 
   const firstFeatureFlag = page.locator('[data-testid="heading-text"]').first()
