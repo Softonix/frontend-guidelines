@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.only('User should be able to turn the Feature flag On and Off', async ({ page }) => {
+test('Each color block should have a different CSS color', async ({ page }) => {
   await page.goto('http://localhost:5173/example-colors')
 
   const colorBlock = page.getByTestId('color-block')
