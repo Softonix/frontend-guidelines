@@ -21,7 +21,7 @@
           <el-button @click="$router.push({ name: $routeNames.rootPage })">{{ t('auth.backToHome') }}</el-button>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3" data-cy="feature-flag">
           <FF name="FF-SX-1924-LOGIN-FLAG-EXAMPLE" show-badge>
             <el-button>Feature Flag Enabled</el-button>
           </FF>

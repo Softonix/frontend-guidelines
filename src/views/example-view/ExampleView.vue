@@ -76,11 +76,12 @@
 
     <div v-loading="generalLoading" class="inline-flex flex-col items-start">
       <label>General store example</label>
-      <p data-testid="general-store-text" class="mb-2">{{ exampleGeneralVar }}</p>
+      <p data-testid="general-store-text" data-cy="general-store-text" class="mb-2">{{ exampleGeneralVar }}</p>
       <el-button
         data-testid="general-store-button"
         :type="$elComponentType.success"
         @click="generalStore.getGeneralStoreVar"
+        data-cy="general-store-button"
       >
         get general store value
       </el-button>
