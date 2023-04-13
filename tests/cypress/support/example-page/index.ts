@@ -38,6 +38,14 @@ export class ExamplePage extends GeneralCommands {
         .should('contain.text', `${requestID}`)
     })
   }
+
+  assertTheRequestIDsAreDifferent () {
+    cy.get('@firstRequestID').then((firstRequestId) => {
+      cy.get('@secondRequestID').then((secondRequestId) => {
+        expect(firstRequestId).not.equal(secondRequestId)
+      })
+    })
+  }
 }
 
 export const examplesPage = new ExamplePage()
