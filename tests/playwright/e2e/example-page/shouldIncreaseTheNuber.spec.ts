@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:5173/example')
 })
 
-test('Clicking the [] button should respond with incremented id', async ({ page }) => {
+test('Clicking the [General store] should increase the Id value in a box', async ({ page }) => {
   const examplePage = new ExamplePage(page)
 
   examplePage.interceptTheGeneralStoreRequest()

@@ -1,20 +1,16 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
+import { ColorsPage } from '../../pages/colors.page'
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('http://localhost:5173/example-colors')
+})
 
 test('Each color block should have a different CSS color', async ({ page }) => {
-  await page.goto('http://localhost:5173/example-colors')
+  const colorsPage = new ColorsPage(page)
 
-  const colorBlock = page.getByTestId('color-block')
+  await colorsPage.getTheNumberOfColorBlocks()
 
-  const numberOfColorBlocks = await colorBlock.count()
+  await colorsPage.countDistinctBlockColors()
 
-  const distinctColors: any = []
-  for (let blockNumber = 0; blockNumber < numberOfColorBlocks; blockNumber++) {
-    await colorBlock.nth(blockNumber).getAttribute('style').then((value) => {
-      if (!distinctColors.includes(value)) {
-        distinctColors.push(value)
-      }
-    })
-  }
-
-  expect(numberOfColorBlocks).toEqual(distinctColors.length)
+  await colorsPage.assertBlocksHaveDifferentColors()
 })
