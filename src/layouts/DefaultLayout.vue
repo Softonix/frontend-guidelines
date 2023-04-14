@@ -4,7 +4,11 @@
     Please create your own depending on your projects needs
   -->
   <div class="flex flex-col h-full overflow-hidden">
+<<<<<<< HEAD
     <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-cy="page-header">
+=======
+    <header class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-testid="page-header">
+>>>>>>> a4d5c40 (Data attributes for FF test added)
       <div class="w-40 mr-10">
         <img src="/images/logo.png" alt="logo">
       </div>

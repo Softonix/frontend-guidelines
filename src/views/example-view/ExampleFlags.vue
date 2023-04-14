@@ -5,6 +5,7 @@
       <template #default="{ row }: { row: { name: keyof typeof flags, value: boolean } }">
         <el-switch
           v-model="flags[row.name]"
+          data-testid="heading-text"
           :disabled="defaultFlags[row.name]"
           data-cy="swtich"
           @change="changeFlag(row.name, $event as boolean)"
