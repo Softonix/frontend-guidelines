@@ -1,13 +1,15 @@
 import { expect, Page, Locator } from '@playwright/test'
+import { GeneralCommands } from './general-commands.page'
 
 export let numberOfColorBlocks: number
 export let numberOfDistinctColors: number
 
-export class ColorsPage {
+export class ColorsPage extends GeneralCommands {
   page: Page
   colorBlock: Locator
 
   constructor (page: Page) {
+    super(page)
     this.page = page
     this.colorBlock = page.getByTestId('color-block')
   }
