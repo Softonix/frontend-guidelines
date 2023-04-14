@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:5173/example-colors')
 })
 
-test('Each color block should have a different CSS color', async ({ page }) => {
+test('Each block should have a different CSS color', async ({ page }) => {
   const colorsPage = new ColorsPage(page)
 
   await colorsPage.getTheNumberOfColorBlocks()
