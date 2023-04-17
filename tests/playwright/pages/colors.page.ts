@@ -19,15 +19,12 @@ export class ColorsPage extends GeneralCommands {
   }
 
   async countDistinctBlockColors () {
-    const distinctColors: any = []
-    for (let blockNumber = 0; blockNumber < numberOfColorBlocks; blockNumber++) {
-      await this.colorBlock.nth(blockNumber).getAttribute('style').then((value) => {
-        if (!distinctColors.includes(value)) {
-          distinctColors.push(value)
-        }
-      })
-    }
-    numberOfDistinctColors = distinctColors.length
+    const styles = await Promise.all(Array.from(
+      { length: numberOfColorBlocks },
+      (_, i) => this.colorBlock.nth(i).getAttribute('style')
+    ))
+
+    numberOfDistinctColors = ([...new Set(styles)]).length
   }
 
   async assertBlocksHaveDifferentColors () {
