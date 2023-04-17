@@ -20,17 +20,14 @@ export class ExamplePage extends GeneralCommands {
     await this.generalStoreButton.click()
   }
 
-  async declarateResponseId (request: Promise<any>) {
-    await (await request).response().then(async (response: Response) => {
-      await response?.json().then((resp) => {
-        responseId = resp.id
-      })
+  async declarateResponseId () {
+    await this.response.json().then((response: any) => {
+      responseId = response.id
     })
   }
 
   async interceptTheGeneralStoreRequest () {
-    request = this.page.waitForRequest(request => request.url()
-      .includes('https://jsonplaceholder.typicode.com/posts/'))
+    request = this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
   }
 
   async assertGeneralStoreTextId () {
