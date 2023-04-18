@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { ColorsPage } from '../../pages/colors.page'
+import { ColorsPage } from '../../pages'
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/example-colors')
@@ -8,9 +8,9 @@ test.beforeEach(async ({ page }) => {
 test('Each block should have a different CSS color', async ({ page }) => {
   const colorsPage = new ColorsPage(page)
 
-  await colorsPage.getTheNumberOfColorBlocks()
+  const numberOfColorBlocks = await colorsPage.getTheNumberOfColorBlocks()
 
-  await colorsPage.countDistinctBlockColors()
+  const countDistingBlockColors = await colorsPage.countDistinctBlockColors()
 
-  await colorsPage.assertBlocksHaveDifferentColors()
+  await colorsPage.assertBlocksHaveDifferentColors(numberOfColorBlocks, countDistingBlockColors)
 })
