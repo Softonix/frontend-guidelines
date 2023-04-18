@@ -1,4 +1,5 @@
-import { colorsPage } from '../../support'
+/// <reference types="cypress" />
+import { colorsPage } from '../../support/colors/index'
 
 describe('Color blocks', () => {
   beforeEach(() => {

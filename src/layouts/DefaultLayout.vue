@@ -5,8 +5,7 @@
   -->
   <div class="flex flex-col h-full overflow-hidden">
     <header
-      class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-cy="page-header"
-      data-testid="page-header"
+      class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-testid="page-header"
     >
       <div class="w-40 mr-10">
         <img src="/images/logo.png" alt="logo">

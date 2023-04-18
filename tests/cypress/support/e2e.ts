@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-namespace */
 // ***********************************************************
 // This example support/e2e.ts is processed and
 // loaded automatically before your test files.
@@ -15,6 +17,17 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+         * Custom command to select DOM element by testId attribute.
+         * @example cy.dataCy('greeting')
+         */
+      getByTestId(value: string): Chainable<JQuery<HTMLElement>>
+    }
+  }
+}
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

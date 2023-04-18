@@ -7,7 +7,6 @@
           v-model="flags[row.name]"
           data-testid="heading-text"
           :disabled="defaultFlags[row.name]"
-          data-cy="swtich"
           @change="changeFlag(row.name, $event as boolean)"
         />
       </template>

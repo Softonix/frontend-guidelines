@@ -6,11 +6,11 @@ export class FeatureFlags extends GeneralCommands {
   }
 
   getTheFeatureFlagButton () {
-    return cy.get('[data-cy="feature-flag"]')
+    return cy.getByTestId('feature-flag')
   }
 
   getTheSwitcher () {
-    return cy.get('[data-cy="swtich"]')
+    return cy.getByTestId('heading-text')
   }
 
   verifyTheSwitcherIsUnchecked () {

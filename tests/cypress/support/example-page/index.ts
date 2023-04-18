@@ -6,11 +6,11 @@ export class ExamplePage extends GeneralCommands {
   }
 
   getTheGeneralStoreButton () {
-    return cy.get('[data-cy="general-store-button"]')
+    return cy.getByTestId('general-store-button')
   }
 
   getTheGeneralStoreText () {
-    return cy.get('[data-cy="general-store-text"]')
+    return cy.getByTestId('general-store-text')
   }
 
   interceptGetGeneralStoreRequest (requestAlias: string) {

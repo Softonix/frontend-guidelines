@@ -5,6 +5,10 @@ export class ColorsPage extends GeneralCommands {
     cy.visit('/example-colors')
   }
 
+  getTheColorBlock () {
+    return cy.getByTestId('color-block')
+  }
+
   countTheColorBlocksOnThePage () {
     this.getTheColorBlock()
       .then((colorBlocks) => {
@@ -39,10 +43,6 @@ export class ColorsPage extends GeneralCommands {
         expect(numberOfBlocks).to.equal(distinctColors.length)
       })
     })
-  }
-
-  getTheColorBlock () {
-    return cy.get('[data-cy="color-block"]')
   }
 }
 
