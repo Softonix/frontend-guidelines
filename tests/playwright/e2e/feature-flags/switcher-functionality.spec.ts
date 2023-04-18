@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { FeatureFlag } from '../../pages/feature-flag.page'
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/example-flags')
+  await page.goto('/example-flags')
 })
 
 test('Flag switcher should turn On and Off the Feature flag if clicking', async ({ page }) => {
@@ -20,7 +20,7 @@ test('Flag switcher should turn On and Off the Feature flag if clicking', async 
 
   await featureFlagPage.assertTheFFlagButtonVisible()
 
-  await page.goto('http://localhost:5173/example-flags')
+  await page.goto('/example-flags')
 
   await page.reload()
 
