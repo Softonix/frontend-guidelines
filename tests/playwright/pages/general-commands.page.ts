@@ -1,38 +1,25 @@
 import type { Page, Locator } from '@playwright/test'
+import { GeneralMethods } from './general-methods.page'
 
 export let featureFlagValue: string
 
-export class GeneralCommands {
+export class GeneralCommands extends GeneralMethods {
   page: Page
   pageHeader: Locator
   tableRow: Locator
-  request: any
-  response: any
 
   constructor (page: Page) {
+    super(page)
     this.page = page
     this.pageHeader = page.getByTestId('page-header')
     this.tableRow = page.locator('td')
-    this.request = null
-    this.response = null
   }
 
   async firstTableRow () {
     return this.tableRow.first()
   }
 
-  async interceptTheRequest (url: string) {
-    return this.page.waitForRequest(request => request.url()
-      .includes(`${url}`)).then((request) => {
-      this.request = request
-    })
-  }
-
-  async interceptResponse () {
-    return await (await this.request).response().then(async (response: Response) => {
-      this.response = response
-
-      return this.response
-    })
+  async getTheLocalStorage () {
+    return await this.page.evaluate(() => window.localStorage)
   }
 }

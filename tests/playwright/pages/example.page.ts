@@ -2,7 +2,6 @@ import { expect, Page, Locator } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
 export let responseId: number
-export let request: any
 
 export class ExamplePage extends GeneralCommands {
   page: Page
@@ -27,7 +26,7 @@ export class ExamplePage extends GeneralCommands {
   }
 
   async interceptTheGeneralStoreRequest () {
-    request = this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
+    this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
   }
 
   async assertGeneralStoreTextId () {
