@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { ExamplePage } from '../../pages/example.page'
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/example')
+  await page.goto('/example')
 })
 
 test('Clicking the [General store] should increase the Id value in a box', async ({ page }) => {
