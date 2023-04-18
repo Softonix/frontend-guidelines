@@ -1,18 +1,18 @@
 import { expect, Page, Locator } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
-export let featureFlagValue: string
-
 export class FeatureFlag extends GeneralCommands {
   page: Page
   featureFlagSwitcher: Locator
   featureFlagButton: Locator
+  featureFlagValue: string
 
   constructor (page: Page) {
     super(page)
     this.page = page
     this.featureFlagSwitcher = page.getByTestId('heading-text')
     this.featureFlagButton = page.getByTestId('feature-flag')
+    this.featureFlagValue = ''
   }
 
   async clickTheFirstFF () {
@@ -25,22 +25,18 @@ export class FeatureFlag extends GeneralCommands {
   }
 
   async saveTheFeatureFlagValue () {
-    featureFlagValue = (await (await this.firstTableRow()).innerText()).toString()
-  }
-
-  async getTheLocalStorage () {
-    return await this.page.evaluate(() => window.localStorage)
+    this.featureFlagValue = (await (await this.firstTableRow()).innerText()).toString()
   }
 
   async assertTheFlagInLocalStorage () {
     await this.getTheLocalStorage().then(storage => {
-      expect(storage).toHaveProperty(`${featureFlagValue}`)
+      expect(storage).toHaveProperty(`${this.featureFlagValue}`)
     })
   }
 
   async assertTheFlagNotInStorage () {
     expect(await this.getTheLocalStorage())
-      .not.toHaveProperty(`${featureFlagValue}`)
+      .not.toHaveProperty(`${this.featureFlagValue}`)
   }
 
   async clickTheLoginButton () {
