@@ -6,8 +6,8 @@
         <el-switch
           v-model="flags[row.name]"
           :disabled="defaultFlags[row.name]"
-          @change="changeFlag(row.name, $event as boolean)"
           data-cy="swtich"
+          @change="changeFlag(row.name, $event as boolean)"
         />
       </template>
     </el-table-column>
