@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { featureFlags } from '../../support'
 
 describe('Feature flag switcher', () => {

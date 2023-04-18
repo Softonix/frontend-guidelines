@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { examplesPage } from '../../support'
 
 describe('General store button', () => {

@@ -5,7 +5,6 @@
       :key="c.name"
       data-testid="color-block" class="pb-[100%]"
       :style="{ 'background': c.color}"
-      data-cy="color-block"
     />
   </div>
 </template>

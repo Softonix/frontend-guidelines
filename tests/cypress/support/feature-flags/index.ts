@@ -5,6 +5,14 @@ export class FeatureFlags extends GeneralCommands {
     cy.visit('/example-flags')
   }
 
+  getTheFeatureFlagButton () {
+    return cy.getByTestId('feature-flag')
+  }
+
+  getTheSwitcher () {
+    return cy.getByTestId('heading-text')
+  }
+
   verifyTheSwitcherIsUnchecked () {
     this.getTheSwitcher()
       .first()
@@ -62,14 +70,6 @@ export class FeatureFlags extends GeneralCommands {
   assertTheFFButtonDoesntExist () {
     this.getTheFeatureFlagButton()
       .should('not.be.visible')
-  }
-
-  getTheFeatureFlagButton () {
-    return cy.get('[data-cy="feature-flag"]')
-  }
-
-  getTheSwitcher () {
-    return cy.get('[data-cy="swtich"]')
   }
 }
 
