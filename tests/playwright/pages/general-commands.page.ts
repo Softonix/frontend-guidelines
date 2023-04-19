@@ -5,8 +5,6 @@ export let featureFlagValue: string
 export class GeneralCommands {
   page: Page
   pageHeader: Locator
-  request?: Request
-  response?: any
 
   constructor (page: Page) {
     this.page = page

@@ -39,9 +39,9 @@ export class ExamplePage extends GeneralCommands {
     })
   }
 
-  assertTheRequestIDsAreDifferent (firstRequestId: string, secondRequestId: string) {
-    cy.get(`@${firstRequestId}`).then((firstRequestId) => {
-      cy.get(`@${secondRequestId}`).then((secondRequestId) => {
+  assertTheRequestIDsAreDifferent (firstRequestIdalias: string, secondRequestIdAlias: string) {
+    cy.get(`@${firstRequestIdalias}`).then((firstRequestId) => {
+      cy.get(`@${secondRequestIdAlias}`).then((secondRequestId) => {
         expect(firstRequestId).not.equal(secondRequestId)
       })
     })

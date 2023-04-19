@@ -23,9 +23,9 @@ export class ColorsPage extends GeneralCommands {
       })
   }
 
-  assertBlocksHaveDifferentColors (numberOfBlocks: string, numberOfDistinctColors: string) {
-    cy.get(`@${numberOfBlocks}`).then((numberOfBlocks) => {
-      cy.get(`@${numberOfDistinctColors}`).then((distinctColors) => {
+  assertBlocksHaveDifferentColors (numberOfBlocksAlias: string, numberOfDistinctColorsAlias: string) {
+    cy.get(`@${numberOfBlocksAlias}`).then((numberOfBlocks) => {
+      cy.get(`@${numberOfDistinctColorsAlias}`).then((distinctColors) => {
         expect(numberOfBlocks).to.equal(distinctColors)
       })
     })
