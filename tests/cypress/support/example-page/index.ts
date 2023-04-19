@@ -13,35 +13,35 @@ export class ExamplePage extends GeneralCommands {
     return cy.getByTestId('general-store-text')
   }
 
-  interceptGetGeneralStoreRequest (requestAlias: string) {
-    cy.intercept({
+  interceptGetGeneralStoreRequest () {
+    return cy.intercept({
       method: 'GET',
       url: 'https://jsonplaceholder.typicode.com/posts/*'
-    }).as(requestAlias)
+    })
   }
 
   clickTheGeneralStoreButton () {
     this.getTheGeneralStoreButton().click()
   }
 
-  saveTheResponseId (requestAlias: string, requestIdAlias: string) {
-    cy.wait(`@${requestAlias}`).then(({ response }) => {
-      const requestID = `"id": ${response && response.body.id}`
+  saveTheResponseId (requestAlias: string) {
+    return cy.wait(`@${requestAlias}`).then(({ response }) => {
+      const responseId = `"id": ${response && response.body.id}`
 
-      cy.wrap(requestID).as(`${requestIdAlias}`)
+      return responseId
     })
   }
 
-  assertTheIdAppearedInTheGeneralStoreText (requestId: string) {
-    cy.get(`@${requestId}`).then((requestID) => {
+  assertTheValueInGeneralStoreText (valueAlias: string) {
+    return cy.get(`@${valueAlias}`).then((valueAlias) => {
       this.getTheGeneralStoreText()
-        .should('contain.text', `${requestID}`)
+        .should('contain.text', `${valueAlias}`)
     })
   }
 
-  assertTheRequestIDsAreDifferent () {
-    cy.get('@firstRequestID').then((firstRequestId) => {
-      cy.get('@secondRequestID').then((secondRequestId) => {
+  assertTheRequestIDsAreDifferent (firstRequestId: string, secondRequestId: string) {
+    cy.get(`@${firstRequestId}`).then((firstRequestId) => {
+      cy.get(`@${secondRequestId}`).then((secondRequestId) => {
         expect(firstRequestId).not.equal(secondRequestId)
       })
     })

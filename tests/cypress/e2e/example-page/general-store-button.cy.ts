@@ -7,22 +7,22 @@ describe('General store button', () => {
   })
 
   it('should increment the id value with each click', () => {
-    examplesPage.interceptGetGeneralStoreRequest('firstRequest')
+    examplesPage.interceptGetGeneralStoreRequest().as('firstRequest')
 
     examplesPage.clickTheGeneralStoreButton()
 
-    examplesPage.saveTheResponseId('firstRequest', 'firstRequestID')
+    examplesPage.saveTheResponseId('firstRequest').as('firstResponseId')
 
-    examplesPage.assertTheIdAppearedInTheGeneralStoreText('firstRequestID')
+    examplesPage.assertTheValueInGeneralStoreText('firstResponseId')
 
-    examplesPage.interceptGetGeneralStoreRequest('secondRequest')
+    examplesPage.interceptGetGeneralStoreRequest().as('secondRequest')
 
     examplesPage.clickTheGeneralStoreButton()
 
-    examplesPage.saveTheResponseId('secondRequest', 'secondRequestID')
+    examplesPage.saveTheResponseId('secondRequest').as('secondResponseId')
 
-    examplesPage.assertTheIdAppearedInTheGeneralStoreText('secondRequestID')
+    examplesPage.assertTheValueInGeneralStoreText('secondResponseId')
 
-    examplesPage.assertTheRequestIDsAreDifferent()
+    examplesPage.assertTheRequestIDsAreDifferent('firstResponseId', 'secondResponseId')
   })
 })
