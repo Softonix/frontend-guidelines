@@ -17,7 +17,7 @@ export class GeneralCommands {
     return this.page.locator('td').first()
   }
 
-  async countElementsByAttribute (parentElement: Locator, attributeName: string) {
+  async countDistinctAttributeValues (parentElement: Locator, attributeName: string) {
     const parentElementNumber = await parentElement.count()
 
     const styles = await Promise.all(Array.from(

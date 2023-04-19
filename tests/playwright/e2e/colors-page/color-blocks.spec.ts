@@ -12,5 +12,5 @@ test('Each block should have a different CSS color', async ({ page }) => {
 
   const countDistingBlockColors = await colorsPage.countDistinctBlockColors()
 
-  await colorsPage.assertBlocksHaveDifferentColors(numberOfColorBlocks, countDistingBlockColors)
+  colorsPage.assertBlocksHaveDifferentColors(numberOfColorBlocks, countDistingBlockColors)
 })

@@ -14,10 +14,10 @@ export class ColorsPage extends GeneralCommands {
   }
 
   async countDistinctBlockColors () {
-    return this.countElementsByAttribute(this.colorBlock, 'style')
+    return this.countDistinctAttributeValues(this.colorBlock, 'style')
   }
 
   async assertBlocksHaveDifferentColors (numberOfColorBlocks: number, numberOfDistinctColors: number) {
-    await expect(numberOfColorBlocks).toEqual(numberOfDistinctColors)
+    expect(numberOfColorBlocks).toEqual(numberOfDistinctColors)
   }
 }
