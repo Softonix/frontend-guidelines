@@ -29,13 +29,11 @@ export class FeatureFlag extends GeneralCommands {
   }
 
   async saveTheFeatureFlagValue () {
-    this.featureFlagValue = (await this.firstTableRow().innerText()).toString()
+    this.featureFlagValue = (await this.firstTableRow().innerText())
   }
 
   async assertTheFlagInLocalStorage () {
-    await this.getTheLocalStorage().then(storage => {
-      expect(storage).toHaveProperty(`${this.featureFlagValue}`)
-    })
+    expect(await this.page.evaluate(() => { localStorage.getItem(this.featureFlagValue) })).not.toBeNull()
   }
 
   async assertTheFlagNotInStorage () {
