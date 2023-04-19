@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { FeatureFlag } from '../../pages/feature-flag.page'
+import { FeatureFlag } from '../../pages'
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/example-flags')

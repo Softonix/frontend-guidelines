@@ -1,16 +1,12 @@
 import { expect, Page, Locator } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
-export let responseId: number
-
 export class ExamplePage extends GeneralCommands {
-  page: Page
   generalStoreButton: Locator
   generalStoreText: Locator
 
   constructor (page: Page) {
     super(page)
-    this.page = page
     this.generalStoreButton = page.getByTestId('general-store-button')
     this.generalStoreText = page.getByTestId('general-store-text')
   }
@@ -19,17 +15,11 @@ export class ExamplePage extends GeneralCommands {
     await this.generalStoreButton.click()
   }
 
-  async declarateResponseId () {
-    await this.response.json().then((response: any) => {
-      responseId = response.id
-    })
+  async interceptTheGeneralStoreRequestV2 () {
+    return this.interceptTheRequestV2('https://jsonplaceholder.typicode.com/posts/')
   }
 
-  async interceptTheGeneralStoreRequest () {
-    this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
-  }
-
-  async assertGeneralStoreTextId () {
-    await expect(this.generalStoreText).toContainText(`"id": ${responseId}`)
+  async assertGeneralStoreTextIdV2 (id: number) {
+    await expect(this.generalStoreText).toContainText(`"id": ${id}`)
   }
 }

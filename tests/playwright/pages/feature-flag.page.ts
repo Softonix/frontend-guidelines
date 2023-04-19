@@ -25,7 +25,7 @@ export class FeatureFlag extends GeneralCommands {
   }
 
   async saveTheFeatureFlagValue () {
-    this.featureFlagValue = (await (await this.firstTableRow()).innerText()).toString()
+    this.featureFlagValue = (await this.firstTableRow().innerText()).toString()
   }
 
   async assertTheFlagInLocalStorage () {

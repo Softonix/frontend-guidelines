@@ -1,32 +1,23 @@
-import type { Page, Locator } from '@playwright/test'
+import { Page, Locator, expect } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
-export let numberOfColorBlocks: number
-export let numberOfDistinctColors: number
-
 export class ColorsPage extends GeneralCommands {
-  page: Page
   colorBlock: Locator
-  numberOfColorBlocks: number
-  numberOfDistinctColors: number
 
   constructor (page: Page) {
     super(page)
-    this.page = page
     this.colorBlock = page.getByTestId('color-block')
-    this.numberOfColorBlocks = this.numberOfElements
-    this.numberOfDistinctColors = this.numberOfElementsByAttribute
   }
 
   async getTheNumberOfColorBlocks () {
-    await this.countTheNumberOfElements(this.colorBlock)
+    return this.colorBlock.count()
   }
 
   async countDistinctBlockColors () {
-    await this.countElementsByAttribute(this.colorBlock, 'style')
+    return this.countElementsByAttribute(this.colorBlock, 'style')
   }
 
-  async assertBlocksHaveDifferentColors () {
-    await this.assertVariablesEquality(numberOfColorBlocks, numberOfDistinctColors)
+  async assertBlocksHaveDifferentColors (numberOfColorBlocks: number, numberOfDistinctColors: number) {
+    await expect(numberOfColorBlocks).toEqual(numberOfDistinctColors)
   }
 }
