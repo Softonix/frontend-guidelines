@@ -8,9 +8,9 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "test": "dotenv -e .env.test npx playwright test --ui",
-    "test:cy": "dotenv -e .env.test start-server-and-test 'vite' http://localhost:5173 'cypress open'",
-    "test:cy:h": "dotenv -e .env.test start-server-and-test 'vite' http://localhost:5173 'cypress run'"
+    "test": "npx playwright test --ui",
+    "test:cy": "start-server-and-test 'vite' http://localhost:5173 'cypress open'",
+    "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'"
   },
   "dependencies": {
     "@vueuse/core": "^9.1.1",
