@@ -11,15 +11,19 @@ export class ExamplePage extends GeneralCommands {
     this.generalStoreText = page.getByTestId('general-store-text')
   }
 
+  async visitTheExamplesPage () {
+    return this.page.goto('/example')
+  }
+
   async clickGeneraStoreButton () {
     await this.generalStoreButton.click()
   }
 
-  async interceptTheGeneralStoreRequestV2 () {
-    return this.interceptTheRequestV2('https://jsonplaceholder.typicode.com/posts/')
+  async interceptTheGeneralStoreRequest () {
+    return this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
   }
 
-  async assertGeneralStoreTextIdV2 (id: number) {
+  async assertGeneralStoreTextId (id: number) {
     await expect(this.generalStoreText).toContainText(`"id": ${id}`)
   }
 }

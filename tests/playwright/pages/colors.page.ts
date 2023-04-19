@@ -9,6 +9,10 @@ export class ColorsPage extends GeneralCommands {
     this.colorBlock = page.getByTestId('color-block')
   }
 
+  async visitColorsPage () {
+    return this.page.goto('/example-colors')
+  }
+
   async getTheNumberOfColorBlocks () {
     return this.colorBlock.count()
   }

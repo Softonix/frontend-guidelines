@@ -15,6 +15,10 @@ export class FeatureFlag extends GeneralCommands {
     this.featureFlagValue = ''
   }
 
+  async visitTheFeatureFlagPage () {
+    return this.page.goto('/example-flags')
+  }
+
   async clickTheFirstFF () {
     await this.featureFlagSwitcher.first().click()
   }

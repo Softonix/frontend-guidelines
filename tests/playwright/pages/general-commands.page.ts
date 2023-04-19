@@ -29,15 +29,14 @@ export class GeneralCommands {
   }
 
   async getTheLocalStorage () {
-    return await this.page.evaluate(() => window.localStorage)
+    return this.page.evaluate(() => window.localStorage)
   }
 
-  // AV Changes
-  async interceptTheRequestV2 (url: string) {
+  async interceptTheRequest (url: string) {
     return this.page.waitForRequest(request => request.url().includes(url))
   }
 
-  async interceptTheResponseV2 (requestPromise: Promise<Request>) {
+  async interceptTheResponse (requestPromise: Promise<Request>) {
     return requestPromise
       .then(request => request.response())
       .then(response => response?.json())

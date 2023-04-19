@@ -1,26 +1,24 @@
 import { test } from '@playwright/test'
 import { ExamplePage } from '../../pages'
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/example')
-})
-
 test('Clicking the [General store] should increase the Id value in a box', async ({ page }) => {
   const examplePage = new ExamplePage(page)
 
-  let requestPromise = examplePage.interceptTheGeneralStoreRequestV2()
+  await examplePage.visitTheExamplesPage()
+
+  let requestPromise = examplePage.interceptTheGeneralStoreRequest()
 
   await examplePage.clickGeneraStoreButton()
 
-  let examplePageResponse = await examplePage.interceptTheResponseV2(requestPromise)
+  let examplePageResponse = await examplePage.interceptTheResponse(requestPromise)
 
-  await examplePage.assertGeneralStoreTextIdV2(examplePageResponse.id)
+  await examplePage.assertGeneralStoreTextId(examplePageResponse.id)
 
-  requestPromise = examplePage.interceptTheGeneralStoreRequestV2()
+  requestPromise = examplePage.interceptTheGeneralStoreRequest()
 
   await examplePage.clickGeneraStoreButton()
 
-  examplePageResponse = await examplePage.interceptTheResponseV2(requestPromise)
+  examplePageResponse = await examplePage.interceptTheResponse(requestPromise)
 
-  await examplePage.assertGeneralStoreTextIdV2(examplePageResponse.id)
+  await examplePage.assertGeneralStoreTextId(examplePageResponse.id)
 })
