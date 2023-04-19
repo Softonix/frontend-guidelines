@@ -7,10 +7,10 @@ describe('Color blocks', () => {
   })
 
   it('should have different CSS colors', () => {
-    colorsPage.countTheColorBlocksOnThePage()
+    colorsPage.countTheColorBlocksOnThePage().as('totalBlockNumber')
 
-    colorsPage.countTheDistinctBlockClolors()
+    colorsPage.countTheDistinctBlockClolors().as('numberOfDistinctColors')
 
-    colorsPage.assertBlocksHaveDifferentColors()
+    colorsPage.assertBlocksHaveDifferentColors('totalBlockNumber', 'numberOfDistinctColors')
   })
 })

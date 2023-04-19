@@ -10,37 +10,23 @@ export class ColorsPage extends GeneralCommands {
   }
 
   countTheColorBlocksOnThePage () {
-    this.getTheColorBlock()
-      .then((colorBlocks) => {
-        const numberOfBlocks = colorBlocks.length
-
-        cy.wrap(numberOfBlocks).as('numberOfBlocks')
-      })
+    return this.getTheColorBlock().its('length')
   }
 
   countTheDistinctBlockClolors () {
-    cy.get('@numberOfBlocks').then((numberOfBlocks) => {
-      const arrayOfColors: any = []
+    return this.getTheColorBlock()
+      .then((blocks) => {
+        const stylesArray = Array.from(blocks, (blocks) => blocks.getAttribute('style'))
+        const numberOfDistinctColors = (new Set(stylesArray)).size
 
-      for (let blockNumber = 0; blockNumber < +numberOfBlocks; blockNumber++) {
-        this.getTheColorBlock()
-          .eq(blockNumber)
-          .invoke('attr', 'style')
-          .then((blockColor) => {
-            if (!arrayOfColors.includes(blockColor)) {
-              arrayOfColors.push(blockColor)
-            }
-          })
-      }
-
-      cy.wrap(arrayOfColors).as('distinctColors')
-    })
+        return numberOfDistinctColors
+      })
   }
 
-  assertBlocksHaveDifferentColors () {
-    cy.get('@numberOfBlocks').then((numberOfBlocks) => {
-      cy.get('@distinctColors').then((distinctColors) => {
-        expect(numberOfBlocks).to.equal(distinctColors.length)
+  assertBlocksHaveDifferentColors (numberOfBlocks: string, numberOfDistinctColors: string) {
+    cy.get(`@${numberOfBlocks}`).then((numberOfBlocks) => {
+      cy.get(`@${numberOfDistinctColors}`).then((distinctColors) => {
+        expect(numberOfBlocks).to.equal(distinctColors)
       })
     })
   }
