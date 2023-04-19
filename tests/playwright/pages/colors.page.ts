@@ -19,6 +19,5 @@ export class ColorsPage extends GeneralCommands {
 
   async assertBlocksHaveDifferentColors (numberOfColorBlocks: number, numberOfDistinctColors: number) {
     await expect(numberOfColorBlocks).toEqual(numberOfDistinctColors)
-    // await this.assertVariablesEquality(numberOfColorBlocks, numberOfDistinctColors)
   }
 }

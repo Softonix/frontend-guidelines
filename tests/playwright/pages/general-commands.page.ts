@@ -1,4 +1,4 @@
-import { Page, Locator, Request, expect } from '@playwright/test'
+import type { Page, Locator, Request } from '@playwright/test'
 
 export let featureFlagValue: string
 
@@ -17,10 +17,6 @@ export class GeneralCommands {
     return this.page.locator('td').first()
   }
 
-  async getTheLocalStorage () {
-    return await this.page.evaluate(() => window.localStorage)
-  }
-
   async countElementsByAttribute (parentElement: Locator, attributeName: string) {
     const parentElementNumber = await parentElement.count()
 
@@ -32,24 +28,11 @@ export class GeneralCommands {
     return ([...new Set(styles)]).length
   }
 
-  async interceptTheRequest (url: string) {
-    return this.page.waitForRequest(request => request.url().includes(`${url}`)).then((request) => {
-      this.request = request
-    })
-  }
-
-  async interceptResponse () {
-    if (this.request) {
-      return this.request.response().then(async (response) => {
-        this.response = await response?.json()
-
-        return this.response
-      })
-    }
+  async getTheLocalStorage () {
+    return await this.page.evaluate(() => window.localStorage)
   }
 
   // AV Changes
-
   async interceptTheRequestV2 (url: string) {
     return this.page.waitForRequest(request => request.url().includes(url))
   }
@@ -58,9 +41,5 @@ export class GeneralCommands {
     return requestPromise
       .then(request => request.response())
       .then(response => response?.json())
-  }
-
-  async assertVariablesEquality (parameterOne: number, parameterTwo: number) {
-    expect(parameterOne).toEqual(parameterTwo)
   }
 }

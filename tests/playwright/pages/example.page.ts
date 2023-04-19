@@ -15,15 +15,6 @@ export class ExamplePage extends GeneralCommands {
     await this.generalStoreButton.click()
   }
 
-  async interceptTheGeneralStoreRequest () {
-    this.interceptTheRequest('https://jsonplaceholder.typicode.com/posts/')
-  }
-
-  async assertGeneralStoreTextId () {
-    await expect(this.generalStoreText).toContainText(`"id": ${this.response.id}`)
-  }
-
-  // AV Changes
   async interceptTheGeneralStoreRequestV2 () {
     return this.interceptTheRequestV2('https://jsonplaceholder.typicode.com/posts/')
   }
