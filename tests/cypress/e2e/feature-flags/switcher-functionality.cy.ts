@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { featureFlags } from '../../support'
 
 describe('Feature flag switcher', () => {
@@ -12,9 +13,9 @@ describe('Feature flag switcher', () => {
 
     featureFlags.verifySwitcherIsChecked()
 
-    featureFlags.saveTheFeatureFlagName()
+    featureFlags.saveTheFeatureFlagName().as('featureFlagName')
 
-    featureFlags.assertFFInLocalStorage()
+    featureFlags.assertTheValueInLocalStorage('featureFlagName')
 
     featureFlags.clickTheLoginButton()
 
@@ -22,13 +23,13 @@ describe('Feature flag switcher', () => {
 
     cy.reload()
 
-    featureFlags.assertFFInLocalStorage()
+    featureFlags.assertTheValueInLocalStorage('featureFlagName')
 
     featureFlags.visitTheFeatureFlagPage()
 
     featureFlags.clickTheSwithcer()
 
-    featureFlags.assertFFremovedFromLocalStorage()
+    featureFlags.assertTheValueIsNotInLocalStorage('featureFlagName')
 
     featureFlags.clickTheLoginButton()
 

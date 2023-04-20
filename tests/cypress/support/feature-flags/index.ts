@@ -6,11 +6,11 @@ export class FeatureFlags extends GeneralCommands {
   }
 
   getTheFeatureFlagButton () {
-    return cy.get('[data-cy="feature-flag"]')
+    return cy.getByTestId('feature-flag')
   }
 
   getTheSwitcher () {
-    return cy.get('[data-cy="swtich"]')
+    return cy.getByTestId('heading-text')
   }
 
   verifyTheSwitcherIsUnchecked () {
@@ -36,28 +36,28 @@ export class FeatureFlags extends GeneralCommands {
   }
 
   saveTheFeatureFlagName () {
-    this.getTheFirstRow()
+    return this.getTheFirstRow()
       .then((featureFlag) => {
         const flagName = featureFlag.text()
 
-        cy.wrap(flagName).as('flagName')
+        return flagName
       })
   }
 
-  assertFFInLocalStorage () {
-    cy.get('@flagName').then((flagName) => {
+  assertTheValueInLocalStorage (valueAlias: string) {
+    cy.get(`@${valueAlias}`).then((valueAlias) => {
       cy.window()
         .its('localStorage')
-        .invoke('getItem', flagName)
+        .invoke('getItem', valueAlias)
         .should('exist')
     })
   }
 
-  assertFFremovedFromLocalStorage () {
-    cy.get('@flagName').then((flagName) => {
+  assertTheValueIsNotInLocalStorage (valueAlias: string) {
+    cy.get(`@${valueAlias}`).then((valueAlias) => {
       cy.window()
         .its('localStorage')
-        .invoke('getItem', flagName)
+        .invoke('getItem', valueAlias)
         .should('not.exist')
     })
   }
