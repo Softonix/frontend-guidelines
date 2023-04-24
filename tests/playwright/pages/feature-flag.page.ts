@@ -2,14 +2,12 @@ import { expect, Page, Locator } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
 export class FeatureFlag extends GeneralCommands {
-  page: Page
   featureFlagSwitcher: Locator
   featureFlagButton: Locator
   featureFlagValue: string
 
   constructor (page: Page) {
     super(page)
-    this.page = page
     this.featureFlagSwitcher = page.getByTestId('heading-text')
     this.featureFlagButton = page.getByTestId('feature-flag')
     this.featureFlagValue = ''

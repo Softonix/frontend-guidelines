@@ -1,4 +1,5 @@
-import { expect, Page, Locator } from '@playwright/test'
+import { expect } from '@playwright/test'
+import type { Page, Locator } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
 export class LoginPage extends GeneralCommands {
