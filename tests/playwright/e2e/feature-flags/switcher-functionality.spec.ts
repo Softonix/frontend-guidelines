@@ -1,8 +1,9 @@
 import { test } from '@playwright/test'
-import { FeatureFlag } from '../../pages'
+import { FeatureFlag, LoginPage } from '../../pages'
 
-test('Flag switcher should turn On and Off the Feature flag if clicking', async ({ page }) => {
+test('Flag switcher should turn On and Off the Feature flag if clicking', async ({ page, context }) => {
   const featureFlagPage = new FeatureFlag(page)
+  const loginPageTab = new LoginPage(await context.newPage())
 
   await featureFlagPage.visitTheFeatureFlagPage()
 
@@ -14,13 +15,11 @@ test('Flag switcher should turn On and Off the Feature flag if clicking', async 
 
   await featureFlagPage.assertTheFlagInLocalStorage()
 
-  await featureFlagPage.clickTheLoginButton()
+  await loginPageTab.visitTheLoginPage()
 
-  await featureFlagPage.assertTheFFlagButtonVisible()
+  await loginPageTab.assertTheFFlagButtonVisible()
 
-  await featureFlagPage.visitTheFeatureFlagPage()
-
-  await page.reload()
+  await featureFlagPage.page.reload()
 
   await featureFlagPage.assertTheFlagInLocalStorage()
 
@@ -28,7 +27,7 @@ test('Flag switcher should turn On and Off the Feature flag if clicking', async 
 
   await featureFlagPage.assertTheFlagNotInStorage()
 
-  await featureFlagPage.clickTheLoginButton()
+  await loginPageTab.page.reload()
 
-  await featureFlagPage.assertFFlagButtonNotVisible()
+  await loginPageTab.assertFFlagButtonNotVisible()
 })
