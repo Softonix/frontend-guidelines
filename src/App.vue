@@ -12,7 +12,5 @@
 <script lang="ts" setup>
 import type { TranslatePair } from 'element-plus/lib/locale'
 
-console.log('test')
-console.log('test2')
 const { messages, locale } = useI18n()
 </script>
