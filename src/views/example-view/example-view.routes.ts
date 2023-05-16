@@ -1,9 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { transitionViewRouteNames, transitionViewRoutes } from './transitions/transitions.routes'
 
 export const exampleViewRouteNames = {
   exampleView: 'exampleView',
   exampleColors: 'exampleColors',
-  exampleFlags: 'exampleFlags'
+  exampleFlags: 'exampleFlags',
+  exampleTransitions: 'exampleTransitions'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
@@ -30,5 +32,15 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
     meta: {
       label: 'Flags'
     }
+  },
+  {
+    path: 'example-transitions',
+    name: exampleViewRouteNames.exampleTransitions,
+    component: () => import('./transitions/transition.vue'),
+    meta: {
+      label: 'Transitions'
+    },
+    redirect: { name: transitionViewRouteNames.fade },
+    children: transitionViewRoutes
   }
 ]
