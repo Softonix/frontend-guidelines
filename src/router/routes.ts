@@ -4,13 +4,14 @@ import { routeNames } from './route-names'
 
 import { authRoutes } from '@/views/auth/auth.routes'
 import { exampleViewRoutes } from '@/views/example-view/example-view.routes'
+import { chatRoutes } from '@/views/chat/chat.routes'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const defaultLayoutRoutes: RouteRecordRaw = {
   path: '/',
   name: routeNames.rootPage,
-  redirect: { name: routeNames.exampleView },
+  redirect: { name: routeNames.chat },
   component: DefaultLayout,
   children: [
     // list of views that use default layout
@@ -25,6 +26,7 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   authRoutes,
+  ...chatRoutes,
   defaultLayoutRoutes
 ]
 

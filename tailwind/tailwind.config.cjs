@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-
+const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('./tailwind.colors.cjs')
 
 module.exports = {
@@ -9,7 +9,11 @@ module.exports = {
   ],
   theme: {
     colors,
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
   plugins: []
 }
