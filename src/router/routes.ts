@@ -15,6 +15,7 @@ const defaultLayoutRoutes: RouteRecordRaw = {
   component: DefaultLayout,
   children: [
     // list of views that use default layout
+    ...chatRoutes,
     ...exampleViewRoutes
   ]
 }
@@ -26,7 +27,6 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   authRoutes,
-  ...chatRoutes,
   defaultLayoutRoutes
 ]
 
