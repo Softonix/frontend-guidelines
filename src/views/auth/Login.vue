@@ -1,68 +1,31 @@
 <template>
-  <div class="h-full flex items-center justify-center">
-    <el-card class="w-[450px] max-w-full m-auto">
-      <el-form
-        ref="formRef"
-        :model="formModel"
-        :rules="formRules"
-        label-position="top"
-      >
-        <el-form-item label="email" prop="email">
-          <el-input v-model="formModel.email" />
-        </el-form-item>
-
-        <el-form-item label="Password" prop="password">
-          <el-input v-model="formModel.password" />
-        </el-form-item>
-
-        <div>
-          <el-button :type="$elComponentType.primary" @click="submitForm">{{ t('auth.login') }}</el-button>
-          <el-button @click="resetForm">{{ t('auth.reset') }}</el-button>
-          <el-button @click="$router.push({ name: $routeNames.rootPage })">{{ t('auth.backToHome') }}</el-button>
+  <div
+    class="min-h-screen flex m-auto sm:items-center
+   gap-20 pt-20 sm:pt-0 px-4 md:px-16 flex-col sm:flex-row items-stretch"
+  >
+    <el-form class="flex-1 flex flex-col sm:block " label-position="top">
+      <h1 class="font-semibold text-4xl text-center mb-10">Log In</h1>
+      <el-form-item label="Email">
+        <el-input />
+      </el-form-item>
+      <el-form-item label="Password">
+        <el-input />
+      </el-form-item>
+      <el-form-item class="mt-auto sm:mt-10">
+        <div class="sm:ml-auto w-full sm:w-auto">
+          <el-button
+            class="w-full"
+            :type="$elComponentType.primary"
+          >
+            Log In
+          </el-button>
         </div>
-
-        <div class="mt-3" data-testid="feature-flag">
-          <FF name="FF-SX-1924-LOGIN-FLAG-EXAMPLE" show-badge>
-            <el-button>Feature Flag Enabled</el-button>
-          </FF>
-        </div>
-      </el-form>
-    </el-card>
+      </el-form-item>
+    </el-form>
+    <Logo class="relative flex-1 h-screen hidden lg:block" />
   </div>
 </template>
 
 <script lang="ts" setup>
-const { t } = useI18n()
-
-const formRef = useElFormRef()
-const formModel = reactive({
-  email: '',
-  password: ''
-})
-
-const formRules = useElFormRules({
-  email: [
-    useRequiredRule(),
-    useEmailRule()
-  ],
-  password: [
-    useRequiredRule(),
-    useMinLenRule(5)
-  ]
-})
-
-async function submitForm () {
-  console.log(formRef)
-
-  formRef.value.validate(valid => {
-    if (valid) {
-      alert('submit!')
-    }
-  })
-}
-
-function resetForm () {
-  formRef.value.resetFields()
-  console.log(formModel)
-}
+import Logo from '@/components/icons/Logo.vue'
 </script>
