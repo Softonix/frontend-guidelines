@@ -26,15 +26,3 @@ defineProps<{
 const rightDrawer = ref(false)
 const leftSidebarOpen = ref(false)
 </script>
-
-<style lang="scss">
-.el-button {
-  margin: 0 !important;
-}
-
-.search-input {
-  .el-input__prefix {
-    font-size: 20px !important;
-  }
-}
-</style>
