@@ -41,9 +41,9 @@
     </div>
     <el-divider class="my-4" />
     <div class="flex flex-col">
-      <el-button class="justify-start" type="primary" text>Block user</el-button>
-      <el-button class="justify-start" type="primary" text>Clear history</el-button>
-      <el-button class="justify-start" type="primary" text>Delete conversation</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Block user</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Clear history</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Delete conversation</el-button>
     </div>
   </el-drawer>
 </template>
