@@ -8,8 +8,24 @@ module.exports = {
   orange: colors.orange,
 
   // todo: with the following code you can use element colors
-  primary: 'var(--el-color-primary)',
   success: 'var(--el-color-success)',
   warning: 'var(--el-color-warning)',
-  danger: 'var(--el-color-danger)'
+  danger: 'var(--el-color-danger)',
+
+  primary: '#0e1114',
+  secondary: '#616c76',
+  tertiary: '#8fa0af',
+  'link-primary': '#0086ea',
+  'icon-action': '#616c76',
+  'icon-info': '#8fa0af',
+  'icon-primary': '#0e1114',
+  'system-info': '#0086ea',
+  'system-info-light': '#e8f2fe',
+  'system-success': '#1d9745',
+  'primary-disabled': '#9e9e9e',
+  'block-secondary': '#f8f9fa',
+  'block-primary': '#ffffff',
+  'block-3': '#8fa0af',
+  'page-primary': '#ffffff',
+  'border-primary': '#cdd5de'
 }

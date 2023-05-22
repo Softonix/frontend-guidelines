@@ -9,8 +9,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AppLogo: typeof import('./../src/components/AppLogo.vue')['default']
     AuthButton: typeof import('./../src/views/auth/components/AuthButton.vue')['default']
+    Badge: typeof import('./../src/components/Badge.vue')['default']
+    BurgerMenu: typeof import('./../src/components/icons/BurgerMenu.vue')['default']
+    CloseCross: typeof import('./../src/components/icons/CloseCross.vue')['default']
     Compute: typeof import('./../src/components/Compute.vue')['default']
+    ContactItem: typeof import('./../src/components/ContactItem.vue')['default']
+    Dots: typeof import('./../src/components/icons/Dots.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -25,8 +31,16 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ExampleViewComponent: typeof import('./../src/views/example-view/components/ExampleViewComponent.vue')['default']
     FF: typeof import('./../src/components/FF.vue')['default']
+    Gear: typeof import('./../src/components/icons/Gear.vue')['default']
+    Header: typeof import('./../src/components/Header.vue')['default']
     IconCar: typeof import('~icons/icon/car')['default']
     IconCart: typeof import('~icons/icon/cart')['default']
+    LeftSidebar: typeof import('./../src/components/LeftSidebar.vue')['default']
+    Logo: typeof import('./../src/components/icons/Logo.vue')['default']
+    MagnifyingGlass: typeof import('./../src/components/icons/MagnifyingGlass.vue')['default']
+    Message: typeof import('./../src/views/chat/components/Message.vue')['default']
+    MessageForm: typeof import('./../src/views/chat/components/MessageForm.vue')['default']
+    RightSidebar: typeof import('./../src/components/RightSidebar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

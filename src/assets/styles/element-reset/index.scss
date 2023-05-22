@@ -5,6 +5,9 @@
     'primary': (
       'base': colors.$primary, // todo: this MUST be a valid 6-digit HEX color in order to make it correctly work
     ),
+  ),
+  $border-radius: (
+    'base': 8px,
   )
 );
 
@@ -22,3 +25,6 @@
 @use "element-plus/theme-chalk/src/card";
 @use "element-plus/theme-chalk/src/table";
 @use "element-plus/theme-chalk/src/switch";
+@use "element-plus/theme-chalk/src/avatar";
+@use "element-plus/theme-chalk/src/drawer";
+@use "element-plus/theme-chalk/src/divider";
