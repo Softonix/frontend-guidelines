@@ -7,7 +7,7 @@
     <LeftSidebar :open="leftSidebarOpen" @onClose="leftSidebarOpen=false" />
     <Header @onMenuClick="leftSidebarOpen=!leftSidebarOpen" @onInfoClick="rightDrawer=true" />
     <RightSidebar v-model="rightDrawer" />
-    <div class="md:pl-[240px] lg:pl-[320px] pt-14 lg:pr-[280px] h-full">
+    <div class="md:pl-[240px] lg:pl-[320px] pt-14 lg:pr-[280px] h-full px-0 ">
       <router-view />
     </div>
   </div>

@@ -1,6 +1,9 @@
 <template>
-  <div class="chat-view grid justify-items-center grid-rows-2  items-center px-20 pt-2 pb-10 overflow-hidden h-full">
-    <div class="overflow-y-auto no-scrollbar max-h-full self-start">
+  <div
+    class="chat-view grid justify-items-center
+   grid-rows-2  items-center pt-2 md:pb-10 overflow-hidden h-full"
+  >
+    <div class="overflow-y-auto no-scrollbar max-h-full self-start px-5 md:px-20 pb-5">
       <Message />
       <Message />
       <Message />
@@ -17,7 +20,7 @@
       <Message />
       <Message />
     </div>
-    <div class="min-w-[320px] w-full">
+    <div class="md:min-w-[320px] w-full px-5 md:p-8">
       <MessageForm />
     </div>
   </div>
