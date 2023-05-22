@@ -11,6 +11,7 @@
         </el-icon>
       </el-button>
       <el-input class="search-input w-full h-8 text-sm mb-2" placeholder="Search" :prefix-icon="MagnifyingGlass" />
+
       <!-- TODO: Add v-infinite-scroll directive -->
       <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
         <ContactItem />

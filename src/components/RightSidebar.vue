@@ -23,23 +23,30 @@
         </el-button>
       </div>
     </template>
+
     <el-divider class="my-4" />
+
     <div class="flex flex-col gap-4 text-primary">
       <div class="flex flex-col gap-2">
         <span class="font-semibold text-sm">Username</span>
         <span class="text-sm">@Caesar</span>
       </div>
+
       <div class="flex flex-col gap-2">
         <span class="font-semibold text-sm">Bio</span>
         <span class="text-sm">I like talk shows</span>
       </div>
     </div>
+
     <el-divider class="my-4" />
+
     <div class="flex justify-between items-center">
       <span class="font-semibold text-sm text-primary">Notifications</span>
       <el-switch />
     </div>
+
     <el-divider class="my-4" />
+
     <div class="flex flex-col">
       <el-button class="justify-start" type="primary" text>Block user</el-button>
       <el-button class="justify-start" type="primary" text>Clear history</el-button>
