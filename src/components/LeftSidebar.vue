@@ -38,7 +38,7 @@
 
 <script lang="ts" setup>
 import MagnifyingGlass from '@/components/icons/MagnifyingGlass.vue'
-import ContactItem from '@/views/chat/components/ContactItem.vue'
+import ContactItem from '@/components/ContactItem.vue'
 
 defineProps<{
   open?: boolean
@@ -57,16 +57,5 @@ const emit = defineEmits(['onClose'])
     z-index: 999;
     @apply bg-page-primary;
   }
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 </style>

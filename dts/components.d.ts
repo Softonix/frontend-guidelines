@@ -15,7 +15,7 @@ declare module '@vue/runtime-core' {
     BurgerMenu: typeof import('./../src/components/icons/BurgerMenu.vue')['default']
     CloseCross: typeof import('./../src/components/icons/CloseCross.vue')['default']
     Compute: typeof import('./../src/components/Compute.vue')['default']
-    ContactItem: typeof import('./../src/views/chat/components/ContactItem.vue')['default']
+    ContactItem: typeof import('./../src/components/ContactItem.vue')['default']
     Dots: typeof import('./../src/components/icons/Dots.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
