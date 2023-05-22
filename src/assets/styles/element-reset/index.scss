@@ -28,3 +28,6 @@
 @use "element-plus/theme-chalk/src/avatar";
 @use "element-plus/theme-chalk/src/drawer";
 @use "element-plus/theme-chalk/src/divider";
+
+@use './_buttons';
+@use './drawers';

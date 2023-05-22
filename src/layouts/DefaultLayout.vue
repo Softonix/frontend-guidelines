@@ -7,7 +7,7 @@
     <LeftSidebar :open="leftSidebarOpen" @onClose="leftSidebarOpen=false" />
     <Header @onMenuClick="leftSidebarOpen=!leftSidebarOpen" @onInfoClick="rightDrawer=true" />
     <RightSidebar v-model="rightDrawer" />
-    <div class="md:pl-[240px] lg:pl-[320px] pt-14 lg:pr-[280px] h-full px-0 ">
+    <div class="md:pl-[240px] lg:pl-[320px] pt-14 h-full px-0 ">
       <router-view />
     </div>
   </div>
@@ -26,15 +26,3 @@ defineProps<{
 const rightDrawer = ref(false)
 const leftSidebarOpen = ref(false)
 </script>
-
-<style lang="scss">
-.el-button {
-  margin: 0 !important;
-}
-
-.search-input {
-  .el-input__prefix {
-    font-size: 20px !important;
-  }
-}
-</style>
