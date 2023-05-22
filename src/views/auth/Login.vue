@@ -11,6 +11,10 @@
       <el-form-item label="Password">
         <el-input />
       </el-form-item>
+      <p>
+        Don't have an account?
+        <router-link class="text-link-primary " :to="{name: $routeNames.signUp}">Sign Up</router-link>
+      </p>
       <el-form-item class="mt-auto sm:mt-10">
         <div class="sm:ml-auto w-full sm:w-auto">
           <el-button
