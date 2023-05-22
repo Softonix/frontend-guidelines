@@ -2,7 +2,7 @@
   <div class="flex gap-2 py-4">
     <div class="relative">
       <el-avatar :size="40" />
-      <div class="absolute w-2 h-2 rounded-full border border-block-primary bg-system-success bottom-1 right-1" />
+      <Badge variant="primary" class="absolute border border-block-primary bg-system-success bottom-1 right-1" dot />
     </div>
 
     <div class="flex flex-col flex-1 truncate">
