@@ -18,21 +18,16 @@ declare module '@vue/runtime-core' {
     Dots: typeof import('./../src/components/icons/Dots.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDivider: typeof import('element-plus/es')['ElDivider']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElForm: typeof import('element-plus/es')['ElForm']
-    ElFormInput: typeof import('element-plus/es')['ElFormInput']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
-    ElOption: typeof import('element-plus/es')['ElOption']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     Gear: typeof import('./../src/components/icons/Gear.vue')['default']
     Header: typeof import('./../src/components/Header.vue')['default']
-    IconCar: typeof import('~icons/icon/car')['default']
-    IconCart: typeof import('~icons/icon/cart')['default']
     LeftSidebar: typeof import('./../src/components/LeftSidebar.vue')['default']
     Logo: typeof import('./../src/components/icons/Logo.vue')['default']
     MagnifyingGlass: typeof import('./../src/components/icons/MagnifyingGlass.vue')['default']
@@ -41,8 +36,5 @@ declare module '@vue/runtime-core' {
     RightSidebar: typeof import('./../src/components/RightSidebar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
