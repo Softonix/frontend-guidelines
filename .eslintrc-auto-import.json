@@ -249,6 +249,7 @@
     "useStorage": true,
     "useStorageAsync": true,
     "useStyleTag": true,
+    "useSupabase": true,
     "useSupported": true,
     "useSwipe": true,
     "useTemplateRefsList": true,
