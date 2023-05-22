@@ -8,10 +8,3 @@
     </div>
   </el-form>
 </template>
-
-<style lang="scss">
-.el-input__inner {
-    border: none;
-    outline: none; /* Optional - removes the focus outline */
-  }
-</style>
