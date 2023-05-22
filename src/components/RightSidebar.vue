@@ -5,7 +5,7 @@
     :modal="false"
     :lock-scroll="false"
     :style="{top: '58px', position: 'fixed', zIndex: '3000'}"
-    class="drawer"
+    class="shadow-2xl rounded-l-2xl border-l border-border-primary"
     :show-close="false"
     @open="$emit('update:modelValue', true)"
     @close="$emit('update:modelValue', false)"
@@ -41,9 +41,9 @@
     </div>
     <el-divider class="my-4" />
     <div class="flex flex-col">
-      <el-button class="justify-start" type="primary" text>Block user</el-button>
-      <el-button class="justify-start" type="primary" text>Clear history</el-button>
-      <el-button class="justify-start" type="primary" text>Delete conversation</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Block user</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Clear history</el-button>
+      <el-button class="justify-start" :type="$elComponentType.primary" text>Delete conversation</el-button>
     </div>
   </el-drawer>
 </template>
@@ -54,32 +54,3 @@ import CloseCross from '@/components/icons/CloseCross.vue'
 defineProps(['modelValue'])
 defineEmits(['update:modelValue'])
 </script>
-
-<style lang="scss">
-.operational-drawer-modal {
-  all: unset !important;
-}
-
-.operational-drawer {
-  position:fixed;
-  z-index: 3000;
-  top: 56px;
-}
-
-.drawer {
-  box-shadow:
-  0px 0px 4px rgba(2, 17, 37, 0.08), -2px 0px 8px rgba(2, 17, 37, 0.08), -6px 0px 16px rgba(2, 17, 37, 0.04);
-  border-radius: 16px 0px 0px 0px;
-  border-left: 1px solid #CDD5DE;
-}
-
-.el-drawer__header {
-  padding: 16px 24px;
-  padding-bottom: 0;
-  margin-bottom: 0 !important;
-}
-
-.el-drawer__body {
-  padding: 0 24px;
-}
-</style>
