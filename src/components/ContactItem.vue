@@ -2,7 +2,7 @@
   <div class="flex gap-2 py-4">
     <div class="relative">
       <el-avatar :size="40" />
-      <Badge variant="primary" class="absolute border border-block-primary bg-system-success bottom-1 right-1" dot />
+      <Badge :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot />
     </div>
 
     <div class="flex flex-col flex-1 truncate">
@@ -15,7 +15,7 @@
 
     <div class="flex flex-col items-end gap-1">
       <span class="font-normal text-xs text-tertiary">10:49 AM</span>
-      <Badge variant="primary">23</Badge>
+      <Badge :type="$badgeType.primary">23</Badge>
     </div>
   </div>
 </template>

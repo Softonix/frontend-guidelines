@@ -11,3 +11,9 @@ export enum EElComponentSize {
   default = 'default',
   large = 'large'
 }
+
+export enum EBadgeType {
+  primary = 'bg-system-info',
+  secondary = 'bg-block-3',
+  success = 'bg-system-success'
+}
