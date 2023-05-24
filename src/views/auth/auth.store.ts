@@ -39,11 +39,7 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   useSupabase().auth.onAuthStateChange((event, session) => {
-    console.log(session?.user)
     switch (event) {
-      case 'INITIAL_SESSION':
-        console.log('first')
-        break
       case 'SIGNED_IN':
         currentUser.value = session?.user || null
         router.replace({ name: 'chat' })

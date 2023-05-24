@@ -6,7 +6,7 @@
     <el-button class="md:hidden text-2xl leading-none" text :icon="BurgerMenu" @click="emit('onMenuClick')" />
 
     <div class="flex gap-20 items-center">
-      <AppLogo />
+      <AppLogo class="hidden md:flex items-center" />
       <p class="font-semibold text-sm text-primary">
         Caeser
         <span class="font-normal text-secondary">last seen 5 min ago</span>
@@ -29,11 +29,15 @@
             text
           />
         </span>
+
         <template #dropdown>
           <el-dropdown-menu class="bg-block-primary rounded-3xl" placement="bottom-start">
             <el-dropdown-item>
-              <el-button text>Settings</el-button>
+              <el-button text>
+                <router-link :to="$routeNames.settings">Settings</router-link>
+              </el-button>
             </el-dropdown-item>
+
             <el-dropdown-item>
               <LogOutButton />
             </el-dropdown-item>
