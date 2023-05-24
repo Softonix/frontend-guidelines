@@ -48,18 +48,18 @@
 import Logo from '@/components/icons/Logo.vue'
 
 const loginFormRef = useElFormRef()
-const loginModel = useElFormModel<IAuthWithEmailAndPasswordCred>({ email: '', password: '' })
+const loginModel = useElFormModel<IAuthWithEmailAndPasswordPayload>({ email: '', password: '' })
 const loginRules = useElFormRules({
   email: [useEmailRule(), useRequiredRule()],
   password: [useMinLenRule(6), useRequiredRule()]
 })
 
-const { loginWithEmailAndPassword } = authService
+const { logIn } = useAuthStore()
 
 function submit (formRef) {
   formRef.validate((valid) => {
     if (valid) {
-      loginWithEmailAndPassword(loginModel)
+      logIn(loginModel)
     }
   })
 }

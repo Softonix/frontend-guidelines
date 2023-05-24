@@ -1,5 +1,5 @@
 class AuthService {
-  async loginWithEmailAndPassword (payload: IAuthWithEmailAndPasswordCred) {
+  async loginWithEmailAndPassword (payload: IAuthWithEmailAndPasswordPayload) {
     const { data, error } = await useSupabase().auth.signInWithPassword(payload)
 
     if (error) {
@@ -9,7 +9,7 @@ class AuthService {
     return data
   }
 
-  async registerWithEmailAndPassword (payload: TAuthWithEmailAndPasswordRequest) {
+  async registerWithEmailAndPassword (payload: TAuthWithEmailAndPasswordPayload) {
     const {
       email,
       password,

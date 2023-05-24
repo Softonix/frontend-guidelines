@@ -1,13 +1,13 @@
-interface IAuthWithEmailAndPasswordCred {
+interface IAuthWithEmailAndPasswordPayload {
   email: string
   password: string
 }
 
-interface IForgotPasswordCred {
+interface IForgotPasswordPayload {
   email: string
 }
 
-interface IResetPasswordCred {
+interface IResetPasswordPayload {
   password: string
 }
 
@@ -19,4 +19,4 @@ interface IUserData {
   avatarUrl: string
 }
 
-type TAuthWithEmailAndPasswordRequest = IAuthWithEmailAndPasswordCred & Omit<IUserData, 'bio' | 'avatarUrl'>
+type TAuthWithEmailAndPasswordPayload = IAuthWithEmailAndPasswordPayload & Omit<IUserData, 'bio' | 'avatarUrl'>

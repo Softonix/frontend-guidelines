@@ -57,7 +57,7 @@
 
 <script lang="ts" setup>
 const registerFormRef = useElFormRef()
-const registerModel = useElFormModel<TAuthWithEmailAndPasswordRequest>({
+const registerModel = useElFormModel<TAuthWithEmailAndPasswordPayload>({
   email: '',
   password: '',
   fullname: '',
@@ -72,12 +72,12 @@ const registerRules = useElFormRules({
   username: [useMinLenRule(5), useMaxLenRule(25), useRequiredRule()]
 })
 
-const { registerWithEmailAndPassword } = authService
+const { register } = useAuthStore()
 
 function submit (formRef) {
   formRef.validate((valid) => {
     if (valid) {
-      registerWithEmailAndPassword({
+      register({
         ...registerModel,
         tagname: `@${registerModel.username}`
       })

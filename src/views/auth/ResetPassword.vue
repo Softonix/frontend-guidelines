@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 const resetPasswordRef = useElFormRef()
-const resetPasswordModel = useElFormModel<IResetPasswordCred>({
+const resetPasswordModel = useElFormModel<IResetPasswordPayload>({
   password: ''
 })
 const resetPasswordRules = useElFormRules({

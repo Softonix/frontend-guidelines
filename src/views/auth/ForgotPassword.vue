@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 const forgotPasswordRef = useElFormRef()
-const forgotPasswordModel = useElFormModel<IForgotPasswordCred>({
+const forgotPasswordModel = useElFormModel<IForgotPasswordPayload>({
   email: ''
 })
 const forgotPasswordRules = useElFormRules({

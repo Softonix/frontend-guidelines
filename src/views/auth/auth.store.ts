@@ -7,6 +7,14 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const isAuthenticated = computed(() => !!currentUser)
 
+  async function logIn (payload: IAuthWithEmailAndPasswordPayload) {
+    await authService.loginWithEmailAndPassword(payload)
+  }
+
+  async function register (payload: TAuthWithEmailAndPasswordPayload) {
+    await authService.registerWithEmailAndPassword(payload)
+  }
+
   async function loadUser () {
     currentUser.value = await authService.loadUser()
   }
@@ -49,6 +57,8 @@ export const useAuthStore = defineStore('authStore', () => {
   return {
     currentUser,
     isAuthenticated,
+    logIn,
+    register,
     loadUser,
     logOut,
     clearUser,
