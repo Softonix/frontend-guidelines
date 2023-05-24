@@ -80,17 +80,19 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   }
 
-  useSupabase().auth.onAuthStateChange((event, session) => {
-    switch (event) {
-      case 'SIGNED_IN':
-        currentUser.value = session?.user || null
-        router.replace({ name: 'chat' })
-        break
-      case 'SIGNED_OUT':
-        clearUser()
-        break
-    }
-  })
+  function startListenToAuthStateChange () {
+    useSupabase().auth.onAuthStateChange((event, session) => {
+      switch (event) {
+        case 'SIGNED_IN':
+          currentUser.value = session?.user || null
+          router.replace({ name: 'chat' })
+          break
+        case 'SIGNED_OUT':
+          clearUser()
+          break
+      }
+    })
+  }
 
   return {
     currentUser,
@@ -102,6 +104,7 @@ export const useAuthStore = defineStore('authStore', () => {
     logOut,
     clearUser,
     sendPasswordResetEmail,
-    resetPassword
+    resetPassword,
+    startListenToAuthStateChange
   }
 })
