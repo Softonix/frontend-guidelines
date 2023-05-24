@@ -3,12 +3,8 @@
     class="header fixed top-0 left-0 md:left-[240px]
       lg:left-[320px] right-0 flex px-1 md:px-6 items-center justify-between h-14"
   >
-    <el-button
-      class="md:hidden text-2xl leading-none"
-      text
-      :icon="BurgerMenu"
-      @click="emit('onMenuClick')"
-    />
+    <el-button class="md:hidden text-2xl leading-none" text :icon="BurgerMenu" @click="emit('onMenuClick')" />
+
     <div class="flex gap-20 items-center">
       <AppLogo />
       <p class="font-semibold text-sm text-primary">
@@ -16,6 +12,7 @@
         <span class="font-normal text-secondary">last seen 5 min ago</span>
       </p>
     </div>
+
     <div class="flex items-center self-stretch">
       <el-button
         class="h-full header-button px-2 text-2xl leading-none"
@@ -23,6 +20,7 @@
         text
         @click="emit('onInfoClick')"
       />
+
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
           <el-button
