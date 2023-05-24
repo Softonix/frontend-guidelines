@@ -4,7 +4,9 @@ import BlankLayout from '@/layouts/BlankLayout.vue'
 export const authRouteNames = {
   auth: 'auth',
   login: 'login',
-  signUp: 'signUp'
+  signUp: 'signUp',
+  forgotPassword: 'forgotPassword',
+  resetPassword: 'resetPassword'
 }
 
 export const authRoutes: RouteRecordRaw = {
@@ -22,6 +24,16 @@ export const authRoutes: RouteRecordRaw = {
       path: 'sign-up',
       name: authRouteNames.signUp,
       component: () => import('./SignUp.vue')
+    },
+    {
+      path: 'forgot-password',
+      name: authRouteNames.forgotPassword,
+      component: () => import('./ForgotPassword.vue')
+    },
+    {
+      path: 'reset-password',
+      name: authRouteNames.resetPassword,
+      component: () => import('./ResetPassword.vue')
     }
   ]
 }
