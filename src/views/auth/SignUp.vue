@@ -9,10 +9,7 @@
       :rules="registerRules"
       class="flex-1 flex flex-col sm:block"
       label-position="top"
-      @submit.prevent="registerWithEmailAndPassword({
-        ...registerModel,
-        tagname: `@${registerModel.username}`
-      })"
+      @submit.prevent="submit(registerFormRef)"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Register</h1>
       <el-form-item label="Email" prop="email">
@@ -76,4 +73,15 @@ const registerRules = useElFormRules({
 })
 
 const { registerWithEmailAndPassword } = authService
+
+function submit (formRef) {
+  formRef.validate((valid) => {
+    if (valid) {
+      registerWithEmailAndPassword({
+        ...registerModel,
+        tagname: `@${registerModel.username}`
+      })
+    }
+  })
+}
 </script>

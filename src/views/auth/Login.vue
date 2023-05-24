@@ -9,7 +9,7 @@
       :rules="loginRules"
       class="flex-1 flex flex-col sm:block"
       label-position="top"
-      @submit.prevent="loginWithEmailAndPassword(loginModel)"
+      @submit.prevent="submit(loginFormRef)"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Log In</h1>
       <el-form-item label="Email" prop="email">
@@ -55,4 +55,12 @@ const loginRules = useElFormRules({
 })
 
 const { loginWithEmailAndPassword } = authService
+
+function submit (formRef) {
+  formRef.validate((valid) => {
+    if (valid) {
+      loginWithEmailAndPassword(loginModel)
+    }
+  })
+}
 </script>

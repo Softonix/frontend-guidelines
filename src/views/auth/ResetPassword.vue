@@ -6,7 +6,7 @@
       :rules="resetPasswordRules"
       class="flex flex-col justify-center border rounded-3xl px-20 py-10 shadow-md"
       label-position="top"
-      @submit.prevent="resetPassword(resetPasswordModel.password)"
+      @submit.prevent="submit(resetPasswordRef)"
     >
       <h1 class="text-3xl mb-5">Reset Password</h1>
       <el-form-item class="mb-10" label="New Password" prop="password">
@@ -31,4 +31,12 @@ const resetPasswordRules = useElFormRules({
 })
 
 const { resetPassword } = useAuthStore()
+
+function submit (formRef) {
+  formRef.validate((valid) => {
+    if (valid) {
+      resetPassword(resetPasswordModel.password)
+    }
+  })
+}
 </script>
