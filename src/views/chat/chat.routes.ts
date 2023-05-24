@@ -8,6 +8,9 @@ export const chatRoutes: Array<RouteRecordRaw> = [
   {
     path: '/chat',
     name: chatRouteNames.chat,
-    component: () => import('./Chat.vue')
+    component: () => import('./Chat.vue'),
+    meta: {
+      requireAuth: true
+    }
   }
 ]

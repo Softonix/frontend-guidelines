@@ -23,11 +23,26 @@
         text
         @click="emit('onInfoClick')"
       />
-      <el-button
-        class="h-full header-button px-2 text-xl leading-none"
-        :icon="Gear"
-        text
-      />
+      <el-dropdown trigger="click">
+        <span class="el-dropdown-link">
+          <el-button
+            class="h-full header-button px-2 text-xl leading-none"
+            :icon="Gear"
+            text
+          />
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu class="bg-block-primary rounded-3xl" placement="bottom-start">
+            <el-dropdown-item>
+              <el-button text>Settings</el-button>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <LogOutButton />
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+
       <div class="hidden px-2 h-full md:flex items-center">
         <el-avatar :size="32" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" fill="cover" />
       </div>

@@ -3,13 +3,20 @@
     class="min-h-screen flex m-auto sm:items-center
    gap-10 pt-20 sm:pt-0 px-4 md:px-16 flex-col sm:flex-row items-stretch"
   >
-    <el-form class="flex-1 flex flex-col sm:block" label-position="top">
+    <el-form
+      ref="registerFormRef"
+      :model="registerModel"
+      :rules="registerRules"
+      class="flex-1 flex flex-col sm:block"
+      label-position="top"
+      @submit.prevent="registerWithEmailAndPassword(registerModel)"
+    >
       <h1 class="font-semibold text-4xl text-center mb-10">Register</h1>
-      <el-form-item label="Email">
-        <el-input />
+      <el-form-item label="Email" prop="email">
+        <el-input v-model="registerModel.email" />
       </el-form-item>
-      <el-form-item label="Password">
-        <el-input />
+      <el-form-item label="Password" prop="password">
+        <el-input v-model="registerModel.password" />
       </el-form-item>
       <p>
         Already have an account?
@@ -19,6 +26,7 @@
         <div class="sm:ml-auto w-full sm:w-auto">
           <el-button
             class="w-full"
+            native-type="submit"
             :type="$elComponentType.primary"
           >
             Sign Up
@@ -40,3 +48,14 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+const registerFormRef = useElFormRef()
+const registerModel = useElFormModel<IAuthWithEmailAndPasswordRequest>({ email: '', password: '' })
+const registerRules = useElFormRules({
+  email: [useEmailRule(), useRequiredRule()],
+  password: [useMinLenRule(6), useRequiredRule()]
+})
+
+const { registerWithEmailAndPassword } = authService
+</script>
