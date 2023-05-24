@@ -12,28 +12,36 @@
       @submit.prevent="submit(loginFormRef)"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Log In</h1>
+
       <el-form-item label="Email" prop="email">
         <el-input v-model.trim="loginModel.email" />
       </el-form-item>
+
       <el-form-item label="Password" prop="password">
         <el-input v-model.trim="loginModel.password" />
       </el-form-item>
-      <div class="flex flex-col gap-2 text-sm">
-        <p>
-          Forgot your password?
-          <router-link class="text-link-primary " :to="{name: $routeNames.forgotPassword}">Reset Password</router-link>
-        </p>
+
+      <div class="flex gap-2 justify-between text-sm">
         <p>
           Don't have an account?
           <router-link class="text-link-primary " :to="{name: $routeNames.signUp}">Sign Up</router-link>
         </p>
+
+        <router-link
+          class="text-link-primary"
+          :to="{name: $routeNames.forgotPassword}"
+        >
+          Forgot your password?
+        </router-link>
       </div>
+
       <el-form-item class="mt-auto sm:mt-10">
         <div class="sm:ml-auto w-full sm:w-auto">
           <el-button
             class="w-full"
             native-type="submit"
             :type="$elComponentType.primary"
+            :loading="loading"
           >
             Log In
           </el-button>
@@ -54,7 +62,9 @@ const loginRules = useElFormRules({
   password: [useMinLenRule(6), useRequiredRule()]
 })
 
-const { logIn } = useAuthStore()
+const store = useAuthStore()
+const { logIn } = store
+const { loading } = storeToRefs(store)
 
 function submit (formRef) {
   formRef.validate((valid) => {

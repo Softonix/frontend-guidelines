@@ -9,12 +9,14 @@
       @submit.prevent="submit(forgotPasswordRef)"
     >
       <h1 class="text-3xl mb-5">Forgot Password?</h1>
+
       <el-form-item class="mb-10" label="Recovery Email Address" prop="email">
         <el-input v-model.trim="forgotPasswordModel.email" />
       </el-form-item>
+
       <el-form-item>
         <div class="flex flex-1 justify-center">
-          <el-button native-type="submit">Send Reset Email</el-button>
+          <el-button native-type="submit" :loading="loading">Send Reset Email</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -30,7 +32,9 @@ const forgotPasswordRules = useElFormRules({
   email: [useEmailRule(), useRequiredRule()]
 })
 
-const { sendPasswordResetEmail } = useAuthStore()
+const store = useAuthStore()
+const { sendPasswordResetEmail } = store
+const { loading } = storeToRefs(store)
 
 function submit (formRef) {
   formRef.validate((valid) => {

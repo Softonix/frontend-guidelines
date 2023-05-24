@@ -9,12 +9,14 @@
       @submit.prevent="submit(resetPasswordRef)"
     >
       <h1 class="text-3xl mb-5">Reset Password</h1>
+
       <el-form-item class="mb-10" label="New Password" prop="password">
         <el-input v-model.trim="resetPasswordModel.password" />
       </el-form-item>
+
       <el-form-item>
         <div class="flex flex-1 justify-center">
-          <el-button native-type="submit">Reset Password</el-button>
+          <el-button native-type="submit" :loading="loading">Reset Password</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -30,7 +32,9 @@ const resetPasswordRules = useElFormRules({
   password: [useMinLenRule(6), useRequiredRule()]
 })
 
-const { resetPassword } = useAuthStore()
+const store = useAuthStore()
+const { resetPassword } = store
+const { loading } = storeToRefs(store)
 
 function submit (formRef) {
   formRef.validate((valid) => {
