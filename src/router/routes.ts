@@ -4,6 +4,7 @@ import { routeNames } from './route-names'
 
 import { authRoutes } from '@/views/auth/auth.routes'
 import { chatRoutes } from '@/views/chat/chat.routes'
+import { settingsRoutes } from '@/views/settings/settings.routes'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
@@ -25,6 +26,7 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   authRoutes,
+  settingsRoutes,
   defaultLayoutRoutes
 ]
 
