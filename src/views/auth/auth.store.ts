@@ -2,28 +2,56 @@ import { type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
+  const loading = ref(false)
 
   const router = useRouter()
 
   const isAuthenticated = computed(() => !!currentUser)
 
   async function logIn (payload: IAuthWithEmailAndPasswordPayload) {
-    await authService.loginWithEmailAndPassword(payload)
+    try {
+      loading.value = true
+      await authService.loginWithEmailAndPassword(payload)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   async function register (payload: TAuthWithEmailAndPasswordPayload) {
-    await authService.registerWithEmailAndPassword(payload)
+    try {
+      loading.value = true
+      await authService.registerWithEmailAndPassword(payload)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   async function loadUser () {
-    currentUser.value = await authService.loadUser()
+    try {
+      loading.value = true
+      currentUser.value = await authService.loadUser()
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   async function logOut () {
-    authService.logOut().then(() => {
+    try {
+      loading.value = true
+      await authService.logOut()
       currentUser.value = null
       router.replace({ name: 'login' })
-    })
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   function clearUser () {
@@ -31,19 +59,29 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function sendPasswordResetEmail (email: string) {
-    await authService.sendPasswordResetEmail(email)
+    try {
+      loading.value = true
+      await authService.sendPasswordResetEmail(email)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   async function resetPassword (password: string) {
-    await authService.resetPassword(password)
+    try {
+      loading.value = true
+      await authService.resetPassword(password)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   useSupabase().auth.onAuthStateChange((event, session) => {
-    console.log(session?.user)
     switch (event) {
-      case 'INITIAL_SESSION':
-        console.log('first')
-        break
       case 'SIGNED_IN':
         currentUser.value = session?.user || null
         router.replace({ name: 'chat' })
@@ -56,6 +94,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
   return {
     currentUser,
+    loading,
     isAuthenticated,
     logIn,
     register,
