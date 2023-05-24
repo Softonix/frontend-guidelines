@@ -12,7 +12,6 @@
 );
 
 @use "element-plus/theme-chalk/src/base";
-@use "element-plus/theme-chalk/src/button";
 @use "element-plus/theme-chalk/src/badge";
 @use "element-plus/theme-chalk/src/message";
 @use "element-plus/theme-chalk/src/select";
@@ -26,8 +25,7 @@
 @use "element-plus/theme-chalk/src/table";
 @use "element-plus/theme-chalk/src/switch";
 @use "element-plus/theme-chalk/src/avatar";
-@use "element-plus/theme-chalk/src/drawer";
 @use "element-plus/theme-chalk/src/divider";
 
-@use './_buttons';
-@use './drawers';
+@import './button';
+@import './drawer';
