@@ -13,10 +13,10 @@
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Log In</h1>
       <el-form-item label="Email" prop="email">
-        <el-input v-model="loginModel.email" />
+        <el-input v-model.trim="loginModel.email" />
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input v-model="loginModel.password" />
+        <el-input v-model.trim="loginModel.password" />
       </el-form-item>
       <div class="flex flex-col gap-2 text-sm">
         <p>
@@ -48,7 +48,7 @@
 import Logo from '@/components/icons/Logo.vue'
 
 const loginFormRef = useElFormRef()
-const loginModel = useElFormModel<IAuthWithEmailAndPasswordRequest>({ email: '', password: '' })
+const loginModel = useElFormModel<IAuthWithEmailAndPasswordCred>({ email: '', password: '' })
 const loginRules = useElFormRules({
   email: [useEmailRule(), useRequiredRule()],
   password: [useMinLenRule(6), useRequiredRule()]

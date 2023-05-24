@@ -9,14 +9,23 @@
       :rules="registerRules"
       class="flex-1 flex flex-col sm:block"
       label-position="top"
-      @submit.prevent="registerWithEmailAndPassword(registerModel)"
+      @submit.prevent="registerWithEmailAndPassword({
+        ...registerModel,
+        tagname: `@${registerModel.username}`
+      })"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Register</h1>
       <el-form-item label="Email" prop="email">
-        <el-input v-model="registerModel.email" />
+        <el-input v-model.trim="registerModel.email" />
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input v-model="registerModel.password" />
+        <el-input v-model.trim="registerModel.password" />
+      </el-form-item>
+      <el-form-item label="Fullname" prop="fullname">
+        <el-input v-model="registerModel.fullname" />
+      </el-form-item>
+      <el-form-item label="Username" prop="username">
+        <el-input v-model.trim="registerModel.username" />
       </el-form-item>
       <p>
         Already have an account?
@@ -51,10 +60,19 @@
 
 <script lang="ts" setup>
 const registerFormRef = useElFormRef()
-const registerModel = useElFormModel<IAuthWithEmailAndPasswordRequest>({ email: '', password: '' })
+const registerModel = useElFormModel<TAuthWithEmailAndPasswordRequest>({
+  email: '',
+  password: '',
+  fullname: '',
+  username: '',
+  tagname: ''
+})
+
 const registerRules = useElFormRules({
   email: [useEmailRule(), useRequiredRule()],
-  password: [useMinLenRule(6), useRequiredRule()]
+  password: [useMinLenRule(6), useRequiredRule()],
+  fullname: [useMinLenRule(5), useMaxLenRule(25), useRequiredRule()],
+  username: [useMinLenRule(5), useMaxLenRule(25), useRequiredRule()]
 })
 
 const { registerWithEmailAndPassword } = authService

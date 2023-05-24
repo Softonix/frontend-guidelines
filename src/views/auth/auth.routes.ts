@@ -5,7 +5,8 @@ export const authRouteNames = {
   auth: 'auth',
   login: 'login',
   signUp: 'signUp',
-  forgotPassword: 'forgotPassword'
+  forgotPassword: 'forgotPassword',
+  resetPassword: 'resetPassword'
 }
 
 export const authRoutes: RouteRecordRaw = {
@@ -28,6 +29,11 @@ export const authRoutes: RouteRecordRaw = {
       path: 'forgot-password',
       name: authRouteNames.forgotPassword,
       component: () => import('./ForgotPassword.vue')
+    },
+    {
+      path: 'reset-password',
+      name: authRouteNames.resetPassword,
+      component: () => import('./ResetPassword.vue')
     }
   ]
 }

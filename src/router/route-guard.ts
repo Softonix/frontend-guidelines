@@ -10,8 +10,6 @@ export const routeGuard = async (
   // todo: please write your own route guard
   const authStore = useAuthStore()
 
-  // const { data: {session} } = await useSupabase().auth.getSession()
-
   if (!to.meta.requireAuth || authStore.isAuthenticated) {
     return next()
   } else {

@@ -10,7 +10,7 @@
     >
       <h1 class="text-3xl mb-5">Forgot Password?</h1>
       <el-form-item class="mb-10" label="Recovery Email Address" prop="email">
-        <el-input v-model="forgotPasswordModel.email" />
+        <el-input v-model.trim="forgotPasswordModel.email" />
       </el-form-item>
       <el-form-item>
         <div class="flex flex-1 justify-center">
@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 const forgotPasswordRef = useElFormRef()
-const forgotPasswordModel = useElFormModel<IForgotPasswordRequest>({
+const forgotPasswordModel = useElFormModel<IForgotPasswordCred>({
   email: ''
 })
 const forgotPasswordRules = useElFormRules({

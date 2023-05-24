@@ -1,5 +1,5 @@
 class AuthService {
-  async loginWithEmailAndPassword (request: IAuthWithEmailAndPasswordRequest) {
+  async loginWithEmailAndPassword (request: IAuthWithEmailAndPasswordCred) {
     const { data, error } = await useSupabase().auth.signInWithPassword(request)
 
     if (error) {
@@ -9,8 +9,25 @@ class AuthService {
     return data
   }
 
-  async registerWithEmailAndPassword (request: IAuthWithEmailAndPasswordRequest) {
-    const { data, error } = await useSupabase().auth.signUp(request)
+  async registerWithEmailAndPassword (request: TAuthWithEmailAndPasswordRequest) {
+    const {
+      email,
+      password,
+      fullname,
+      username,
+      tagname
+    } = request
+    const { data, error } = await useSupabase().auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          fullname,
+          username,
+          tagname
+        }
+      }
+    })
 
     if (error) {
       throw error
@@ -38,7 +55,19 @@ class AuthService {
   }
 
   async sendPasswordResetEmail (email: string) {
-    const { error } = await useSupabase().auth.resetPasswordForEmail(email)
+    const { error } = await useSupabase().auth.resetPasswordForEmail(email, {
+      redirectTo: `${import.meta.env.VITE_APP_BASE_URL_DEV}/auth/reset-password`
+    })
+
+    if (error) {
+      throw error
+    }
+  }
+
+  async resetPassword (password: string) {
+    const { error } = await useSupabase().auth.updateUser({
+      password
+    })
 
     if (error) {
       throw error

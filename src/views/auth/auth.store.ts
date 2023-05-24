@@ -23,12 +23,18 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function sendPasswordResetEmail (email: string) {
-    authService.sendPasswordResetEmail(email)
+    await authService.sendPasswordResetEmail(email)
+  }
+
+  async function resetPassword (password: string) {
+    await authService.resetPassword(password)
   }
 
   useSupabase().auth.onAuthStateChange((event, session) => {
+    console.log(session?.user)
     switch (event) {
       case 'INITIAL_SESSION':
+        console.log('first')
         break
       case 'SIGNED_IN':
         currentUser.value = session?.user || null
@@ -46,6 +52,7 @@ export const useAuthStore = defineStore('authStore', () => {
     loadUser,
     logOut,
     clearUser,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    resetPassword
   }
 })
