@@ -10,7 +10,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppLogo: typeof import('./../src/components/AppLogo.vue')['default']
-    AuthButton: typeof import('./../src/views/auth/components/AuthButton.vue')['default']
     Badge: typeof import('./../src/components/Badge.vue')['default']
     BurgerMenu: typeof import('./../src/components/icons/BurgerMenu.vue')['default']
     CloseCross: typeof import('./../src/components/icons/CloseCross.vue')['default']
@@ -33,6 +32,7 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./../src/components/Header.vue')['default']
     LeftSidebar: typeof import('./../src/components/LeftSidebar.vue')['default']
     Logo: typeof import('./../src/components/icons/Logo.vue')['default']
+    LogOutButton: typeof import('./../src/components/LogOutButton.vue')['default']
     MagnifyingGlass: typeof import('./../src/components/icons/MagnifyingGlass.vue')['default']
     Message: typeof import('./../src/views/chat/components/Message.vue')['default']
     MessageForm: typeof import('./../src/views/chat/components/MessageForm.vue')['default']
