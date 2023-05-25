@@ -1,5 +1,6 @@
 <template>
   <div
+    v-loading="loading"
     class="min-h-screen flex m-auto sm:items-center
    gap-20 pt-20 sm:pt-0 px-4 md:px-16 flex-col sm:flex-row items-stretch"
   >
@@ -9,7 +10,6 @@
       :rules="loginRules"
       class="flex-1 flex flex-col sm:block"
       label-position="top"
-      @submit.prevent="submit(loginFormRef)"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Log In</h1>
 
@@ -39,9 +39,8 @@
         <div class="sm:ml-auto w-full sm:w-auto">
           <el-button
             class="w-full"
-            native-type="submit"
             :type="$elComponentType.primary"
-            :loading="loading"
+            @click="submit(loginFormRef)"
           >
             Log In
           </el-button>
@@ -64,12 +63,19 @@ const loginRules = useElFormRules({
 
 const store = useAuthStore()
 const { logIn } = store
-const { loading } = storeToRefs(store)
+const loading = ref(false)
 
 function submit (formRef) {
-  formRef.validate((valid) => {
+  formRef.validate(async (valid) => {
     if (valid) {
-      logIn(loginModel)
+      try {
+        loading.value = true
+        await logIn(loginModel)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        loading.value = false
+      }
     }
   })
 }

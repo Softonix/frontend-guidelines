@@ -2,56 +2,27 @@ import { type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
-  const loading = ref(false)
 
   const router = useRouter()
 
   const isAuthenticated = computed(() => !!currentUser)
 
   async function logIn (payload: IAuthWithEmailAndPasswordPayload) {
-    try {
-      loading.value = true
-      await authService.loginWithEmailAndPassword(payload)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    await authService.loginWithEmailAndPassword(payload)
   }
 
   async function register (payload: TAuthWithEmailAndPasswordPayload) {
-    try {
-      loading.value = true
-      await authService.registerWithEmailAndPassword(payload)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    await authService.registerWithEmailAndPassword(payload)
   }
 
   async function loadUser () {
-    try {
-      loading.value = true
-      currentUser.value = await authService.loadUser()
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    currentUser.value = await authService.loadUser()
   }
 
   async function logOut () {
-    try {
-      loading.value = true
-      await authService.logOut()
-      currentUser.value = null
-      router.replace({ name: 'login' })
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    await authService.logOut()
+    currentUser.value = null
+    router.replace({ name: 'login' })
   }
 
   function clearUser () {
@@ -59,25 +30,11 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function sendPasswordResetEmail (email: string) {
-    try {
-      loading.value = true
-      await authService.sendPasswordResetEmail(email)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    await authService.sendPasswordResetEmail(email)
   }
 
   async function resetPassword (password: string) {
-    try {
-      loading.value = true
-      await authService.resetPassword(password)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      loading.value = false
-    }
+    await authService.resetPassword(password)
   }
 
   function startListenToAuthStateChange () {
@@ -96,7 +53,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
   return {
     currentUser,
-    loading,
     isAuthenticated,
     logIn,
     register,
