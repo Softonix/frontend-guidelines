@@ -27,4 +27,8 @@
 <script lang="ts" setup>
 import Message from './components/Message.vue'
 import MessageForm from './components/MessageForm.vue'
+
+onMounted(() => {
+  // getContactInfo()
+})
 </script>

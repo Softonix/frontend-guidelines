@@ -16,16 +16,9 @@
       <!-- TODO: Add v-infinite-scroll directive -->
       <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
         <ContactItem
-          v-for="user in users"
-          :key="user.id"
-          :contact="{
-            ...user,
-            msg: {
-              id: '1',
-              text: 'Have you ever heard of Minamoto',
-              sent_at: '10:49 AM'
-            }
-          }"
+          v-for="contact in contactData"
+          :key="contact.id"
+          :contact="contact"
         />
       </div>
     </aside>
@@ -46,11 +39,33 @@ const emit = defineEmits(['onClose'])
 // computed by chat, user
 
 const chatStore = useChatStore()
-const { users } = storeToRefs(chatStore)
-const { getUsers } = chatStore
+const authStore = useAuthStore()
+const { currentUser } = storeToRefs(authStore)
+const { chats } = storeToRefs(chatStore)
+const { getChats } = chatStore
+
+const contactData = computed(() => {
+  return chats.value.map(chat => {
+    const chatter = chat.users.find((user) => {
+      return user.id === currentUser.value?.id
+    })
+    const lastMessage = chat.messages[chat.messages.length - 1]
+    console.log(chatter)
+    return {
+      id: chat.id,
+      avatar_url: chatter.avatar_url || '',
+      fullname: chatter.fullname,
+      msg: {
+        id: lastMessage.id,
+        text: lastMessage.message,
+        sent_at: lastMessage.created_at
+      }
+    }
+  })
+})
 
 onMounted(() => {
-  getUsers()
+  getChats()
 })
 </script>
 

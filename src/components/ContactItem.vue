@@ -16,7 +16,13 @@
     </div>
 
     <div class="flex flex-col items-end gap-1">
-      <span class="font-normal text-xs text-tertiary">{{ contact.msg.sent_at }}</span>
+      <span class="font-normal text-xs text-tertiary">
+        {{ new Intl.DateTimeFormat("en-Us", {
+          hour: '2-digit',
+          minute: '2-digit'
+
+        }).format(new Date(contact.msg.sent_at)) }}
+      </span>
       <Badge :type="$badgeType.primary">23</Badge>
     </div>
   </div>

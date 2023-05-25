@@ -5,4 +5,11 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 const supabaseClient = createClient(supabaseUrl, supabaseAnonKey)
 
+export const supabaseTablesNames = {
+  chat_to_user: 'chat_to_user',
+  chats: 'chats',
+  messages: 'messages',
+  users: 'users'
+}
+
 export const useSupabase = () => supabaseClient
