@@ -18,7 +18,7 @@
       </el-form-item>
 
       <el-form-item label="Password" prop="password">
-        <el-input v-model.trim="registerModel.password" />
+        <el-input v-model.trim="registerModel.password" show-password />
       </el-form-item>
 
       <el-form-item label="Fullname" prop="fullname">

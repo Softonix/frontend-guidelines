@@ -13,7 +13,7 @@
       <h1 class="text-3xl mb-5">Reset Password</h1>
 
       <el-form-item class="mb-10" label="New Password" prop="password">
-        <el-input v-model.trim="resetPasswordModel.password" />
+        <el-input v-model.trim="resetPasswordModel.password" show-password />
       </el-form-item>
 
       <el-form-item>

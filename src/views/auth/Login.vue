@@ -18,7 +18,7 @@
       </el-form-item>
 
       <el-form-item label="Password" prop="password">
-        <el-input v-model.trim="loginModel.password" />
+        <el-input v-model.trim="loginModel.password" show-password />
       </el-form-item>
 
       <div class="flex gap-2 justify-between text-sm">
