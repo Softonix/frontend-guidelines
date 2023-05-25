@@ -89,7 +89,7 @@ function submit (formRef) {
     if (valid) {
       try {
         loading.value = true
-        register({
+        await register({
           ...registerModel,
           tagname: `@${registerModel.username}`
         })

@@ -15,20 +15,18 @@
 
       <!-- TODO: Add v-infinite-scroll directive -->
       <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
-        <ContactItem />
+        <ContactItem
+          v-for="user in users"
+          :key="user.id"
+          :contact="{
+            ...user,
+            msg: {
+              id: '1',
+              text: 'Have you ever heard of Minamoto',
+              sent_at: '10:49 AM'
+            }
+          }"
+        />
       </div>
     </aside>
   </Transition>
@@ -37,12 +35,21 @@
 <script lang="ts" setup>
 import MagnifyingGlass from '@/components/icons/MagnifyingGlass.vue'
 import ContactItem from '@/components/ContactItem.vue'
+import { useChatStore } from '@/views/chat/chat.store'
 
 defineProps<{
   open?: boolean
 }>()
 
 const emit = defineEmits(['onClose'])
+
+const chatStore = useChatStore()
+const { users } = storeToRefs(chatStore)
+const { getUsers } = chatStore
+
+onMounted(() => {
+  getUsers()
+})
 </script>
 
 <style lang="scss">

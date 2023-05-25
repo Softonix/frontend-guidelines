@@ -7,16 +7,16 @@
     </div>
 
     <div class="flex flex-col flex-1 truncate">
-      <span class="font-semibold text-sm text-primary">Zack Fox</span>
+      <span class="font-semibold text-sm text-primary">{{ contact.fullname }}</span>
 
       <span
         class="font-normal text-sm
         text-secondary truncate"
-      >Have you ever heard of that thing, I've done yesterday</span>
+      >{{ contact.msg.text }}</span>
     </div>
 
     <div class="flex flex-col items-end gap-1">
-      <span class="font-normal text-xs text-tertiary">10:49 AM</span>
+      <span class="font-normal text-xs text-tertiary">{{ contact.msg.sent_at }}</span>
       <Badge :type="$badgeType.primary">23</Badge>
     </div>
   </div>
@@ -24,4 +24,17 @@
 
 <script lang="ts" setup>
 import Badge from '@/components/Badge.vue'
+
+defineProps<{
+  contact: {
+    id: string
+    avatar_url: string
+    fullname: string
+    msg: {
+      id: string
+      text: string
+      sent_at: string
+    }
+  }
+}>()
 </script>
