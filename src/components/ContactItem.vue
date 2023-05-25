@@ -1,31 +1,37 @@
 <template>
-  <div class="flex gap-2 py-4">
-    <div class="relative">
-      <el-avatar :size="40" />
+  <router-link
+    :to="{name: $routeNames.chatRoom, params: {
+      id: contact.id
+    }}"
+  >
+    <div class="flex gap-2 py-4">
+      <div class="relative">
+        <el-avatar :size="40" />
 
-      <Badge :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot />
-    </div>
+        <Badge :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot />
+      </div>
 
-    <div class="flex flex-col flex-1 truncate">
-      <span class="font-semibold text-sm text-primary">{{ contact.fullname }}</span>
+      <div class="flex flex-col flex-1 truncate">
+        <span class="font-semibold text-sm text-primary">{{ contact.fullname }}</span>
 
-      <span
-        class="font-normal text-sm
+        <span
+          class="font-normal text-sm
         text-secondary truncate"
-      >{{ contact.msg.text }}</span>
-    </div>
+        >{{ contact.msg.text }}</span>
+      </div>
 
-    <div class="flex flex-col items-end gap-1">
-      <span class="font-normal text-xs text-tertiary">
-        {{ new Intl.DateTimeFormat("en-Us", {
-          hour: '2-digit',
-          minute: '2-digit'
+      <div class="flex flex-col items-end gap-1">
+        <span class="font-normal text-xs text-tertiary">
+          {{ new Intl.DateTimeFormat("en-Us", {
+            hour: '2-digit',
+            minute: '2-digit'
 
-        }).format(new Date(contact.msg.sent_at)) }}
-      </span>
-      <Badge :type="$badgeType.primary">23</Badge>
+          }).format(new Date(contact.msg.sent_at)) }}
+        </span>
+        <Badge :type="$badgeType.primary">23</Badge>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts" setup>
