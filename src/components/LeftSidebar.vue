@@ -43,6 +43,8 @@ defineProps<{
 
 const emit = defineEmits(['onClose'])
 
+// computed by chat, user
+
 const chatStore = useChatStore()
 const { users } = storeToRefs(chatStore)
 const { getUsers } = chatStore
