@@ -7,6 +7,7 @@
 
     <div class="flex gap-20 items-center">
       <AppLogo />
+
       <p class="font-semibold text-sm text-primary">
         Caeser
         <span class="font-normal text-secondary">last seen 5 min ago</span>
@@ -29,6 +30,7 @@
             text
           />
         </span>
+
         <template #dropdown>
           <el-dropdown-menu class="bg-block-primary rounded-3xl" placement="bottom-start">
             <el-dropdown-item>

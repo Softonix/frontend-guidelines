@@ -1,5 +1,6 @@
 <template>
   <div
+    v-loading="loading"
     class="min-h-screen flex m-auto sm:items-center
    gap-10 pt-20 sm:pt-0 px-4 md:px-16 flex-col sm:flex-row items-stretch"
   >
@@ -9,43 +10,50 @@
       :rules="registerRules"
       class="flex-1 flex flex-col sm:block"
       label-position="top"
-      @submit.prevent="submit(registerFormRef)"
     >
       <h1 class="font-semibold text-4xl text-center mb-10">Register</h1>
+
       <el-form-item label="Email" prop="email">
         <el-input v-model.trim="registerModel.email" />
       </el-form-item>
+
       <el-form-item label="Password" prop="password">
-        <el-input v-model.trim="registerModel.password" />
+        <el-input v-model.trim="registerModel.password" show-password />
       </el-form-item>
+
       <el-form-item label="Fullname" prop="fullname">
         <el-input v-model="registerModel.fullname" />
       </el-form-item>
+
       <el-form-item label="Username" prop="username">
         <el-input v-model.trim="registerModel.username" />
       </el-form-item>
-      <p>
+
+      <p class="text-sm">
         Already have an account?
-        <router-link class="text-link-primary " :to="{name: $routeNames.login}">Log In</router-link>
+        <router-link class="text-link-primary" :to="{name: $routeNames.login}">Log In</router-link>
       </p>
+
       <el-form-item class="mt-auto sm:mt-10">
         <div class="sm:ml-auto w-full sm:w-auto">
           <el-button
             class="w-full"
-            native-type="submit"
             :type="$elComponentType.primary"
+            @click="submit(registerFormRef)"
           >
             Sign Up
           </el-button>
         </div>
       </el-form-item>
     </el-form>
+
     <div class="relative flex-[1.5] h-screen hidden lg:block">
       <img
         class="absolute top-1/2 -translate-y-1/2 w-[1024px] shadow-2xl"
         src="/images/auth-img-1.png"
         alt="White theme"
       >
+
       <img
         class="absolute top-1/2 -translate-y-1/4 w-[1024px] translate-x-7 shadow-2xl"
         src="/images/auth-img-2.png"
@@ -72,15 +80,24 @@ const registerRules = useElFormRules({
   username: [useMinLenRule(5), useMaxLenRule(25), useRequiredRule()]
 })
 
-const { register } = useAuthStore()
+const store = useAuthStore()
+const { register } = store
+const loading = ref(false)
 
 function submit (formRef) {
-  formRef.validate((valid) => {
+  formRef.validate(async (valid) => {
     if (valid) {
-      register({
-        ...registerModel,
-        tagname: `@${registerModel.username}`
-      })
+      try {
+        loading.value = true
+        register({
+          ...registerModel,
+          tagname: `@${registerModel.username}`
+        })
+      } catch (err) {
+        console.log(err)
+      } finally {
+        loading.value = false
+      }
     }
   })
 }
