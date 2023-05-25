@@ -2,7 +2,14 @@
   <div class="h-full">
     <header class="flex justify-between shadow-lg mb-12 px-2 py-5">
       <AppLogo class="flex items-center" />
-      <LogOutButton class="py-5" />
+
+      <div class="flex items-center gap-4">
+        <el-button :type="$elComponentType.primary">
+          <router-link :to="{name: $routeNames.chat}">Home</router-link>
+        </el-button>
+
+        <LogOutButton class="py-5" />
+      </div>
     </header>
 
     <div class="max-w-2xl mx-auto px-2">
@@ -47,8 +54,8 @@
         <el-form-item label="Bio">
           <el-input type="textarea" rows="3" resize="none" placeholder="Tell more about yourself" />
         </el-form-item>
+
         <div class="flex justify-end gap-5">
-          <el-button>Cancel</el-button>
           <el-button :type="$elComponentType.primary">Save</el-button>
         </div>
       </el-form>
