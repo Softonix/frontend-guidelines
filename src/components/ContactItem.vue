@@ -1,4 +1,7 @@
 <template>
+  <router-link>
+    
+  </router-link>
   <div class="flex gap-2 py-4">
     <div class="relative">
       <el-avatar :size="40" />
