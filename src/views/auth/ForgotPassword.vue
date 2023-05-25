@@ -1,20 +1,21 @@
 <template>
-  <div class="max-w-lg h-full m-auto flex items-center justify-center">
+  <div v-loading="loading" class="max-w-lg h-full m-auto flex items-center justify-center">
     <el-form
       ref="forgotPasswordRef"
       :model="forgotPasswordModel"
       :rules="forgotPasswordRules"
       class="flex flex-col justify-center border rounded-3xl px-20 py-10 shadow-md"
       label-position="top"
-      @submit.prevent="submit(forgotPasswordRef)"
     >
       <h1 class="text-3xl mb-5">Forgot Password?</h1>
+
       <el-form-item class="mb-10" label="Recovery Email Address" prop="email">
         <el-input v-model.trim="forgotPasswordModel.email" />
       </el-form-item>
+
       <el-form-item>
         <div class="flex flex-1 justify-center">
-          <el-button native-type="submit">Send Reset Email</el-button>
+          <el-button @click="submit(forgotPasswordRef)">Send Reset Email</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -30,12 +31,21 @@ const forgotPasswordRules = useElFormRules({
   email: [useEmailRule(), useRequiredRule()]
 })
 
-const { sendPasswordResetEmail } = useAuthStore()
+const store = useAuthStore()
+const { sendPasswordResetEmail } = store
+const loading = ref(false)
 
 function submit (formRef) {
-  formRef.validate((valid) => {
+  formRef.validate(async (valid) => {
     if (valid) {
-      sendPasswordResetEmail(forgotPasswordModel.email)
+      try {
+        loading.value = true
+        await sendPasswordResetEmail(forgotPasswordModel.email)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        loading.value = false
+      }
     }
   })
 }
