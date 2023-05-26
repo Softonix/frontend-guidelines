@@ -12,4 +12,9 @@ export const supabaseTablesNames = {
   users: 'users'
 }
 
+export const supabaseChannels = {
+  onlineUsers: 'online-users',
+  dbMessages: 'db-messages'
+}
+
 export const useSupabase = () => supabaseClient

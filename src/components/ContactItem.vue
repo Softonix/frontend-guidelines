@@ -4,7 +4,13 @@
       id: contact.id
     }}"
   >
-    <div class="flex gap-2 py-4">
+    <div
+      class="flex gap-2 py-4 relative
+      hover:after:absolute
+      hover:after:top-0 hover:after:left-0
+      hover:after:content-[''] hover:after:bg-block-3
+      hover:after:bg-opacity-20 hover:after:w-screen hover:after:h-full px-6"
+    >
       <div class="relative">
         <el-avatar :size="40" />
 
@@ -12,21 +18,21 @@
       </div>
 
       <div class="flex flex-col flex-1 truncate">
-        <span class="font-semibold text-sm text-primary">{{ contact.fullname }}</span>
+        <span class="font-semibold text-sm text-primary truncate">{{ contact.fullname }}</span>
 
         <span
           class="font-normal text-sm
         text-secondary truncate"
-        >{{ contact.msg.text }}</span>
+        >{{ contact.msg ? contact.msg.text : '' }}</span>
       </div>
 
       <div class="flex flex-col items-end gap-1">
         <span class="font-normal text-xs text-tertiary">
-          {{ new Intl.DateTimeFormat("en-Us", {
+          {{ contact.msg ? new Intl.DateTimeFormat("en-Us", {
             hour: '2-digit',
             minute: '2-digit'
 
-          }).format(new Date(contact.msg.sent_at)) }}
+          }).format(new Date(contact.msg.sent_at)) : '' }}
         </span>
         <Badge :type="$badgeType.primary">23</Badge>
       </div>
@@ -42,7 +48,7 @@ defineProps<{
     id: string
     avatar_url: string
     fullname: string
-    msg: {
+    msg?: {
       id: string
       text: string
       sent_at: string

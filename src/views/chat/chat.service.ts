@@ -9,7 +9,7 @@ class ChatService {
     return data as IUser[]
   }
 
-  async getChats () {
+  async getChats (id?: number) {
     const { data, error } = await useSupabase().from(supabaseTablesNames.chats).select(`
     id,
     type,
@@ -26,14 +26,35 @@ class ChatService {
 
     return data
   }
-// bfcdb3be-fe0b-4cdc-90bf-26a78650e3fd
-// 9b2fa2a1-d9b3-4b18-b723-7c135f440b91
-// kostya 2f156498-d95d-4ffd-8a92-305f6052f31d
-//   const { data, error } = await supabase.from('countries').select(`
-//   id,
-//   name,
-//   cities ( id, name )
-// `)
+
+  async getMessages (from: number, to: number, chatId: string) {
+    const { data, error } = await useSupabase().from(supabaseTablesNames.messages).select().eq('chat_id', chatId).range(from, to).order('created_at')
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  onNewMessage (handler: (...args: any[]) => void) {
+    useSupabase().channel(supabaseChannels.dbMessages).on('postgres_changes', { event: 'INSERT', schema: 'public', table: supabaseTablesNames.messages }, payload => {
+      handler(payload.new)
+    }).subscribe()
+  }
+
+  async createNewMessage (message: IMessage) {
+    const { data, error } = await useSupabase().from(supabaseTablesNames.messages).insert(message)
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+  // chat d581646b-9cd7-4ef0-92d0-c7a628fe9a79
+  // user1 9b2fa2a1-d9b3-4b18-b723-7c135f440b91
+  // user2 d5c86d37-7adc-48b0-a6cd-fa8057d76550
 }
 
 export const chatService = new ChatService()

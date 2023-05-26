@@ -97,6 +97,7 @@ declare global {
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
   const storeToRefs: typeof import('pinia')['storeToRefs']
+  const supabaseChannels: typeof import('../src/composables/supabase/index')['supabaseChannels']
   const supabaseTablesNames: typeof import('../src/composables/supabase/index')['supabaseTablesNames']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
