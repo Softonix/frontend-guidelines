@@ -17,4 +17,8 @@ export const supabaseChannels = {
   dbMessages: 'db-messages'
 }
 
+export const supabaseViews = {
+  chatView: 'chat_view'
+}
+
 export const useSupabase = () => supabaseClient

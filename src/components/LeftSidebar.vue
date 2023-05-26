@@ -44,14 +44,13 @@ const { chats, transformedChats, messages } = storeToRefs(chatStore)
 const { getChats } = chatStore
 
 const contactData = computed(() => {
-  return chats.value.map(chat => {
+  return chats.value.filter((chat) => chat.users.some((user) => user.id === currentUser.value?.id)).map(chat => {
     const chatter = chat.users.find((user) => {
       return user.id !== currentUser.value?.id
     })
 
     const lastMessage = transformedChats.value[chat.id].lastMessage
 
-    console.log(chat)
     return {
       id: chat.id,
       avatar_url: chatter.avatar_url || '',
@@ -67,8 +66,10 @@ const contactData = computed(() => {
   })
 })
 
-onMounted(async () => {
-  getChats()
+watch(currentUser, async (currUser) => {
+  if (currUser) {
+    await getChats()
+  }
 })
 </script>
 

@@ -1,3 +1,5 @@
+import { supabaseViews } from "@/composables/supabase"
+
 class ChatService {
   async getUsers () {
     const { data, error } = await useSupabase().from(supabaseTablesNames.users).select()
@@ -9,7 +11,7 @@ class ChatService {
     return data as IUser[]
   }
 
-  async getChats (id?: number) {
+  async getChats () {
     const { data, error } = await useSupabase().from(supabaseTablesNames.chats).select(`
     id,
     type,
@@ -18,6 +20,17 @@ class ChatService {
     messages ( id, message, created_at, sender_id ),
     users!chat_to_user (id, fullname, avatar_url)
     `)
+    console.log(data)
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  async getChatsViews (chatId: string) {
+    const { data, error } = await useSupabase().from(supabaseViews.chatView).select().eq('user_id', chatId)
     console.log(data)
 
     if (error) {

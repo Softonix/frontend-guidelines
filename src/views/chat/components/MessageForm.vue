@@ -4,13 +4,15 @@
     :model="sendMessageModel"
     :rules="sendMessageRules"
     class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
+    @submit.prevent="submitMessage(sendMessageFormRef)"
   >
     <el-form-item class="flex-1 m-0" prop="message">
       <el-input v-model="sendMessageModel.message" placeholder="Write a message" />
     </el-form-item>
 
     <div class="flex justify-end md:flex-1 md:p-3">
-      <el-button :type="$elComponentType.primary" @click="submitMessage(sendMessageFormRef)">Send</el-button>
+      <el-button :type="$elComponentType.primary" @click="submitMessage(sendMessageFormRef)"
+      >Send</el-button>
     </div>
   </el-form>
 </template>
@@ -44,6 +46,7 @@ function submitMessage (formRef) {
   formRef.validate(async (valid) => {
     if (valid) {
       await sendMessage()
+      sendMessageModel.message = ''
     }
   })
 }
