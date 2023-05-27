@@ -2,10 +2,9 @@ import { RealtimeChannel, type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
+  const isAuthenticated = computed(() => !!currentUser)
 
   const router = useRouter()
-
-  const isAuthenticated = computed(() => !!currentUser)
 
   let channel: RealtimeChannel | null = null
 

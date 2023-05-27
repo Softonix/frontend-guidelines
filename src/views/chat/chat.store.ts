@@ -5,6 +5,8 @@ export const useChatStore = defineStore('chatStore', () => {
   const messages = ref([])
   const messagesCount = ref(0)
   const maxMessagesPerRequest = 100
+  const authStore = useAuthStore()
+  const { currentUser } = storeToRefs(authStore)
 
   const transformedChats = computed(() => {
     const blah = chats.value.reduce((prev, curr) => {
@@ -17,6 +19,35 @@ export const useChatStore = defineStore('chatStore', () => {
     }, {})
 
     return blah
+  })
+
+  const contactData = computed(() => {
+    return chats.value.filter((chat) => chat.users.some((user) => user.id === currentUser.value?.id)).map(chat => {
+      const chatter = chat.users.find((user) => {
+        return user.id !== currentUser.value?.id
+      })
+
+      const lastMessage = transformedChats.value[chat.id].lastMessage
+
+      return {
+        id: chat.id,
+        avatar_url: chatter.avatar_url || '',
+        fullname: chatter.fullname,
+        msg: lastMessage
+          ? {
+            id: lastMessage.id,
+            text: lastMessage.message,
+            sent_at: lastMessage.created_at
+          }
+          : null
+      }
+    })
+  })
+
+  watch(currentUser, async (currUser) => {
+    if (currUser) {
+      await getChats()
+    }
   })
 
   async function loadMessageBatch (chatId: string) {
@@ -32,6 +63,7 @@ export const useChatStore = defineStore('chatStore', () => {
   return {
     chats,
     transformedChats,
+    contactData,
     messages,
     messagesCount,
     loadMessageBatch,

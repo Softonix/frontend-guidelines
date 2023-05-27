@@ -35,42 +35,9 @@ defineProps<{
 
 const emit = defineEmits(['onClose'])
 
-// computed by chat, user
-
 const chatStore = useChatStore()
-const authStore = useAuthStore()
-const { currentUser } = storeToRefs(authStore)
-const { chats, transformedChats, messages } = storeToRefs(chatStore)
-const { getChats } = chatStore
+const { contactData } = storeToRefs(chatStore)
 
-const contactData = computed(() => {
-  return chats.value.filter((chat) => chat.users.some((user) => user.id === currentUser.value?.id)).map(chat => {
-    const chatter = chat.users.find((user) => {
-      return user.id !== currentUser.value?.id
-    })
-
-    const lastMessage = transformedChats.value[chat.id].lastMessage
-
-    return {
-      id: chat.id,
-      avatar_url: chatter.avatar_url || '',
-      fullname: chatter.fullname,
-      msg: lastMessage
-        ? {
-          id: lastMessage.id,
-          text: lastMessage.message,
-          sent_at: lastMessage.created_at
-        }
-        : null
-    }
-  })
-})
-
-watch(currentUser, async (currUser) => {
-  if (currUser) {
-    await getChats()
-  }
-})
 </script>
 
 <style lang="scss">

@@ -11,8 +11,12 @@
     </el-form-item>
 
     <div class="flex justify-end md:flex-1 md:p-3">
-      <el-button :type="$elComponentType.primary" @click="submitMessage(sendMessageFormRef)"
-      >Send</el-button>
+      <el-button
+        :type="$elComponentType.primary"
+        @click="submitMessage(sendMessageFormRef)"
+      >
+        Send
+      </el-button>
     </div>
   </el-form>
 </template>
