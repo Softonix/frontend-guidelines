@@ -1,4 +1,4 @@
-import { RealtimeChannel, type Session, type User } from '@supabase/supabase-js'
+import { RealtimeChannel, type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
@@ -40,10 +40,11 @@ export const useAuthStore = defineStore('authStore', () => {
 
   function startListenToAuthStateChange () {
     useSupabase().auth.onAuthStateChange((event, session) => {
-      console.log('triggerd')
-      if (!session) {
-        router.replace({ name: 'login' })
-        return
+      if (session) {
+        if (session?.expires_in <= 600) {
+          router.replace({ name: 'login' })
+          return
+        }
       }
 
       switch (event) {

@@ -15,6 +15,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
+
 import Message from './components/Message.vue'
 import MessageForm from './components/MessageForm.vue'
 
@@ -23,51 +25,34 @@ const authStore = useAuthStore()
 const chatId = ref<string | null>(null)
 const senderId = ref<string | null>(null)
 const { currentUser } = storeToRefs(authStore)
-const { messages, chats } = storeToRefs(chatStore)
-const { loadMessageBatch } = chatStore
+const { messages } = storeToRefs(chatStore)
 
-const route = useRoute()
+const chatRoomGuard = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const chatStore = useChatStore()
+  const { chats, messages } = storeToRefs(chatStore)
+  const { loadMessageBatch } = chatStore
 
-onMounted(async () => {
-  const chatIdParam = route.params.id as string
+  const chatId = to.params.id as string
 
-  if (chatIdParam) {
-    chatId.value = chatIdParam
+  await loadMessageBatch(chatId)
 
-    if (currentUser.value?.id) {
-      senderId.value = currentUser.value?.id
-    }
+  await chatService.onNewMessage((newMessage) => {
+    messages.value = [...messages.value, newMessage]
+    const chatIndex = chats.value.findIndex((ch) => ch.id === chatId)
+    const ch = { ...chats.value[chatIndex] }
+    ch.messages = [...ch.messages, newMessage]
 
-    await loadMessageBatch(chatIdParam as string)
+    const copy = [...chats.value]
+    copy.splice(chatIndex, 1)
+    chats.value = [ch, ...copy]
+  })
 
-    await chatService.onNewMessage((newMessage) => {
-      messages.value = [...messages.value, newMessage]
-    })
-  }
-})
+  next()
+}
 
-watch(() => route.params, async (currParams, prevParams) => {
-  const chatIdParam = route.params.id as string
-
-  if (chatIdParam && chatIdParam !== prevParams.id) {
-    chatId.value = chatIdParam
-
-    if (currentUser.value?.id) {
-      senderId.value = currentUser.value?.id
-    }
-
-    await loadMessageBatch(chatIdParam)
-
-    await chatService.onNewMessage((newMessage) => {
-      messages.value = [...messages.value, newMessage]
-      const chatIndex = chats.value.findIndex((ch) => ch.id === chatIdParam)
-      const ch = { ...chats.value[chatIndex] }
-      ch.messages = [...ch.messages, newMessage]
-
-      const copy = [...chats.value]
-      copy.splice(chatIndex, 1)
-      chats.value = [ch, ...copy]
-    })
-  }
-})
+onBeforeRouteUpdate(chatRoomGuard)
 </script>
