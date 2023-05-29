@@ -18,6 +18,7 @@
       <ContactItem
         v-for="contact in contactData"
         :key="contact.id"
+        :open="contact.id === $route.params.id"
         :contact="contact"
       />
     </div>

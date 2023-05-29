@@ -6,10 +6,11 @@
   >
     <div
       class="flex gap-2 py-4 relative
-      hover:after:absolute
-      hover:after:top-0 hover:after:left-0
-      hover:after:content-[''] hover:after:bg-block-3
-      hover:after:bg-opacity-20 hover:after:w-screen hover:after:h-full px-6"
+      after:absolute
+      after:top-0 after:left-0
+      after:content-[''] hover:after:bg-block-3
+      hover:after:bg-opacity-20 after:w-screen after:h-full px-6"
+      :class="{['after:bg-block-3 after:bg-opacity-30']:open}"
     >
       <div class="relative">
         <el-avatar :size="40" />
@@ -46,5 +47,6 @@ import type { TContact } from '@/views/chat/chat'
 
 defineProps<{
   contact: TContact
+  open: boolean
 }>()
 </script>
