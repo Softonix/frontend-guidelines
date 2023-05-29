@@ -9,7 +9,7 @@
     </div>
 
     <div class="md:min-w-[320px] w-full pt-2 px-5 flex-shrink-0 pb-5">
-      <MessageForm :chat_id="chatID" :sender_id="senderId" />
+      <MessageForm :chatId="chatID" :senderId="senderId" />
     </div>
   </div>
 </template>
@@ -20,8 +20,8 @@ import MessageForm from './components/MessageForm.vue'
 
 const chatStore = useChatStore()
 const authStore = useAuthStore()
-const chatID = ref(null)
-const senderId = ref(null)
+const chatID = ref<string | null>(null)
+const senderId = ref<string | null>(null)
 const { currentUser } = storeToRefs(authStore)
 const { messages, messagesCount, chats, transformedChats } = storeToRefs(chatStore)
 const { loadMessageBatch } = chatStore
@@ -29,11 +29,14 @@ const { loadMessageBatch } = chatStore
 const route = useRoute()
 
 onMounted(async () => {
-  const chatId = route.params.id
+  const chatId = route.params.id as string
 
   if (chatId) {
     chatID.value = chatId
-    senderId.value = currentUser.value?.id
+
+    if (currentUser.value?.id) {
+      senderId.value = currentUser.value?.id
+    }
 
     await loadMessageBatch(chatId as string)
 
@@ -44,11 +47,14 @@ onMounted(async () => {
 })
 
 watch(() => route.params, async (currParams, prevParams) => {
-  const chatId = currParams.id
+  const chatId = currParams.id as string
 
   if (chatId && chatId !== prevParams.id) {
     chatID.value = chatId
-    senderId.value = currentUser.value?.id
+
+    if (currentUser.value?.id) {
+      senderId.value = currentUser.value?.id
+    }
 
     await loadMessageBatch(chatId as string)
 

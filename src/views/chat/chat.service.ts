@@ -1,4 +1,4 @@
-import { supabaseViews } from "@/composables/supabase"
+import { supabaseViews } from '@/composables/supabase'
 
 class ChatService {
   async getUsers () {
@@ -56,7 +56,7 @@ class ChatService {
     }).subscribe()
   }
 
-  async createNewMessage (message: IMessage) {
+  async createNewMessage (message: Omit<IMessage, 'id' | 'created_at' >) {
     const { data, error } = await useSupabase().from(supabaseTablesNames.messages).insert(message)
 
     if (error) {
