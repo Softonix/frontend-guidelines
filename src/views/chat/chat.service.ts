@@ -1,5 +1,3 @@
-// import { supabaseViews } from '@/composables/supabase'
-
 import type { IDatabase } from '@/types/supabase'
 
 class ChatService {

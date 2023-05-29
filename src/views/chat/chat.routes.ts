@@ -12,22 +12,52 @@ const chatGuard = async (
   next: NavigationGuardNext
 ) => {
   const chatStore = useChatStore()
-  const { chats } = storeToRefs(chatStore)
+  const { contactData } = storeToRefs(chatStore)
   const { getChats } = chatStore
 
   await getChats()
 
-  if (chats.value.length) {
+  if (contactData.value.length) {
     next({
       name: routeNames.chatRoom,
       params: {
-        id: chats.value[0].id
+        id: contactData.value[0].id
       },
       replace: true
     })
   } else {
     next()
   }
+}
+
+export const chatRoomGuard = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const chatStore = useChatStore()
+  const { chats, messages } = storeToRefs(chatStore)
+  const { loadMessageBatch } = chatStore
+
+  const chatId = to.params.id as string
+
+  await loadMessageBatch(chatId)
+
+  await chatService.onNewMessage((newMessage) => {
+    if (messages.value[0].chat_id === newMessage.chat_id) {
+      messages.value = [...messages.value, newMessage]
+    }
+
+    const chatIndex = chats.value.findIndex((ch) => ch.id === newMessage.chat_id)
+    const ch = { ...chats.value[chatIndex] }
+    ch.messages = [...ch.messages, newMessage]
+
+    const copy = [...chats.value]
+    copy.splice(chatIndex, 1)
+    chats.value = [ch, ...copy]
+  })
+
+  next()
 }
 
 export const chatRoutes: Array<RouteRecordRaw> = [
@@ -46,6 +76,7 @@ export const chatRoutes: Array<RouteRecordRaw> = [
     component: () => import('./Chat.vue'),
     meta: {
       requireAuth: true
-    }
+    },
+    beforeEnter: chatRoomGuard
   }
 ]

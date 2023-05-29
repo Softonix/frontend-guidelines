@@ -35,6 +35,7 @@ export const useChatStore = defineStore('chatStore', () => {
         id: chat.id,
         avatar_url: chatter?.avatar_url || '',
         fullname: chatter?.fullname,
+        chatter_id: chatter?.id,
         msg: lastMessage
           ? {
             id: lastMessage.id,

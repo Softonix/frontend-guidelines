@@ -17,10 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
-
 import Message from './components/Message.vue'
 import MessageForm from './components/MessageForm.vue'
+import { chatRoomGuard } from './chat.routes'
 
 const chatStore = useChatStore()
 const authStore = useAuthStore()
@@ -28,32 +27,6 @@ const { currentUser } = storeToRefs(authStore)
 
 const { messages } = storeToRefs(chatStore)
 
-const chatRoomGuard = async (
-  to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
-  next: NavigationGuardNext
-) => {
-  const chatStore = useChatStore()
-  const { chats, messages } = storeToRefs(chatStore)
-  const { loadMessageBatch } = chatStore
-
-  const chatId = to.params.id as string
-
-  await loadMessageBatch(chatId)
-
-  await chatService.onNewMessage((newMessage) => {
-    messages.value = [...messages.value, newMessage]
-    const chatIndex = chats.value.findIndex((ch) => ch.id === chatId)
-    const ch = { ...chats.value[chatIndex] }
-    ch.messages = [...ch.messages, newMessage]
-
-    const copy = [...chats.value]
-    copy.splice(chatIndex, 1)
-    chats.value = [ch, ...copy]
-  })
-
-  next()
-}
 
 onBeforeRouteUpdate(chatRoomGuard)
 </script>

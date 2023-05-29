@@ -15,7 +15,10 @@
       <div class="relative">
         <el-avatar :size="40" />
 
-        <Badge :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot />
+        <Badge
+          v-if="online"
+          :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot
+        />
       </div>
 
       <div class="flex flex-col flex-1 truncate">
@@ -48,5 +51,6 @@ import type { TContact } from '@/views/chat/chat'
 defineProps<{
   contact: TContact
   open: boolean
+  online: boolean
 }>()
 </script>

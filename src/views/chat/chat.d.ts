@@ -15,6 +15,7 @@ type TContact = {
   id: string
   avatar_url: string
   fullname: string | null | undefined
+  chatter_id: string | undefined
   msg: {
     id: string
     text: string

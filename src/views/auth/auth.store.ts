@@ -2,6 +2,8 @@ import { RealtimeChannel, type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
+  const onlineUsers = ref<{[key: string]: boolean}>({})
+
   const isAuthenticated = computed(() => !!currentUser)
 
   const router = useRouter()
@@ -70,19 +72,31 @@ export const useAuthStore = defineStore('authStore', () => {
 
       channel?.on('presence', { event: 'sync' }, () => {
         console.log('Online users:', channel?.presenceState())
+        // onlineUsers.value = Object.keys(channel?.presenceState())
       })
 
       channel?.on('presence', { event: 'join' }, ({ newPresences }) => {
         console.log('New users have joined', newPresences)
+        onlineUsers.value = {
+          ...onlineUsers.value,
+          [newPresences[0].id]: true
+        }
       })
 
       channel?.on('presence', { event: 'leave' }, ({ leftPresences }) => {
         console.log('Users have left: ', leftPresences)
+        onlineUsers.value = {
+          ...onlineUsers.value,
+          [leftPresences[0].id]: false
+        }
       })
 
       channel.subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
-          const status = await channel?.track({ online_at: new Date().toISOString() })
+          const status = await channel?.track({
+            online_at: new Date().toISOString(),
+            id: currentUser?.value?.id
+          })
           console.log(status)
         }
       })
@@ -91,6 +105,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
   return {
     currentUser,
+    onlineUsers,
     isAuthenticated,
     logIn,
     register,
