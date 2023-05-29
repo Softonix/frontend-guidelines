@@ -10,15 +10,18 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "test": "npx playwright test --ui",
     "test:cy": "start-server-and-test 'vite' http://localhost:5173 'cypress open'",
-    "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'"
+    "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'",
+    "host": "vite --host"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.22.0",
+    "@tensorflow/tfjs": "^4.6.0",
     "@vueuse/core": "^9.1.1",
     "axios": "^0.27.2",
     "element-plus": "^2.3.4",
     "pinia": "^2.0.36",
     "portal-vue": "^3.0.0",
+    "simple-vue-camera": "^1.1.3",
     "vue": "^3.3.2",
     "vue-i18n": "^9.3.0-beta.14",
     "vue-router": "^4.2.0"
