@@ -101,8 +101,6 @@
     "shallowRef": true,
     "storeToRefs": true,
     "supabaseChannels": true,
-    "supabaseTablesNames": true,
-    "supabaseViews": true,
     "syncRef": true,
     "syncRefs": true,
     "templateRef": true,

@@ -1,4 +1,4 @@
-import { RealtimeChannel, type User } from '@supabase/supabase-js'
+import { RealtimeChannel, type Session, type User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('authStore', () => {
   const currentUser = ref<User | null>(null)
@@ -40,6 +40,12 @@ export const useAuthStore = defineStore('authStore', () => {
 
   function startListenToAuthStateChange () {
     useSupabase().auth.onAuthStateChange((event, session) => {
+      console.log('triggerd')
+      if (!session) {
+        router.replace({ name: 'login' })
+        return
+      }
+
       switch (event) {
         case 'INITIAL_SESSION':
           currentUser.value = session?.user || null
@@ -48,7 +54,6 @@ export const useAuthStore = defineStore('authStore', () => {
         case 'SIGNED_IN':
           currentUser.value = session?.user || null
           trackOnlineStatus()
-          router.replace({ name: 'chat' })
           break
         case 'SIGNED_OUT':
           clearUser()

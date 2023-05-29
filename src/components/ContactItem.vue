@@ -28,7 +28,7 @@
 
       <div class="flex flex-col items-end gap-1">
         <span class="font-normal text-xs text-tertiary">
-          {{ contact.msg ? new Intl.DateTimeFormat("en-Us", {
+          {{ contact.msg?.sent_at ? new Intl.DateTimeFormat("en-Us", {
             hour: '2-digit',
             minute: '2-digit'
 
@@ -42,17 +42,9 @@
 
 <script lang="ts" setup>
 import Badge from '@/components/Badge.vue'
+import type { TContact } from '@/views/chat/chat'
 
 defineProps<{
-  contact: {
-    id: string
-    avatar_url: string
-    fullname: string
-    msg?: {
-      id: string
-      text: string
-      sent_at: string
-    }
-  }
+  contact: TContact
 }>()
 </script>

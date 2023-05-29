@@ -5,6 +5,7 @@
     :rules="sendMessageRules"
     :show-message="false"
     class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
+    @submit.prevent
   >
     <el-form-item
       ref="messageInputRef"
@@ -26,14 +27,12 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  chatId: string
-  senderId: string
+  chatId: string | null
+  senderId: string | null
 }>()
 
 const sendMessageFormRef = useElFormRef()
 const sendMessageModel = useElFormModel({
-  chat_id: props.chatId,
-  sender_id: props.senderId,
   message: ''
 })
 const sendMessageRules = useElFormRules({
@@ -43,6 +42,11 @@ const sendMessageRules = useElFormRules({
 const messageInputRef = ref(null)
 
 async function sendMessage () {
+  console.log({
+    message: sendMessageModel.message,
+    chat_id: props.chatId,
+    sender_id: props.senderId
+  })
   chatService.createNewMessage({
     message: sendMessageModel.message,
     chat_id: props.chatId,

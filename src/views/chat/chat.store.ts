@@ -1,8 +1,10 @@
+import type { IDatabase } from '@/types/supabase'
+import type { TChat, TTransformedChat } from './chat'
 import { chatService } from './chat.service'
 
 export const useChatStore = defineStore('chatStore', () => {
-  const chats = ref<any[]>([])
-  const messages = ref([])
+  const chats = ref<TChat[]>([])
+  const messages = ref<IDatabase['public']['Tables']['messages']['Row'][]>([])
   const messagesCount = ref(0)
   const maxMessagesPerRequest = 100
   const authStore = useAuthStore()
@@ -16,7 +18,7 @@ export const useChatStore = defineStore('chatStore', () => {
       }
 
       return prev
-    }, {})
+    }, {} as TTransformedChat)
 
     return blah
   })
@@ -31,8 +33,8 @@ export const useChatStore = defineStore('chatStore', () => {
 
       return {
         id: chat.id,
-        avatar_url: chatter.avatar_url || '',
-        fullname: chatter.fullname,
+        avatar_url: chatter?.avatar_url || '',
+        fullname: chatter?.fullname,
         msg: lastMessage
           ? {
             id: lastMessage.id,
@@ -67,7 +69,6 @@ export const useChatStore = defineStore('chatStore', () => {
     messages,
     messagesCount,
     loadMessageBatch,
-    // getUsers,
     getChats
   }
 })

@@ -61,6 +61,8 @@ const loginRules = useElFormRules({
   password: [useMinLenRule(6), useRequiredRule()]
 })
 
+const router = useRouter()
+
 const store = useAuthStore()
 const { logIn } = store
 const loading = ref(false)
@@ -71,6 +73,7 @@ function submit (formRef) {
       try {
         loading.value = true
         await logIn(loginModel)
+        router.push({ name: 'chat' })
       } catch (err) {
         console.log(err)
       } finally {

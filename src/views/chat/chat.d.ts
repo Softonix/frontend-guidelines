@@ -1,24 +1,23 @@
-interface IUser {
+import type { IDatabase } from '@/types/supabase'
+
+type TChat = IDatabase['public']['Tables']['chats']['Row'] & {
+  messages: IDatabase['public']['Tables']['messages']['Row'][]
+  users: IDatabase['public']['Tables']['users']['Row'][]
+}
+
+type TTransformedChat = {
+  [key: string]: TChat & {
+    lastMessage: IDatabase['public']['Tables']['messages']['Row']
+  }
+}
+
+type TContact = {
   id: string
-  bio: string
-  fullname: string
-  tagname: string
-  username: string
   avatar_url: string
-}
-
-interface IMessage {
-  id: string
-  created_at: string
-  sender_id: string
-  chat_id: string
-  message: string
-}
-
-interface IChat {
-  id: string
-  created_at: string
-  admin_id: string
-  type: 'chat' | 'group'
-  description: string
+  fullname: string | null | undefined
+  msg: {
+    id: string
+    text: string
+    sent_at: string | null
+  } | null
 }

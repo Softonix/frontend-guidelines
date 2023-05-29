@@ -4,12 +4,12 @@
       <Message
         v-for="message in messages" :key="message.id"
         :message="message"
-        :currentUserMessage="currentUser.id === message.sender_id"
+        :currentUserMessage="currentUser?.id === message.sender_id"
       />
     </div>
 
     <div class="md:min-w-[320px] w-full pt-2 px-5 flex-shrink-0 pb-5">
-      <MessageForm :chatId="chatID" :senderId="senderId" />
+      <MessageForm :chatId="chatId" :senderId="senderId" />
     </div>
   </div>
 </template>
@@ -20,25 +20,25 @@ import MessageForm from './components/MessageForm.vue'
 
 const chatStore = useChatStore()
 const authStore = useAuthStore()
-const chatID = ref<string | null>(null)
+const chatId = ref<string | null>(null)
 const senderId = ref<string | null>(null)
 const { currentUser } = storeToRefs(authStore)
-const { messages, messagesCount, chats, transformedChats } = storeToRefs(chatStore)
+const { messages, chats } = storeToRefs(chatStore)
 const { loadMessageBatch } = chatStore
 
 const route = useRoute()
 
 onMounted(async () => {
-  const chatId = route.params.id as string
+  const chatIdParam = route.params.id as string
 
-  if (chatId) {
-    chatID.value = chatId
+  if (chatIdParam) {
+    chatId.value = chatIdParam
 
     if (currentUser.value?.id) {
       senderId.value = currentUser.value?.id
     }
 
-    await loadMessageBatch(chatId as string)
+    await loadMessageBatch(chatIdParam as string)
 
     await chatService.onNewMessage((newMessage) => {
       messages.value = [...messages.value, newMessage]
@@ -47,28 +47,26 @@ onMounted(async () => {
 })
 
 watch(() => route.params, async (currParams, prevParams) => {
-  const chatId = currParams.id as string
+  const chatIdParam = route.params.id as string
 
-  if (chatId && chatId !== prevParams.id) {
-    chatID.value = chatId
+  if (chatIdParam && chatIdParam !== prevParams.id) {
+    chatId.value = chatIdParam
 
     if (currentUser.value?.id) {
       senderId.value = currentUser.value?.id
     }
 
-    await loadMessageBatch(chatId as string)
+    await loadMessageBatch(chatIdParam)
 
     await chatService.onNewMessage((newMessage) => {
       messages.value = [...messages.value, newMessage]
-      const chatIndex = chats.value.findIndex((ch) => ch.id === chatId)
+      const chatIndex = chats.value.findIndex((ch) => ch.id === chatIdParam)
       const ch = { ...chats.value[chatIndex] }
       ch.messages = [...ch.messages, newMessage]
-      console.log('CH')
-      console.log(ch)
+
       const copy = [...chats.value]
       copy.splice(chatIndex, 1)
       chats.value = [ch, ...copy]
-      // TODO: Reflect last message in left sidebar
     })
   }
 })

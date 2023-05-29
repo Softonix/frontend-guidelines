@@ -1,24 +1,27 @@
-import { supabaseViews } from '@/composables/supabase'
+// import { supabaseViews } from '@/composables/supabase'
+
+import type { IDatabase } from '@/types/supabase'
 
 class ChatService {
   async getUsers () {
-    const { data, error } = await useSupabase().from(supabaseTablesNames.users).select()
+    const { data, error } = await useSupabase().from('users').select()
 
     if (error) {
       throw error
     }
 
-    return data as IUser[]
+    return data
   }
 
   async getChats () {
-    const { data, error } = await useSupabase().from(supabaseTablesNames.chats).select(`
+    const { data, error } = await useSupabase().from('chats').select(`
     id,
     type,
     description,
     admin_id,
-    messages ( id, message, created_at, sender_id ),
-    users!chat_to_user (id, fullname, avatar_url)
+    created_at,
+    messages ( id, message, created_at, sender_id, chat_id ),
+    users!chat_to_user (id, fullname, avatar_url, username, tagname, bio)
     `)
     console.log(data)
 
@@ -30,7 +33,7 @@ class ChatService {
   }
 
   async getChatsViews (chatId: string) {
-    const { data, error } = await useSupabase().from(supabaseViews.chatView).select().eq('user_id', chatId)
+    const { data, error } = await useSupabase().from('chat_view').select().eq('user_id', chatId)
     console.log(data)
 
     if (error) {
@@ -41,7 +44,7 @@ class ChatService {
   }
 
   async getMessages (from: number, to: number, chatId: string) {
-    const { data, error } = await useSupabase().from(supabaseTablesNames.messages).select().eq('chat_id', chatId).range(from, to).order('created_at')
+    const { data, error } = await useSupabase().from('messages').select().eq('chat_id', chatId).range(from, to).order('created_at')
 
     if (error) {
       throw error
@@ -51,13 +54,13 @@ class ChatService {
   }
 
   onNewMessage (handler: (...args: any[]) => void) {
-    useSupabase().channel(supabaseChannels.dbMessages).on('postgres_changes', { event: 'INSERT', schema: 'public', table: supabaseTablesNames.messages }, payload => {
+    useSupabase().channel(supabaseChannels.dbMessages).on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
       handler(payload.new)
     }).subscribe()
   }
 
-  async createNewMessage (message: Omit<IMessage, 'id' | 'created_at' >) {
-    const { data, error } = await useSupabase().from(supabaseTablesNames.messages).insert(message)
+  async createNewMessage (message: IDatabase['public']['Tables']['messages']['Insert']) {
+    const { data, error } = await useSupabase().from('messages').insert(message)
 
     if (error) {
       throw error
