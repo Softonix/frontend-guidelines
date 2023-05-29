@@ -44,6 +44,7 @@
     "rollup-plugin-visualizer": "^5.8.1",
     "sass": "^1.54.8",
     "start-server-and-test": "^2.0.0",
+    "supabase": "^1.64.3",
     "tailwindcss": "^3.1.8",
     "typescript": "~5.0.4",
     "unplugin-auto-import": "0.15.2",
