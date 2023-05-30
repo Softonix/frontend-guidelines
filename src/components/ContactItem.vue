@@ -12,16 +12,7 @@
       hover:after:bg-opacity-20 after:w-screen after:h-full px-6"
       :class="{['after:bg-block-3 after:bg-opacity-30']:open}"
     >
-      <div class="relative">
-        <el-avatar :size="40" @error="failedLoadImage = true">
-          {{ contact.fullname?.split(' ').map(str => str.charAt(0)).join('') }}
-        </el-avatar>
-
-        <Badge
-          v-if="online"
-          :type="$badgeType.success" class="absolute border border-block-primary bottom-1 right-1" dot
-        />
-      </div>
+      <AppAvatar :size="40" :online="online" :src="contact.avatar_url" :fullname="contact.fullname" />
 
       <div class="flex flex-col flex-1 truncate">
         <span class="font-semibold text-sm text-primary truncate">{{ contact.fullname }}</span>
@@ -49,8 +40,6 @@
 <script lang="ts" setup>
 import Badge from '@/components/Badge.vue'
 import type { TContact } from '@/views/chat/chat'
-
-const failedLoadImage = ref(false)
 
 defineProps<{
   contact: TContact

@@ -40,7 +40,14 @@ class ChatService {
   }
 
   async getMessages (from: number, to: number, chatId: string) {
-    const { data, error } = await useSupabase().from('messages').select().eq('chat_id', chatId).range(from, to).order('created_at')
+    const { data, error } = await useSupabase().from('messages').select(`
+    id,
+    chat_id,
+    message,
+    created_at,
+    users(id, fullname, username, avatar_url)
+    `
+    ).eq('chat_id', chatId).range(from, to).order('created_at')
 
     if (error) {
       throw error
@@ -71,10 +78,10 @@ class ChatService {
     }).subscribe()
   }
 
-  async markMessageAsRead (message: IDatabase['public']['Tables']['messages']['Update']) {
+  async markMessageAsRead (messageId: string) {
     const { data, error } = await useSupabase().from('messages').update({
       read: true
-    }).eq('id', message.id)
+    }).eq('id', messageId)
 
     if (error) {
       throw error
