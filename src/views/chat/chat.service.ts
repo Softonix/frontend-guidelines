@@ -18,10 +18,9 @@ class ChatService {
     description,
     admin_id,
     created_at,
-    messages ( id, message, created_at, sender_id, chat_id ),
+    messages ( id, message, created_at, sender_id, chat_id, read ),
     users!chat_to_user (id, fullname, avatar_url, username, tagname, bio)
     `)
-    console.log(data)
 
     if (error) {
       throw error
@@ -32,7 +31,6 @@ class ChatService {
 
   async getChatsViews (chatId: string) {
     const { data, error } = await useSupabase().from('chat_view').select().eq('user_id', chatId)
-    console.log(data)
 
     if (error) {
       throw error
@@ -59,6 +57,24 @@ class ChatService {
 
   async createNewMessage (message: IDatabase['public']['Tables']['messages']['Insert']) {
     const { data, error } = await useSupabase().from('messages').insert(message)
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  onUpdateMessage (handler: (...args: any[]) => void) {
+    useSupabase().channel(supabaseChannels.dbMessagesUpdate).on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'messages' }, payload => {
+      handler(payload.new)
+    }).subscribe()
+  }
+
+  async markMessageAsRead (message: IDatabase['public']['Tables']['messages']['Update']) {
+    const { data, error } = await useSupabase().from('messages').update({
+      read: true
+    }).eq('id', message.id)
 
     if (error) {
       throw error

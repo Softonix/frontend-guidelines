@@ -6,7 +6,7 @@ export const useChatStore = defineStore('chatStore', () => {
   const chats = ref<TChat[]>([])
   const messages = ref<IDatabase['public']['Tables']['messages']['Row'][]>([])
   const messagesCount = ref(0)
-  const maxMessagesPerRequest = 100
+  const maxMessagesPerRequest = 200
   const authStore = useAuthStore()
   const { currentUser } = storeToRefs(authStore)
 
@@ -14,7 +14,9 @@ export const useChatStore = defineStore('chatStore', () => {
     const blah = chats.value.reduce((prev, curr) => {
       prev[curr.id] = {
         ...curr,
-        lastMessage: curr.messages[curr.messages.length - 1]
+        lastMessage: curr.messages[curr.messages.length - 1],
+        unreadMessages: curr.messages.filter(msg =>
+          !msg.read && msg.sender_id !== currentUser.value?.id).length
       }
 
       return prev
@@ -30,6 +32,7 @@ export const useChatStore = defineStore('chatStore', () => {
       })
 
       const lastMessage = transformedChats.value[chat.id].lastMessage
+      const unreadMessages = transformedChats.value[chat.id].unreadMessages
 
       return {
         id: chat.id,
@@ -42,15 +45,10 @@ export const useChatStore = defineStore('chatStore', () => {
             text: lastMessage.message,
             sent_at: lastMessage.created_at
           }
-          : null
+          : null,
+        unreadMessages
       }
     })
-  })
-
-  watch(currentUser, async (currUser) => {
-    if (currUser) {
-      await getChats()
-    }
   })
 
   async function loadMessageBatch (chatId: string) {
@@ -63,6 +61,24 @@ export const useChatStore = defineStore('chatStore', () => {
     chats.value = await chatService.getChats()
   }
 
+  function markAsRead (message: IDatabase['public']['Tables']['messages']['Row']) {
+    const chatIndex = chats.value.findIndex(chat => chat.id === message.chat_id)
+
+    const msgs = chats.value[chatIndex].messages.map(msg => msg.id === message.id
+      ? {
+        ...msg,
+        read: true
+      }
+      : { ...msg })
+
+    const chatInfo = {
+      ...chats.value[chatIndex],
+      messages: msgs
+    }
+
+    chats.value = [...chats.value.slice(0, chatIndex), chatInfo, ...chats.value.slice(chatIndex + 1)]
+  }
+
   return {
     chats,
     transformedChats,
@@ -70,6 +86,7 @@ export const useChatStore = defineStore('chatStore', () => {
     messages,
     messagesCount,
     loadMessageBatch,
-    getChats
+    getChats,
+    markAsRead
   }
 })

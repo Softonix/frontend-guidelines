@@ -20,7 +20,8 @@
         :key="contact.id"
         :open="contact.id === $route.params.id"
         :contact="contact"
-        :online="onlineUsers[contact.chatter_id]"
+        :online="!!onlineUsers[contact.chatter_id ?? '']"
+        :unreadMessages="contact.unreadMessages"
       />
     </div>
   </aside>
@@ -43,10 +44,6 @@ const authStore = useAuthStore()
 const { onlineUsers } = storeToRefs(authStore)
 const { contactData } = storeToRefs(chatStore)
 
-watch(onlineUsers, (newUsers) => {
-  console.log('Online ids')
-  console.log(newUsers)
-})
 </script>
 
 <style lang="scss">

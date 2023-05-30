@@ -38,7 +38,7 @@
 
           }).format(new Date(contact.msg.sent_at)) : '' }}
         </span>
-        <Badge :type="$badgeType.primary">23</Badge>
+        <Badge v-if="unreadMessages" :type="$badgeType.primary" :dot="unreadMessages === 1">{{ unreadMessages }}</Badge>
       </div>
     </div>
   </router-link>
@@ -52,5 +52,6 @@ defineProps<{
   contact: TContact
   open: boolean
   online: boolean
+  unreadMessages: number
 }>()
 </script>

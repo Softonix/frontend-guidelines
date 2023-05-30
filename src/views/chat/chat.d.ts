@@ -8,6 +8,7 @@ type TChat = IDatabase['public']['Tables']['chats']['Row'] & {
 type TTransformedChat = {
   [key: string]: TChat & {
     lastMessage: IDatabase['public']['Tables']['messages']['Row']
+    unreadMessages: number
   }
 }
 

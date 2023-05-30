@@ -4,6 +4,7 @@
       <Message
         v-for="message in messages" :key="message.id" :message="message"
         :currentUserMessage="currentUser?.id === message.sender_id"
+        @onMessageRead="markAsRead"
       />
     </div>
 
@@ -23,10 +24,11 @@ import { chatRoomGuard } from './chat.routes'
 
 const chatStore = useChatStore()
 const authStore = useAuthStore()
+
+const { markAsRead } = chatStore
+
 const { currentUser } = storeToRefs(authStore)
-
 const { messages } = storeToRefs(chatStore)
-
 
 onBeforeRouteUpdate(chatRoomGuard)
 </script>

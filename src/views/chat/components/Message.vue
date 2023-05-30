@@ -1,5 +1,8 @@
 <template>
-  <div :class="{['self-end']: currentUserMessage}">
+  <div
+    ref="messageRef"
+    :class="{['self-end']: currentUserMessage}"
+  >
     <div
       class="p-4 max-w-fit rounded-2xl text-primary"
       :class="[currentUserMessage ? 'self-end bg-system-info-light rounded-br-none'
@@ -16,8 +19,28 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
   message: any
   currentUserMessage: boolean
 }>()
+const messageRef = ref(null)
+const messageVisible = ref(false)
+const read = toRef(() => props.message.read)
+
+const { stop } = useIntersectionObserver(
+  messageRef,
+  ([{ isIntersecting }]) => {
+    messageVisible.value = isIntersecting
+  }
+)
+
+watch(messageVisible, async (visible) => {
+  if (read.value) {
+    stop()
+  }
+
+  if (visible && !read.value && !props.currentUserMessage) {
+    await chatService.markMessageAsRead(props.message)
+  }
+})
 </script>

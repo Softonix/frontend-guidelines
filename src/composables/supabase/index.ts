@@ -8,7 +8,8 @@ const supabaseClient = createClient<IDatabase>(supabaseUrl, supabaseAnonKey)
 
 export const supabaseChannels = {
   onlineUsers: 'online-users',
-  dbMessages: 'db-messages'
+  dbMessages: 'db-messages',
+  dbMessagesUpdate: 'db-messages-update'
 }
 
 export const useSupabase = () => supabaseClient
