@@ -1,10 +1,11 @@
 <template>
-  <div v-show="cameraActive" class="absolute top-20 rounded-3xl overflow-hidden">
+  <div v-show="cameraActive" class="absolute top-20 rounded-3xl overflow-hidden left-0">
     <Camera
       ref="webcamRef" :resolution="{
         width: 640,
         height: 480
-      }" :autoplay="false" @started="onCameraStarted" @stopped="onCameraStopped"
+      }" :autoplay="false" facingMode="user" @started="onCameraStarted"
+      @stopped="onCameraStopped"
     >
       <div class="flex gap-5 h-full justify-center items-end z-[999] p-5 relative">
         <el-button @click="toggleCamera">
@@ -13,6 +14,9 @@
         <el-button @click="sendMessageModel.message=signLanguageMessage">
           Save to input
         </el-button>
+        <el-button @click="flip">
+          Flip
+        </el-button>
       </div>
 
       <canvas ref="canvasRef" class="w-full h-full absolute left-0 right-0 top-0" />
@@ -20,17 +24,17 @@
   </div>
   <el-form
     ref="sendMessageFormRef" :model="sendMessageModel" :rules="sendMessageRules" :show-message="false"
-    class="md:border border-border-primary rounded-xl flex md:flex-col w-full" @submit.prevent
+    class="md:border border-border-primary rounded-xl flex gap-3" @submit.prevent
   >
     <el-form-item ref="messageInputRef" class="flex-1 m-0" prop="message">
       <el-input v-model="sendMessageModel.message" placeholder="Write a message" />
     </el-form-item>
 
-    <div class="flex justify-between md:flex-1 md:p-3">
-      <el-button @click="toggleCamera">Sign Language Detection</el-button>
+    <div class="flex justify-between gap-1 md:p-3">
       <el-button :type="$elComponentType.primary" @click="submitMessage(sendMessageFormRef, messageInputRef)">
         Send
       </el-button>
+      <el-button v-if="!cameraActive" @click="toggleCamera">SLD</el-button>
     </div>
   </el-form>
 </template>
@@ -44,6 +48,21 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const cameraActive = ref(false)
 const interval = ref<NodeJS.Timer | null>()
 const signLanguageMessage = ref('')
+
+async function flip () {
+  const currDevice = webcamRef.value?.currentDeviceID()
+  const devices = await webcamRef.value?.devices(['videoinput'])
+  const otherDevice = devices?.find(device => device.deviceId !== currDevice)
+
+  if (otherDevice?.deviceId) {
+    webcamRef.value?.changeCamera(otherDevice?.deviceId)
+  }
+}
+
+// watch(cameraFacingMode, (curr, prev) => {
+//   webcamRef.value?.stop()
+//   webcamRef.value?.start()
+// })
 
 // Define our labelmap
 const labelMap = {

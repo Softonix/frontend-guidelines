@@ -21,7 +21,7 @@
         <el-input v-model.trim="loginModel.password" show-password />
       </el-form-item>
 
-      <div class="flex gap-2 justify-between text-sm">
+      <div class="flex gap-2 justify-between text-sm flex-wrap">
         <p>
           Don't have an account?
           <router-link class="text-link-primary " :to="{name: $routeNames.signUp}">Sign Up</router-link>
