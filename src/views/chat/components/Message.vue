@@ -7,8 +7,8 @@
     <AppAvatar
       class="self-end"
       :size="40"
-      :src="sender.avatar_url ?? ''"
-      :fullname="sender.fullname"
+      :src="message.users.avatar_url ?? ''"
+      :fullname="message.users.fullname"
       :online="false"
     />
     <div class="flex flex-col gap-1">
@@ -16,7 +16,7 @@
         class="text-sm font-semibold text-orange-500"
         :class="{['self-end']: currentUserMessage}"
       >
-        {{ sender.username }}
+        {{ message.users.username }}
       </div>
       <div
         class="p-4 max-w-[320px] rounded-2xl text-primary break-words"
@@ -41,7 +41,6 @@
 const props = defineProps<{
   message: any
   currentUserMessage: boolean
-  sender: any
 }>()
 const messageRef = ref(null)
 const messageVisible = ref(false)

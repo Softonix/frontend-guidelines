@@ -6,7 +6,7 @@ export const useChatStore = defineStore('chatStore', () => {
   const chats = ref<TChat[]>([])
   const messages = ref<IDatabase['public']['Tables']['messages']['Row'][]>([])
   const messagesCount = ref(0)
-  const maxMessagesPerRequest = 200
+  const maxMessagesPerRequest = 500
   const authStore = useAuthStore()
   const { currentUser } = storeToRefs(authStore)
 
