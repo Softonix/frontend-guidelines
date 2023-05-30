@@ -1,11 +1,11 @@
 <template>
   <div
     ref="messageRef"
-    class="flex gap-1"
+    class="flex gap-1 relative"
     :class="{['self-end flex-row-reverse']: currentUserMessage}"
   >
     <AppAvatar
-      class="-bottom-1/2"
+      class="self-end"
       :size="40"
       :src="sender.avatar_url ?? ''"
       :fullname="sender.fullname"
@@ -19,7 +19,7 @@
         {{ sender.username }}
       </div>
       <div
-        class="p-4 max-w-[320px] rounded-2xl text-primary"
+        class="p-4 max-w-[320px] rounded-2xl text-primary break-words"
         :class="[currentUserMessage ? 'self-end bg-system-info-light rounded-br-none'
           : 'bg-block-tertiary rounded-bl-none']"
       >
