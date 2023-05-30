@@ -42,11 +42,8 @@ export const useAuthStore = defineStore('authStore', () => {
 
   function startListenToAuthStateChange () {
     useSupabase().auth.onAuthStateChange((event, session) => {
-      if (session) {
-        if (session?.expires_in <= 600) {
-          router.replace({ name: 'login' })
-          return
-        }
+      if (!session) {
+        router.replace({ name: 'login' })
       }
 
       switch (event) {
