@@ -2,8 +2,6 @@
   <el-form
     ref="sendMessageFormRef"
     :model="sendMessageModel"
-    :rules="sendMessageRules"
-    :show-message="false"
     class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
     @submit.prevent
   >
@@ -17,6 +15,7 @@
     <div class="flex justify-end md:flex-1 md:p-3">
       <el-button
         :type="$elComponentType.primary"
+        :disabled="!isValid"
         @click="submitMessage(sendMessageFormRef, messageInputRef)"
       >
         Send
@@ -35,18 +34,13 @@ const sendMessageFormRef = useElFormRef()
 const sendMessageModel = useElFormModel({
   message: ''
 })
-const sendMessageRules = useElFormRules({
-  message: [useRequiredRule()]
-})
+const isValid = computed(() =>
+  !!sendMessageModel.message.trim().length
+)
 
 const messageInputRef = ref(null)
 
 async function sendMessage () {
-  console.log({
-    message: sendMessageModel.message,
-    chat_id: props.chatId,
-    sender_id: props.senderId
-  })
   chatService.createNewMessage({
     message: sendMessageModel.message,
     chat_id: props.chatId,
@@ -54,12 +48,10 @@ async function sendMessage () {
   })
 }
 
-function submitMessage (formRef, inputRef) {
-  formRef.validate(async (valid) => {
-    if (valid) {
-      await sendMessage()
-      inputRef.resetField()
-    }
-  })
+async function submitMessage (formRef, inputRef) {
+  if (isValid.value) {
+    await sendMessage()
+    inputRef.resetField()
+  }
 }
 </script>
