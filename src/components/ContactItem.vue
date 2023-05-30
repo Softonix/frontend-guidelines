@@ -13,7 +13,9 @@
       :class="{['after:bg-block-3 after:bg-opacity-30']:open}"
     >
       <div class="relative">
-        <el-avatar :size="40" />
+        <el-avatar :size="40" @error="failedLoadImage = true">
+          {{ contact.fullname?.split(' ').map(str => str.charAt(0)).join('') }}
+        </el-avatar>
 
         <Badge
           v-if="online"
@@ -47,6 +49,8 @@
 <script lang="ts" setup>
 import Badge from '@/components/Badge.vue'
 import type { TContact } from '@/views/chat/chat'
+
+const failedLoadImage = ref(false)
 
 defineProps<{
   contact: TContact
