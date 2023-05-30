@@ -10,7 +10,7 @@
         <el-button @click="toggleCamera">
           Stop Camera
         </el-button>
-        <el-button>
+        <el-button @click="sendMessageModel.message=signLanguageMessage">
           Save to input
         </el-button>
       </div>
@@ -28,7 +28,7 @@
 
     <div class="flex justify-between md:flex-1 md:p-3">
       <el-button @click="toggleCamera">Sign Language Detection</el-button>
-      <el-button :type="$elComponentType.primary" @click="submitMessage">
+      <el-button :type="$elComponentType.primary" @click="submitMessage(sendMessageFormRef, messageInputRef)">
         Send
       </el-button>
     </div>
@@ -43,6 +43,7 @@ const webcamRef = ref<InstanceType<typeof Camera> | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const cameraActive = ref(false)
 const interval = ref<NodeJS.Timer | null>()
+const signLanguageMessage = ref('')
 
 // Define our labelmap
 const labelMap = {
@@ -76,6 +77,7 @@ function drawRect (
 
       // DRAW!!
       ctx.beginPath()
+      signLanguageMessage.value = labelMap[text].name
       ctx.fillText(labelMap[text].name + ' - ' + Math.round(scores[i] * 100) / 100, x * imgWidth, y * imgHeight - 10)
       ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 1.5)
       ctx.stroke()
