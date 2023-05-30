@@ -69,14 +69,7 @@ export const useAuthStore = defineStore('authStore', () => {
   function trackOnlineStatus () {
     if (currentUser.value) {
       channel = authService.initializeOnlineChannel(currentUser.value?.id)
-
-      channel?.on('presence', { event: 'sync' }, () => {
-        console.log('Online users:', channel?.presenceState())
-        // onlineUsers.value = Object.keys(channel?.presenceState())
-      })
-
       channel?.on('presence', { event: 'join' }, ({ newPresences }) => {
-        console.log('New users have joined', newPresences)
         onlineUsers.value = {
           ...onlineUsers.value,
           [newPresences[0].id]: true
@@ -93,11 +86,10 @@ export const useAuthStore = defineStore('authStore', () => {
 
       channel.subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
-          const status = await channel?.track({
+          await channel?.track({
             online_at: new Date().toISOString(),
             id: currentUser?.value?.id
           })
-          console.log(status)
         }
       })
     }
