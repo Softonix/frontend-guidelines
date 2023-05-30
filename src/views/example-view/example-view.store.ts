@@ -8,7 +8,6 @@ export const useExampleViewStore = defineStore('exampleViewStore', () => {
 
   async function getExampleVar () {
     exampleVar.value = await exampleViewService.getSomeData()
-    console.log(exampleVar.value)
   }
 
   return {

@@ -36,7 +36,7 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
   {
     path: 'example-transitions',
     name: exampleViewRouteNames.exampleTransitions,
-    component: () => import('./transitions/transition.vue'),
+    component: () => import('./transitions/Transition.vue'),
     meta: {
       label: 'Transitions'
     },

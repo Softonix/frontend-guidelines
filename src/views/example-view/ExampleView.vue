@@ -89,8 +89,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ElSelect } from 'element-plus'
-
 const { availableLocales, locale, t } = useI18n()
 
 const generalStore = useGeneralStore()
@@ -99,7 +97,7 @@ const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 const loading = ref(false)
 
 const exampleElementRef = ref()
-const elementSelectRef = ref<InstanceType<typeof ElSelect>>()
+const elementSelectRef = ref()
 
 const computeExample = {
   firstLevel: {
@@ -127,7 +125,7 @@ async function getSomeExampleVar () {
 onMounted(() => {
   getSomeExampleVar()
 
-  console.log('Html element ref', exampleElementRef)
-  console.log('element input ref blur method', elementSelectRef.value?.blur)
+  // Element input ref blur method
+  elementSelectRef.value?.blur()
 })
 </script>

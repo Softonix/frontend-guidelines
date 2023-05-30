@@ -52,9 +52,7 @@ const formRules = useElFormRules({
 })
 
 async function submitForm () {
-  console.log(formRef)
-
-  formRef.value.validate(valid => {
+  formRef.value.validate((valid: boolean) => {
     if (valid) {
       alert('submit!')
     }
@@ -63,6 +61,5 @@ async function submitForm () {
 
 function resetForm () {
   formRef.value.resetFields()
-  console.log(formModel)
 }
 </script>

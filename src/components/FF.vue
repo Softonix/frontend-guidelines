@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ElBadge } from 'element-plus'
 import type { TFlagName } from '@/composables/flags'
 
 const { flags } = useFlags()
@@ -13,7 +12,7 @@ const { flags } = useFlags()
 const props = withDefaults(defineProps<{
   name: TFlagName
   showBadge: boolean
-  badgeLabel: string
+  badgeLabel?: string
 }>(), {
   badgeLabel: 'new'
 })
