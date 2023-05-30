@@ -1,14 +1,10 @@
 <template>
   <div v-show="cameraActive" class="absolute top-20 rounded-3xl overflow-hidden">
     <Camera
-      ref="webcamRef"
-      :resolution="{
+      ref="webcamRef" :resolution="{
         width: 640,
         height: 480
-      }"
-      :autoplay="false"
-      @started="onCameraStarted"
-      @stopped="onCameraStopped"
+      }" :autoplay="false" @started="onCameraStarted" @stopped="onCameraStopped"
     >
       <div class="flex gap-5 h-full justify-center items-end z-[999] p-5 relative">
         <el-button @click="toggleCamera">
@@ -23,26 +19,16 @@
     </Camera>
   </div>
   <el-form
-    ref="sendMessageFormRef"
-    :model="sendMessageModel"
-    :rules="sendMessageRules"
-    :show-message="false"
-    class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
-    @submit.prevent
+    ref="sendMessageFormRef" :model="sendMessageModel" :rules="sendMessageRules" :show-message="false"
+    class="md:border border-border-primary rounded-xl flex md:flex-col w-full" @submit.prevent
   >
-    <el-form-item
-      ref="messageInputRef"
-      class="flex-1 m-0" prop="message"
-    >
+    <el-form-item ref="messageInputRef" class="flex-1 m-0" prop="message">
       <el-input v-model="sendMessageModel.message" placeholder="Write a message" />
     </el-form-item>
 
     <div class="flex justify-between md:flex-1 md:p-3">
       <el-button @click="toggleCamera">Sign Language Detection</el-button>
-      <el-button
-        :type="$elComponentType.primary"
-        @click="submitMessage"
-      >
+      <el-button :type="$elComponentType.primary" @click="submitMessage">
         Send
       </el-button>
     </div>
