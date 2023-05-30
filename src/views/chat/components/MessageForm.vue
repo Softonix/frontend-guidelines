@@ -22,15 +22,29 @@
       <canvas ref="canvasRef" class="w-full h-full absolute left-0 right-0 top-0" />
     </Camera>
   </div>
-
-  <el-form class="md:border border-border-primary rounded-xl flex md:flex-col w-full">
-    <el-form-item class="flex-1 m-0">
-      <el-input placeholder="Write a message" />
+  <el-form
+    ref="sendMessageFormRef"
+    :model="sendMessageModel"
+    :rules="sendMessageRules"
+    :show-message="false"
+    class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
+    @submit.prevent
+  >
+    <el-form-item
+      ref="messageInputRef"
+      class="flex-1 m-0" prop="message"
+    >
+      <el-input v-model="sendMessageModel.message" placeholder="Write a message" />
     </el-form-item>
 
     <div class="flex justify-between md:flex-1 md:p-3">
       <el-button @click="toggleCamera">Sign Language Detection</el-button>
-      <el-button :type="$elComponentType.primary">Send</el-button>
+      <el-button
+        :type="$elComponentType.primary"
+        @click="submitMessage"
+      >
+        Send
+      </el-button>
     </div>
   </el-form>
 </template>
@@ -157,5 +171,42 @@ function onCameraStopped () {
   if (interval.value) {
     clearInterval(interval.value)
   }
+}
+
+const props = defineProps<{
+  chatId: string | null
+  senderId: string | null
+}>()
+
+const sendMessageFormRef = useElFormRef()
+const sendMessageModel = useElFormModel({
+  message: ''
+})
+const sendMessageRules = useElFormRules({
+  message: [useRequiredRule()]
+})
+
+const messageInputRef = ref(null)
+
+async function sendMessage () {
+  console.log({
+    message: sendMessageModel.message,
+    chat_id: props.chatId,
+    sender_id: props.senderId
+  })
+  chatService.createNewMessage({
+    message: sendMessageModel.message,
+    chat_id: props.chatId,
+    sender_id: props.senderId
+  })
+}
+
+function submitMessage (formRef, inputRef) {
+  formRef.validate(async (valid) => {
+    if (valid) {
+      await sendMessage()
+      inputRef.resetField()
+    }
+  })
 }
 </script>

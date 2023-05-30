@@ -1,3 +1,5 @@
+import { supabaseChannels } from '@/composables/supabase'
+
 class AuthService {
   async loginWithEmailAndPassword (payload: IAuthWithEmailAndPasswordPayload) {
     const { data, error } = await useSupabase().auth.signInWithPassword(payload)
@@ -72,6 +74,18 @@ class AuthService {
     if (error) {
       throw error
     }
+  }
+
+  initializeOnlineChannel (userId: string) {
+    const channel = useSupabase().channel(supabaseChannels.onlineUsers, {
+      config: {
+        presence: {
+          key: userId
+        }
+      }
+    })
+
+    return channel
   }
 }
 
