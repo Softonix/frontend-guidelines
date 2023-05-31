@@ -44,8 +44,9 @@
 </template>
 
 <script lang="ts" setup>
-import Badge from '@/components/Badge.vue'
 import type { IDatabase } from '@/types/supabase'
+
+import Badge from '@/components/Badge.vue'
 
 defineProps<{
   chat: IDatabase['public']['Views']['chat_view']['Row']

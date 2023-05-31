@@ -47,6 +47,7 @@ const { chats } = storeToRefs(chatStore)
 
 <style lang="scss">
 .search-input {
+
   .el-input__prefix {
     @apply text-xl leading-none;
   }

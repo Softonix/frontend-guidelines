@@ -18,7 +18,7 @@
     <div class="md:min-w-[320px] w-full pt-2 px-5 flex-shrink-0 pb-5">
       <MessageForm
         :chatId="($route.params.id as string)"
-        :senderId="currentUser?.id || null"
+        :senderId="(currentUser?.id as string)"
       />
     </div>
   </div>
@@ -30,15 +30,15 @@ import MessageForm from './components/MessageForm.vue'
 
 const messageListRef = ref<HTMLDivElement | null>(null)
 
-const chatStore = useChatStore()
-const authStore = useAuthStore()
+const route = useRoute()
 
-const { markAsRead, loadMessageBatch, addMessage } = chatStore
+const authStore = useAuthStore()
+const chatStore = useChatStore()
 
 const { currentUser } = storeToRefs(authStore)
 const { messages } = storeToRefs(chatStore)
 
-const route = useRoute()
+const { markAsRead, loadMessageBatch, addMessage } = chatStore
 
 watch(route, async (route) => {
   const chatId = route.params.id as string

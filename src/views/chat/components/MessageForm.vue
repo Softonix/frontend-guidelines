@@ -26,25 +26,26 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  chatId: string | null
-  senderId: string | null
+  chatId: string
+  senderId: string
 }>()
+
+const messageInputRef = ref(null)
 
 const sendMessageFormRef = useElFormRef()
 const sendMessageModel = useElFormModel({
   message: ''
 })
+
 const isValid = computed(() =>
   !!sendMessageModel.message.trim().length
 )
 
-const messageInputRef = ref(null)
-
 async function sendMessage () {
   chatService.createNewMessage({
     message: sendMessageModel.message,
-    chat_id: props.chatId ?? '',
-    sender_id: props.senderId ?? ''
+    chat_id: props.chatId,
+    sender_id: props.senderId
   })
 }
 
@@ -59,6 +60,7 @@ async function submitMessage (formRef, inputRef) {
 <style lang="scss">
 .message-input {
   @apply md:rounded-t-xl;
+
   .el-input__wrapper {
     @apply md:shadow-none md:border-b md:rounded-none  md:pb-2;
   }

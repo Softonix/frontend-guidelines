@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import LeftSidebar from '@/components/LeftSidebar.vue'
 import Header from '@/components/Header.vue'
+import LeftSidebar from '@/components/LeftSidebar.vue'
 import RightSidebar from '@/components/RightSidebar.vue'
 
 const rightDrawer = ref(false)
