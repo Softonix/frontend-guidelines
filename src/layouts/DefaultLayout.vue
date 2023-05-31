@@ -18,11 +18,6 @@ import LeftSidebar from '@/components/LeftSidebar.vue'
 import Header from '@/components/Header.vue'
 import RightSidebar from '@/components/RightSidebar.vue'
 
-defineProps<{
-  user: any
-  users: any[]
-}>()
-
 const rightDrawer = ref(false)
 const leftSidebarOpen = ref(false)
 </script>

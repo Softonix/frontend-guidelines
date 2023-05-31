@@ -20,10 +20,9 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function logOut () {
-    authService.logOut().then(() => {
-      currentUser.value = null
-      router.replace({ name: 'login' })
-    })
+    await authService.logOut()
+    currentUser.value = null
+    router.replace({ name: 'login' })
   }
 
   function clearUser () {
@@ -38,17 +37,19 @@ export const useAuthStore = defineStore('authStore', () => {
     await authService.resetPassword(password)
   }
 
-  useSupabase().auth.onAuthStateChange((event, session) => {
-    switch (event) {
-      case 'SIGNED_IN':
-        currentUser.value = session?.user || null
-        router.replace({ name: 'chat' })
-        break
-      case 'SIGNED_OUT':
-        clearUser()
-        break
-    }
-  })
+  function startListenToAuthStateChange () {
+    useSupabase().auth.onAuthStateChange((event, session) => {
+      switch (event) {
+        case 'SIGNED_IN':
+          currentUser.value = session?.user || null
+          router.replace({ name: 'chat' })
+          break
+        case 'SIGNED_OUT':
+          clearUser()
+          break
+      }
+    })
+  }
 
   return {
     currentUser,
@@ -59,6 +60,7 @@ export const useAuthStore = defineStore('authStore', () => {
     logOut,
     clearUser,
     sendPasswordResetEmail,
-    resetPassword
+    resetPassword,
+    startListenToAuthStateChange
   }
 })
