@@ -43,8 +43,8 @@ const messageInputRef = ref(null)
 async function sendMessage () {
   chatService.createNewMessage({
     message: sendMessageModel.message,
-    chat_id: props.chatId,
-    sender_id: props.senderId
+    chat_id: props.chatId ?? '',
+    sender_id: props.senderId ?? ''
   })
 }
 

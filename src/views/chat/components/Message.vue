@@ -45,6 +45,7 @@ const props = defineProps<{
 }>()
 const messageRef = ref<HTMLDivElement | null>(null)
 const messageVisible = ref(false)
+
 const read = toRef(() => props.message.read)
 const last = toRef(() => props.last)
 
