@@ -39,13 +39,14 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  message: any
+  message: IMessage
   currentUserMessage: boolean
   last: boolean
 }>()
 const messageRef = ref<HTMLDivElement | null>(null)
 const messageVisible = ref(false)
 const read = toRef(() => props.message.read)
+const last = toRef(() => props.last)
 
 const { stop } = useIntersectionObserver(
   messageRef,
@@ -64,11 +65,9 @@ watch(messageVisible, async (visible) => {
   }
 })
 
-onMounted(() => {
-  if (props.last && props.currentUserMessage) {
-    if (messageRef.value) {
-      messageRef.value.scrollIntoView()
-    }
+onMounted(async () => {
+  if (last.value && props.currentUserMessage && messageRef.value) {
+    messageRef.value.scrollIntoView()
   }
 })
 </script>

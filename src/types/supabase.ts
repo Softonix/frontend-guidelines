@@ -119,13 +119,55 @@ export interface IDatabase {
           message_id: string | null
           tagname: string | null
           type: string | null
+          unread_messages_count: number | null
+          updated_at: string | null
+          user_id: string | null
+          username: string | null
+        }
+      }
+      chats_view: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          chat_created_at: string | null
+          chat_id: string | null
+          description: string | null
+          fullname: string | null
+          message: string | null
+          message_created_at: string | null
+          message_id: string | null
+          tagname: string | null
+          type: string | null
+          unread_messages_count: number | null
+          updated_at: string | null
           user_id: string | null
           username: string | null
         }
       }
     }
     Functions: {
-      [_ in never]: never
+      get_chats: {
+        Args: {
+          current_user_id: string
+        }
+        Returns: {
+          chat_id: string
+          chat_created_at: string
+          type: string
+          description: string
+          updated_at: string
+          message_id: string
+          message_created_at: string
+          message: string
+          user_id: string
+          bio: string
+          fullname: string
+          tagname: string
+          username: string
+          avatar_url: string
+          unread_messages_count: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

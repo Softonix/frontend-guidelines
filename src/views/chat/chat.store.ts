@@ -1,92 +1,85 @@
 import type { IDatabase } from '@/types/supabase'
-import type { TChat, TTransformedChat } from './chat'
 import { chatService } from './chat.service'
+import { routeNames } from '@/router/route-names'
 
 export const useChatStore = defineStore('chatStore', () => {
-  const chats = ref<TChat[]>([])
-  const messages = ref<IDatabase['public']['Tables']['messages']['Row'][]>([])
-  const messagesCount = ref(0)
+  const chats = ref<IDatabase['public']['Views']['chat_view']['Row'][]>([])
+  const messages = ref<IMessage[]>([])
   const maxMessagesPerRequest = 500
+
   const authStore = useAuthStore()
   const { currentUser } = storeToRefs(authStore)
 
-  const transformedChats = computed(() => {
-    const blah = chats.value.reduce((prev, curr) => {
-      prev[curr.id] = {
-        ...curr,
-        lastMessage: curr.messages[curr.messages.length - 1],
-        unreadMessages: curr.messages.filter(msg =>
-          !msg.read && msg.sender_id !== currentUser.value?.id).length
-      }
+  const router = useRouter()
 
-      return prev
-    }, {} as TTransformedChat)
+  watch(currentUser, async () => {
+    const fetchedChats = await getChats()
 
-    return blah
-  })
-
-  const contactData = computed(() => {
-    return chats.value.filter((chat) => chat.users.some((user) => user.id === currentUser.value?.id)).map(chat => {
-      const chatter = chat.users.find((user) => {
-        return user.id !== currentUser.value?.id
+    if (fetchedChats?.length) {
+      router.replace({
+        name: routeNames.chatRoom,
+        params: {
+          id: fetchedChats[0].chat_id
+        }
       })
-
-      const lastMessage = transformedChats.value[chat.id].lastMessage
-      const unreadMessages = transformedChats.value[chat.id].unreadMessages
-
-      return {
-        id: chat.id,
-        avatar_url: chatter?.avatar_url || '',
-        fullname: chatter?.fullname,
-        chatter_id: chatter?.id,
-        msg: lastMessage
-          ? {
-            id: lastMessage.id,
-            text: lastMessage.message,
-            sent_at: lastMessage.created_at
-          }
-          : null,
-        unreadMessages
-      }
-    })
+    }
   })
 
   async function loadMessageBatch (chatId: string) {
-    const loadedMessages = await chatService.getMessages(0, maxMessagesPerRequest - 1, chatId)
-
-    messages.value = [...loadedMessages]
+    messages.value = (await chatService.getMessages(0, maxMessagesPerRequest - 1, chatId)) as unknown as IMessage[]
   }
 
   async function getChats () {
-    chats.value = await chatService.getChats()
+    if (currentUser.value) {
+      const fetchedChats = await chatService.getChatsViews(currentUser.value.id)
+
+      chats.value = [...fetchedChats]
+
+      return fetchedChats
+    }
   }
 
   function markAsRead (message: IDatabase['public']['Tables']['messages']['Row']) {
-    const chatIndex = chats.value.findIndex(chat => chat.id === message.chat_id)
+    const chatIndex = chats.value.findIndex(chat => chat.chat_id === message.chat_id)
 
-    const msgs = chats.value[chatIndex].messages.map(msg => msg.id === message.id
-      ? {
-        ...msg,
-        read: true
-      }
-      : { ...msg })
+    const copy = { ...chats.value[chatIndex] }
+    copy.unread_messages_count = copy.unread_messages_count ? copy.unread_messages_count - 1 : 0
 
-    const chatInfo = {
-      ...chats.value[chatIndex],
-      messages: msgs
+    chats.value = [...chats.value.slice(0, chatIndex), copy, ...chats.value.slice(chatIndex + 1)]
+  }
+
+  function addMessage (newMessage: IMessage, chatId: string) {
+    if (chatId === newMessage.chat_id) {
+      messages.value = [...messages.value, { ...newMessage, read: false }]
     }
 
-    chats.value = [...chats.value.slice(0, chatIndex), chatInfo, ...chats.value.slice(chatIndex + 1)]
+    const chatIndex = chats.value.findIndex((ch) => ch.chat_id === newMessage.chat_id)
+
+    if (chatIndex !== -1) {
+      const ch = { ...chats.value[chatIndex] }
+      ch.message = newMessage.message
+      ch.message_created_at = newMessage.created_at
+      ch.message_id = newMessage.id
+
+      if (currentUser.value?.id !== newMessage.users.id) {
+        ch.unread_messages_count = ch.unread_messages_count
+          ? ch.unread_messages_count + 1
+          : 1
+      }
+
+      const copy = [...chats.value]
+
+      copy.splice(chatIndex, 1)
+      chats.value = [ch, ...copy]
+    }
   }
 
   return {
     chats,
-    transformedChats,
-    contactData,
     messages,
-    messagesCount,
     loadMessageBatch,
     getChats,
-    markAsRead
+    markAsRead,
+    addMessage
   }
 })

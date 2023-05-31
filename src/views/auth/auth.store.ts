@@ -48,9 +48,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
       switch (event) {
         case 'INITIAL_SESSION':
-          currentUser.value = session?.user || null
-          trackOnlineStatus()
-          break
         case 'SIGNED_IN':
           currentUser.value = session?.user || null
           trackOnlineStatus()

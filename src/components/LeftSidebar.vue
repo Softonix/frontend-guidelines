@@ -16,12 +16,11 @@
     <!-- TODO: Add v-infinite-scroll directive -->
     <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
       <ContactItem
-        v-for="contact in contactData"
-        :key="contact.id"
-        :open="contact.id === $route.params.id"
-        :contact="contact"
-        :online="!!onlineUsers[contact.chatter_id ?? '']"
-        :unreadMessages="contact.unreadMessages"
+        v-for="chat in chats"
+        :key="chat.chat_id!"
+        :open="chat.chat_id === $route.params.id"
+        :chat="chat"
+        :online="!!onlineUsers[chat.user_id ?? '']"
       />
     </div>
   </aside>
@@ -42,7 +41,7 @@ const chatStore = useChatStore()
 const authStore = useAuthStore()
 
 const { onlineUsers } = storeToRefs(authStore)
-const { contactData } = storeToRefs(chatStore)
+const { chats } = storeToRefs(chatStore)
 
 </script>
 

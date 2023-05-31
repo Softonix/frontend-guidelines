@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="{name: $routeNames.chatRoom, params: {
-      id: contact.id
+      id: chat.chat_id
     }}"
   >
     <div
@@ -12,26 +12,32 @@
       hover:after:bg-opacity-20 after:w-screen after:h-full px-6"
       :class="{['after:bg-block-3 after:bg-opacity-30']:open}"
     >
-      <AppAvatar :size="40" :online="online" :src="contact.avatar_url" :fullname="contact.fullname" />
+      <AppAvatar :size="40" :online="online" :src="chat.avatar_url ?? ''" :fullname="chat.fullname" />
 
       <div class="flex flex-col flex-1 truncate">
-        <span class="font-semibold text-sm text-primary truncate">{{ contact.fullname }}</span>
+        <span class="font-semibold text-sm text-primary truncate">{{ chat.fullname }}</span>
 
         <span
           class="font-normal text-sm
         text-secondary truncate"
-        >{{ contact.msg ? contact.msg.text : '' }}</span>
+        >{{ chat.message }}</span>
       </div>
 
       <div class="flex flex-col items-end gap-1">
         <span class="font-normal text-xs text-tertiary">
-          {{ contact.msg?.sent_at ? new Intl.DateTimeFormat("en-Us", {
+          {{ chat.message_created_at ? new Intl.DateTimeFormat("en-Us", {
             hour: '2-digit',
             minute: '2-digit'
 
-          }).format(new Date(contact.msg.sent_at)) : '' }}
+          }).format(new Date(chat.message_created_at)) : '' }}
         </span>
-        <Badge v-if="unreadMessages" :type="$badgeType.primary" :dot="unreadMessages === 1">{{ unreadMessages }}</Badge>
+        <Badge
+          v-if="chat.unread_messages_count"
+          :type="$badgeType.primary"
+          :dot="chat.unread_messages_count === 1"
+        >
+          {{ chat.unread_messages_count }}
+        </Badge>
       </div>
     </div>
   </router-link>
@@ -39,12 +45,11 @@
 
 <script lang="ts" setup>
 import Badge from '@/components/Badge.vue'
-import type { TContact } from '@/views/chat/chat'
+import type { IDatabase } from '@/types/supabase'
 
 defineProps<{
-  contact: TContact
+  chat: IDatabase['public']['Views']['chat_view']['Row']
   open: boolean
   online: boolean
-  unreadMessages: number
 }>()
 </script>
