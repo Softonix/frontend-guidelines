@@ -42,7 +42,7 @@ export const useChatStore = defineStore('chatStore', () => {
   function markAsRead (message: IDatabase['public']['Tables']['messages']['Row']) {
     const chatIndex = chats.value.findIndex(chat => chat.chat_id === message.chat_id)
 
-    if (chatIndex) {
+    if (chatIndex !== -1) {
       const copy = { ...chats.value[chatIndex] }
       copy.unread_messages_count = copy.unread_messages_count ? copy.unread_messages_count - 1 : 0
 
