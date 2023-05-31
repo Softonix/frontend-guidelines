@@ -1,101 +1,107 @@
-export type TJson =
+export type Json =
   | string
   | number
   | boolean
   | null
-  | { [key: string]: TJson }
-  | TJson[]
+  | { [key: string]: Json }
+  | Json[]
 
-export interface IDatabase {
+export interface Database {
   public: {
     Tables: {
       chat_to_user: {
         Row: {
           chat_id: string
-          created_at: string | null
+          created_at: string
           user_id: string
         }
         Insert: {
           chat_id: string
-          created_at?: string | null
+          created_at?: string
           user_id: string
         }
         Update: {
           chat_id?: string
-          created_at?: string | null
+          created_at?: string
           user_id?: string
         }
       }
       chats: {
         Row: {
           admin_id: string | null
-          created_at: string | null
+          created_at: string
           description: string | null
           id: string
           type: string
+          updated_at: string
         }
         Insert: {
           admin_id?: string | null
-          created_at?: string | null
+          created_at?: string
           description?: string | null
           id?: string
           type?: string
+          updated_at?: string
         }
         Update: {
           admin_id?: string | null
-          created_at?: string | null
+          created_at?: string
           description?: string | null
           id?: string
           type?: string
+          updated_at?: string
         }
       }
       messages: {
         Row: {
-          chat_id: string | null
-          created_at: string | null
+          chat_id: string
+          created_at: string
           id: string
           message: string
-          sender_id: string | null
+          read: boolean
+          sender_id: string
         }
         Insert: {
-          chat_id?: string | null
-          created_at?: string | null
-          id?: string
-          message: string
-          sender_id?: string | null
-        }
-        Update: {
-          chat_id?: string | null
-          created_at?: string | null
+          chat_id: string
+          created_at?: string
           id?: string
           message?: string
-          sender_id?: string | null
+          read?: boolean
+          sender_id: string
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string
+          id?: string
+          message?: string
+          read?: boolean
+          sender_id?: string
         }
       }
       users: {
         Row: {
           avatar_url: string | null
           bio: string | null
-          fullname: string | null
+          fullname: string
           id: string
-          tagname: string | null
-          username: string | null
+          tagname: string
+          username: string
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
-          fullname?: string | null
+          fullname: string
           id: string
-          tagname?: string | null
-          username?: string | null
+          tagname: string
+          username: string
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
-          fullname?: string | null
+          fullname?: string
           id?: string
-          tagname?: string | null
-          username?: string | null
+          tagname?: string
+          username?: string
         }
       }
     }

@@ -18,9 +18,12 @@ class ChatService {
     description,
     admin_id,
     created_at,
+    updated_at,
     messages ( id, message, created_at, sender_id, chat_id, read ),
     users!chat_to_user (id, fullname, avatar_url, username, tagname, bio)
-    `)
+    `).order('updated_at', {
+      ascending: false
+    })
 
     if (error) {
       throw error

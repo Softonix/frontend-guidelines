@@ -44,14 +44,6 @@ export const chatRoomGuard = async (
 
   if (beforeEnter) {
     await getChats()
-    chats.value.sort(({ messages: messages1 }, { messages: messages2 }) => {
-      const date1 = new Date(messages1[messages1.length - 1].created_at || '').getTime()
-      const date2 = new Date(messages2[messages2.length - 1].created_at || '').getTime()
-
-      return date2 - date1
-    }
-
-    )
   }
 
   await loadMessageBatch(chatId)
