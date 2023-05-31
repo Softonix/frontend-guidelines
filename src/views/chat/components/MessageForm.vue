@@ -2,17 +2,17 @@
   <el-form
     ref="sendMessageFormRef"
     :model="sendMessageModel"
-    class="md:border border-border-primary rounded-xl flex md:flex-col w-full"
+    class="md:border border-border-primary rounded-xl flex md:flex-col w-full md:pt-2 gap-2 md:gap-0"
     @submit.prevent
   >
     <el-form-item
       ref="messageInputRef"
       class="flex-1 m-0" prop="message"
     >
-      <el-input v-model="sendMessageModel.message" placeholder="Write a message" />
+      <el-input v-model="sendMessageModel.message" class="message-input" placeholder="Write a message" />
     </el-form-item>
 
-    <div class="flex justify-end md:flex-1 md:p-3">
+    <div class="flex justify-end md:flex-1 md:p-3 bg-block-secondary md:rounded-xl">
       <el-button
         :type="$elComponentType.primary"
         :disabled="!isValid"
@@ -55,3 +55,12 @@ async function submitMessage (formRef, inputRef) {
   }
 }
 </script>
+
+<style lang="scss">
+.message-input {
+  @apply md:rounded-t-xl;
+  .el-input__wrapper {
+    @apply md:shadow-none md:border-b md:rounded-none  md:pb-2;
+  }
+}
+</style>
