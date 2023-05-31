@@ -1,12 +1,12 @@
-export type Json =
+export type TJson =
   | string
   | number
   | boolean
   | null
-  | { [key: string]: Json }
-  | Json[]
+  | { [key: string]: TJson }
+  | TJson[]
 
-export interface Database {
+export interface IDatabase {
   public: {
     Tables: {
       chat_to_user: {

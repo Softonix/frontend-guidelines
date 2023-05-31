@@ -61,7 +61,6 @@ class ChatService {
 
   onNewMessage (handler: (...args: any[]) => void) {
     useSupabase().channel(supabaseChannels.dbMessages).on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, async (payload) => {
-      
       const { data, error } = await useSupabase().from('users').select().eq('id', payload.new.sender_id)
 
       handler({
