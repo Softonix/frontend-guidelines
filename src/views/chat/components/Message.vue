@@ -41,8 +41,9 @@
 const props = defineProps<{
   message: any
   currentUserMessage: boolean
+  last: boolean
 }>()
-const messageRef = ref(null)
+const messageRef = ref<HTMLDivElement | null>(null)
 const messageVisible = ref(false)
 const read = toRef(() => props.message.read)
 
@@ -60,6 +61,14 @@ watch(messageVisible, async (visible) => {
 
   if (visible && !read.value && !props.currentUserMessage) {
     await chatService.markMessageAsRead(props.message.id)
+  }
+})
+
+onMounted(() => {
+  if (props.last && props.currentUserMessage) {
+    if (messageRef.value) {
+      messageRef.value.scrollIntoView()
+    }
   }
 })
 </script>
