@@ -1,5 +1,8 @@
 <template>
-  <div v-show="cameraActive" class="absolute top-20 rounded-3xl overflow-hidden left-1/2 -translate-x-1/2">
+  <div
+    v-show="cameraActive"
+    class="absolute top-20 rounded-3xl overflow-hidden md:left-1/2 md:-translate-x-1/2 left-5 right-5"
+  >
     <Camera
       ref="webcamRef" :resolution="{
         width: 640,
