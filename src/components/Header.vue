@@ -33,8 +33,8 @@
         <template #dropdown>
           <el-dropdown-menu class="bg-block-primary rounded-3xl" placement="bottom-start">
             <el-dropdown-item>
-              <el-button text>
-                <router-link :to="$routeNames.settings">Settings</router-link>
+              <el-button text @click="$router.push({name: $routeNames.settings})">
+                Settings
               </el-button>
             </el-dropdown-item>
 

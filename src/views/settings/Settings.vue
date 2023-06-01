@@ -4,9 +4,7 @@
       <AppLogo class="flex items-center" />
 
       <div class="flex items-center gap-4">
-        <el-button :type="$elComponentType.primary">
-          <router-link :to="{ name: $routeNames.chat }">Home</router-link>
-        </el-button>
+        <el-button :type="$elComponentType.primary" @click="$router.push({ name: $routeNames.chat })">Home</el-button>
 
         <LogOutButton class="py-5" />
       </div>
