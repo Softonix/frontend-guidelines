@@ -7,6 +7,13 @@ export const useChatStore = defineStore('chatStore', () => {
   const messages = ref<IMessage[]>([])
   const maxMessagesPerRequest = 500
 
+  const lastReadMessage = computed(() => {
+    const lastReadIndex = messages.value.findIndex(
+      (message, index) => messages.value[index - 1]?.read && !message.read) - 1
+
+    return messages.value[lastReadIndex]
+  })
+
   const authStore = useAuthStore()
   const { currentUser } = storeToRefs(authStore)
 
@@ -79,6 +86,7 @@ export const useChatStore = defineStore('chatStore', () => {
   return {
     chats,
     messages,
+    lastReadMessage,
     loadMessageBatch,
     getChats,
     markAsRead,

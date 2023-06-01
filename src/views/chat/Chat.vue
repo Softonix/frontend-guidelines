@@ -11,6 +11,7 @@
         :key="message.id" :message="message"
         :currentUserMessage="currentUser?.id === message.users.id"
         :last="message.id === messages[messages.length-1].id"
+        :lastRead="message.id === lastReadMessage?.id"
         @onMessageRead="markAsRead"
       />
     </div>
@@ -36,7 +37,7 @@ const authStore = useAuthStore()
 const chatStore = useChatStore()
 
 const { currentUser } = storeToRefs(authStore)
-const { messages } = storeToRefs(chatStore)
+const { messages, lastReadMessage } = storeToRefs(chatStore)
 
 const { markAsRead, loadMessageBatch, addMessage } = chatStore
 
@@ -53,22 +54,5 @@ watch(route, async (route) => {
       markAsRead(updatedMessage)
     })
   }
-})
-
-onMounted(async () => {
-  const chatId = route.params.id as string
-
-  if (chatId) {
-    await loadMessageBatch(chatId as string)
-
-    chatService.onNewMessage((newMessage) => {
-      addMessage(newMessage, chatId)
-    })
-
-    chatService.onUpdateMessage((updatedMessage) => {
-      markAsRead(updatedMessage)
-    })
-  }
-})
-
+}, { immediate: true })
 </script>

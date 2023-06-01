@@ -42,6 +42,7 @@ const props = defineProps<{
   message: IMessage
   currentUserMessage: boolean
   last: boolean
+  lastRead: boolean
 }>()
 const messageRef = ref<HTMLDivElement | null>(null)
 const messageVisible = ref(false)
@@ -67,8 +68,20 @@ watch(messageVisible, async (visible) => {
 })
 
 onMounted(async () => {
-  if (last.value && props.currentUserMessage && messageRef.value) {
-    messageRef.value.scrollIntoView()
+  // await nextTick()
+
+  if (messageRef.value) {
+    if (props.lastRead && !props.currentUserMessage) {
+      console.log('from 1')
+      console.log(props.message.message)
+      messageRef.value.scrollIntoView()
+      return
+    }
+
+    if (last.value && (props.currentUserMessage || props.message.read) && !props.lastRead) {
+      console.log('from 2')
+      messageRef.value.scrollIntoView()
+    }
   }
 })
 </script>
