@@ -16,6 +16,7 @@ module.exports = {
   primary: '#0e1114',
   secondary: '#616c76',
   tertiary: '#8fa0af',
+  'block-tertiary': '#eef1f4',
   'link-primary': '#0086ea',
   'icon-action': '#616c76',
   'icon-info': '#8fa0af',

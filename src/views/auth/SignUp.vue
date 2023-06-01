@@ -80,6 +80,8 @@ const registerRules = useElFormRules({
   username: [useMinLenRule(5), useMaxLenRule(25), useRequiredRule()]
 })
 
+const router = useRouter()
+
 const store = useAuthStore()
 const { register } = store
 const loading = ref(false)
@@ -89,10 +91,11 @@ function submit (formRef) {
     if (valid) {
       try {
         loading.value = true
-        register({
+        await register({
           ...registerModel,
           tagname: `@${registerModel.username}`
         })
+        router.push({ name: 'chat' })
       } catch (err) {
         console.log(err)
       } finally {
