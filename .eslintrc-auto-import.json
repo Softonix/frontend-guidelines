@@ -142,6 +142,7 @@
     "useBroadcastChannel": true,
     "useBrowserLocation": true,
     "useCached": true,
+    "useCameraSignRecognition": true,
     "useChatStore": true,
     "useClipboard": true,
     "useCloned": true,

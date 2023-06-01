@@ -139,6 +139,7 @@ declare global {
   const useBroadcastChannel: typeof import('@vueuse/core')['useBroadcastChannel']
   const useBrowserLocation: typeof import('@vueuse/core')['useBrowserLocation']
   const useCached: typeof import('@vueuse/core')['useCached']
+  const useCameraSignRecognition: typeof import('../src/composables/camera-sign-recognition')['useCameraSignRecognition']
   const useChatStore: typeof import('../src/views/chat/chat.store')['useChatStore']
   const useClipboard: typeof import('@vueuse/core')['useClipboard']
   const useCloned: typeof import('@vueuse/core')['useCloned']
