@@ -11,6 +11,7 @@ module.exports = {
   success: 'var(--el-color-success)',
   warning: 'var(--el-color-warning)',
   danger: 'var(--el-color-danger)',
+  'element-primary': 'var(--el-color-primary)',
 
   primary: '#0e1114',
   secondary: '#616c76',
