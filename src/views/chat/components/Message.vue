@@ -67,19 +67,17 @@ watch(messageVisible, async (visible) => {
   }
 })
 
-onMounted(async () => {
-  // await nextTick()
-
+onMounted(() => {
   if (messageRef.value) {
     if (props.lastRead && !props.currentUserMessage) {
-      console.log('from 1')
-      console.log(props.message.message)
-      messageRef.value.scrollIntoView()
+      messageRef.value.scrollIntoView({
+        block: 'end',
+        inline: 'nearest'
+      })
       return
     }
 
     if (last.value && (props.currentUserMessage || props.message.read) && !props.lastRead) {
-      console.log('from 2')
       messageRef.value.scrollIntoView()
     }
   }
