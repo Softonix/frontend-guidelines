@@ -25,6 +25,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { IDatabase } from '@/types/supabase'
+
+import { routeNames } from '@/router/route-names'
+
 import Message from './components/Message.vue'
 import MessageForm from './components/MessageForm.vue'
 
@@ -34,9 +38,61 @@ const authStore = useAuthStore()
 const chatStore = useChatStore()
 
 const { currentUser } = storeToRefs(authStore)
-const { messages, lastReadMessage } = storeToRefs(chatStore)
+const { messages, lastReadMessage, chats } = storeToRefs(chatStore)
 
-const { markAsRead, loadMessageBatch, addMessage } = chatStore
+const { loadMessageBatch, getChats } = chatStore
+
+const router = useRouter()
+
+watch(currentUser, async () => {
+  const fetchedChats = await getChats()
+
+  if (fetchedChats?.length) {
+    router.replace({
+      name: routeNames.chatRoom,
+      params: {
+        id: fetchedChats[0].chat_id
+      }
+    })
+  }
+})
+
+function markAsRead (message: IDatabase['public']['Tables']['messages']['Row']) {
+  const chatIndex = chats.value.findIndex(chat => chat.chat_id === message.chat_id)
+
+  if (chatIndex !== -1) {
+    const copy = { ...chats.value[chatIndex] }
+    copy.unread_messages_count = copy.unread_messages_count ? copy.unread_messages_count - 1 : 0
+
+    chats.value = [...chats.value.slice(0, chatIndex), copy, ...chats.value.slice(chatIndex + 1)]
+  }
+}
+
+function addMessage (newMessage: IMessage, chatId: string) {
+  if (chatId === newMessage.chat_id) {
+    messages.value = [...messages.value, { ...newMessage, read: false }]
+  }
+
+  const chatIndex = chats.value.findIndex((ch) => ch.chat_id === newMessage.chat_id)
+
+  if (chatIndex !== -1) {
+    const ch = { ...chats.value[chatIndex] }
+    ch.message = newMessage.message
+    ch.message_created_at = newMessage.created_at
+    ch.message_id = newMessage.id
+
+    if (currentUser.value?.id !== newMessage.users.id) {
+      ch.unread_messages_count = ch.unread_messages_count
+        ? ch.unread_messages_count + 1
+        : 1
+    }
+
+    const copy = [...chats.value]
+
+    copy.splice(chatIndex, 1)
+    chats.value = [ch, ...copy]
+  }
+}
 
 watch(route, async (route) => {
   const chatId = route.params.id as string
