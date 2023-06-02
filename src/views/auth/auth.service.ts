@@ -16,8 +16,7 @@ class AuthService {
       email,
       password,
       fullname,
-      username,
-      tagname
+      username
     } = payload
     const { data, error } = await useSupabase().auth.signUp({
       email,
@@ -26,7 +25,8 @@ class AuthService {
         data: {
           fullname,
           username,
-          tagname
+          tagname: `@${username}`,
+          bio: ''
         }
       }
     })
