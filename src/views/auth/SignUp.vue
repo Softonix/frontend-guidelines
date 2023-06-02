@@ -93,7 +93,8 @@ function submit (formRef) {
         loading.value = true
         await register({
           ...registerModel,
-          tagname: `@${registerModel.username}`
+          tagname: `@${registerModel.username}`,
+          bio: ''
         })
         router.push({ name: 'chat' })
       } catch (err) {
