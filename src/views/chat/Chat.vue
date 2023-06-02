@@ -55,7 +55,7 @@ watch(currentUser, async () => {
       }
     })
   }
-})
+}, { immediate: true })
 
 function markAsRead (message: IDatabase['public']['Tables']['messages']['Row']) {
   const chatIndex = chats.value.findIndex(chat => chat.chat_id === message.chat_id)
@@ -96,6 +96,7 @@ function addMessage (newMessage: IMessage, chatId: string) {
 
 watch(route, async (route) => {
   const chatId = route.params.id as string
+
   if (chatId) {
     await loadMessageBatch(chatId)
 

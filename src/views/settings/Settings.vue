@@ -19,9 +19,9 @@
         <div class="flex-col sm:flex-row flex justify-between sm:gap-16 items-center">
           <el-form-item prop="avatar_url">
             <template #label>
-              <div class="cursor-pointer relative overflow-hidden rounded-full">
+              <label for="avatar" class="cursor-pointer relative overflow-hidden rounded-full">
                 <el-avatar
-                  class="cursor-pointer" :size="120"
+                  class="cursor-pointer avatar-photo" :size="120" fit="cover"
                   :src="profileModel.avatar_url"
                 />
 
@@ -33,10 +33,10 @@
                 >
                   Upload
                 </div>
-              </div>
+              </label>
             </template>
 
-            <el-input class="hidden" type="file" @change="onFileChange($event)" />
+            <input id="avatar" class="hidden" type="file" @change="onFileChange">
           </el-form-item>
 
           <el-form-item class="w-full sm:w-auto flex-1" label="Username" prop="username">
@@ -67,7 +67,13 @@
         </router-link>
 
         <div class="flex justify-end gap-5">
-          <el-button :type="$elComponentType.primary" @click="submit(profileFormRef)">Save</el-button>
+          <el-button
+            :type="$elComponentType.primary"
+            :disabled="!changesApplied"
+            @click="submit(profileFormRef)"
+          >
+            Save
+          </el-button>
         </div>
       </el-form>
     </div>
@@ -75,13 +81,24 @@
 </template>
 
 <script lang="ts" setup>
+import { settingsService } from './settings.service'
+
 const authStore = useAuthStore()
 const { loadUser } = authStore
 const { currentUser } = storeToRefs(authStore)
 
+const changesApplied = computed(() => {
+  if (initialProfile.value) {
+    return Object.keys(initialProfile.value).some((key) => profileModel[key] !== initialProfile.value[key])
+  }
+}
+
+)
+
 const profileFormRef = useElFormRef()
 const profileModel = useElFormModel({
-  ...currentUser.value?.user_metadata
+  ...currentUser.value?.user_metadata,
+  avatarFile: null
 })
 
 const profileFormRules = useElFormRules({
@@ -91,31 +108,69 @@ const profileFormRules = useElFormRules({
   bio: [useMaxLenRule(25)]
 })
 
+const initialProfile = ref()
+
 watch(currentUser, (user) => {
-  profileModel.email = user?.email
-  profileModel.fullname = user?.user_metadata.fullname
-  profileModel.username = user?.user_metadata.username
-  profileModel.bio = user?.user_metadata.bio
-  profileModel.avatar_url = user?.user_metadata.profile_url
+  const { email, user_metadata: { fullname, username, bio, avatar_url: avatarUrl } } = user
+  profileModel.email = email
+  profileModel.fullname = fullname
+  profileModel.username = username
+  profileModel.bio = bio
+  profileModel.avatar_url = avatarUrl
+
+  initialProfile.value = {
+    email, fullname, username, bio, avatar_url: avatarUrl
+  }
 })
 
 onMounted(async () => {
   await loadUser()
 })
 
-function onFileChange (e) {
-  const file = e.target.files[0]
-  console.log('ssw')
+async function onFileChange (e) {
+  console.log(e)
+  const arrayBuffer = await (e.target.files[0] as File).arrayBuffer()
+  const file = new File([arrayBuffer],
+    `${currentUser.value?.id}`, {
+      type: (e.target.files[0] as File).type
+    })
+
   console.log(file)
-  // profileModel.avatar_url = URL.createObjectURL(file)
+
+  profileModel.avatarFile = file
+  profileModel.avatar_url = URL.createObjectURL(file)
 }
 
 function submit (formRef) {
   formRef.validate(async (valid) => {
     console.log(profileModel)
     if (valid) {
-      console.log(profileModel)
+      let avatarUrl = ''
+      if (profileModel.avatarFile) {
+        const path = (await settingsService.uploadAvatar(profileModel.avatarFile)).path
+
+        avatarUrl = (await settingsService.getAssetUrl(path)).publicUrl
+      }
+
+      profileModel.avatar_url = avatarUrl
+
+      await settingsService.updateProfile({
+        ...profileModel,
+        avatar_url: avatarUrl
+      })
     }
   })
 }
+
+onBeforeUnmount(() => {
+  // URL.revokeObjectURL(profileModel.avatar_url)
+})
 </script>
+
+<style lang="scss">
+.avatar-photo {
+  img {
+    flex: 1;
+  }
+}
+</style>

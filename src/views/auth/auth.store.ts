@@ -47,6 +47,9 @@ export const useAuthStore = defineStore('authStore', () => {
       }
 
       switch (event) {
+        case 'USER_UPDATED':
+          loadUser()
+          break
         case 'INITIAL_SESSION':
         case 'SIGNED_IN':
           currentUser.value = session?.user || null
