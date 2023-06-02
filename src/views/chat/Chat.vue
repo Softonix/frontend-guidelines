@@ -25,8 +25,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { IDatabase } from '@/types/supabase'
-
 import { routeNames } from '@/router/route-names'
 
 import Message from './components/Message.vue'

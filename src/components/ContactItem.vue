@@ -44,8 +44,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { IDatabase } from '@/types/supabase'
-
 import Badge from '@/components/Badge.vue'
 
 defineProps<{

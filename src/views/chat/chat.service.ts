@@ -1,5 +1,3 @@
-import type { IDatabase } from '@/types/supabase'
-
 class ChatService {
   async getUsers () {
     const { data, error } = await useSupabase().from('users').select()

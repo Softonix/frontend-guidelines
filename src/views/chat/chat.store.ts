@@ -1,4 +1,3 @@
-import type { IDatabase } from '@/types/supabase'
 import { chatService } from './chat.service'
 
 export const useChatStore = defineStore('chatStore', () => {
