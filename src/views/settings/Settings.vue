@@ -12,18 +12,14 @@
 
     <div class="max-w-2xl mx-auto px-2">
       <el-form
-        ref="profileFormRef"
-        hide-required-asterisk :model="profileModel" :rules="profileFormRules"
+        ref="profileFormRef" hide-required-asterisk :model="profileModel" :rules="profileFormRules"
         class="flex flex-col border rounded-3xl bg-gray-100 backdrop-blur-lg px-10 py-10" label-position="top"
       >
         <div class="flex-col sm:flex-row flex justify-between sm:gap-16 items-center">
           <el-form-item prop="avatar_url">
             <template #label>
               <label for="avatar" class="cursor-pointer relative overflow-hidden rounded-full">
-                <el-avatar
-                  class="cursor-pointer avatar-photo" :size="120" fit="cover"
-                  :src="profileModel.avatar_url"
-                />
+                <el-avatar class="cursor-pointer avatar-photo" :size="120" fit="cover" :src="profileModel.avatar_url" />
 
                 <div
                   class="text-xs text-white text-center
@@ -59,19 +55,12 @@
           />
         </el-form-item>
 
-        <router-link
-          class="text-sm text-link-primary"
-          :to="{name: $routeNames.forgotPassword}"
-        >
+        <router-link class="text-sm text-link-primary" :to="{ name: $routeNames.forgotPassword }">
           Reset password
         </router-link>
 
         <div class="flex justify-end gap-5">
-          <el-button
-            :type="$elComponentType.primary"
-            :disabled="!changesApplied"
-            @click="submit(profileFormRef)"
-          >
+          <el-button :type="$elComponentType.primary" :disabled="!changesApplied" @click="submit(profileFormRef)">
             Save
           </el-button>
         </div>
@@ -87,18 +76,12 @@ const authStore = useAuthStore()
 const { loadUser } = authStore
 const { currentUser } = storeToRefs(authStore)
 
-const changesApplied = computed(() => {
-  if (initialProfile.value) {
-    return Object.keys(initialProfile.value).some((key) => profileModel[key] !== initialProfile.value[key])
-  }
-}
-
-)
-
 const profileFormRef = useElFormRef()
-const profileModel = useElFormModel({
-  ...currentUser.value?.user_metadata,
-  avatarFile: null
+const profileModel = useElFormModel<IProfile>({
+  // Do not create type for auth table,
+  // because it can cause system vulnerability
+  ...currentUser.value?.user_metadata as any,
+  avatar_file: null
 })
 
 const profileFormRules = useElFormRules({
@@ -108,62 +91,73 @@ const profileFormRules = useElFormRules({
   bio: [useMaxLenRule(25)]
 })
 
-const initialProfile = ref()
+const changesApplied = computed(() => {
+  if (currentUser.value) {
+    return Object.keys(profileModel).some(
+      (key) => {
+        if (currentUser.value?.user_metadata[key] === undefined) {
+          return false
+        }
 
-watch(currentUser, (user) => {
-  const { email, user_metadata: { fullname, username, bio, avatar_url: avatarUrl } } = user
-  profileModel.email = email
-  profileModel.fullname = fullname
-  profileModel.username = username
-  profileModel.bio = bio
-  profileModel.avatar_url = avatarUrl
-
-  initialProfile.value = {
-    email, fullname, username, bio, avatar_url: avatarUrl
+        return profileModel[key] !== currentUser.value?.user_metadata[key]
+      })
   }
 })
 
-onMounted(async () => {
-  await loadUser()
-})
+async function onFileChange (e: Event) {
+  const target = e.target as HTMLInputElement
+  if (target.files) {
+    const userFile = target.files[0]
+    const arrayBuffer = await userFile.arrayBuffer()
+    const fileToUpload = new File([arrayBuffer],
+      `${currentUser.value?.id}_${new Date().getTime()}`, {
+        type: userFile.type
+      })
 
-async function onFileChange (e) {
-  console.log(e)
-  const arrayBuffer = await (e.target.files[0] as File).arrayBuffer()
-  const file = new File([arrayBuffer],
-    `${currentUser.value?.id}`, {
-      type: (e.target.files[0] as File).type
-    })
-
-  console.log(file)
-
-  profileModel.avatarFile = file
-  profileModel.avatar_url = URL.createObjectURL(file)
+    profileModel.avatar_file = fileToUpload
+    profileModel.avatar_url = URL.createObjectURL(fileToUpload)
+  }
 }
 
 function submit (formRef) {
   formRef.validate(async (valid) => {
-    console.log(profileModel)
     if (valid) {
-      let avatarUrl = ''
-      if (profileModel.avatarFile) {
-        const path = (await settingsService.uploadAvatar(profileModel.avatarFile)).path
+      if (profileModel.avatar_file) {
+        const pathToImage = currentUser.value?.user_metadata.avatar_url.split('images/')[1]
 
-        avatarUrl = (await settingsService.getAssetUrl(path)).publicUrl
+        const [{ path }] = await Promise.all([settingsService.uploadAvatar(profileModel.avatar_file),
+          settingsService.deleteAvatar(pathToImage)])
+
+        const avatarUrl = (await settingsService.getAvatarUrl(path)).publicUrl
+
+        URL.revokeObjectURL(profileModel.avatar_url)
+
+        profileModel.avatar_url = avatarUrl
+
+        await settingsService.updateProfile({
+          ...profileModel,
+          avatar_url: avatarUrl
+        })
       }
 
-      profileModel.avatar_url = avatarUrl
-
       await settingsService.updateProfile({
-        ...profileModel,
-        avatar_url: avatarUrl
+        ...profileModel
       })
     }
   })
 }
 
-onBeforeUnmount(() => {
-  // URL.revokeObjectURL(profileModel.avatar_url)
+onMounted(async () => {
+  await loadUser()
+
+  if (currentUser.value) {
+    const { email, user_metadata: { fullname, username, bio, avatar_url: avatarUrl } } = currentUser.value
+    profileModel.email = email ?? ''
+    profileModel.fullname = fullname
+    profileModel.username = username
+    profileModel.bio = bio
+    profileModel.avatar_url = avatarUrl
+  }
 })
 </script>
 

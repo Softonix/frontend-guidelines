@@ -15,7 +15,7 @@ class SettingsService {
     return data
   }
 
-  async updateProfile (profile) {
+  async updateProfile (profile: IProfile) {
     const {
       email,
       avatar_url: avatarUrl,
@@ -35,8 +35,21 @@ class SettingsService {
     return data
   }
 
-  async getAssetUrl (path: string) {
+  async getAvatarUrl (path: string) {
     const { data } = useSupabase().storage.from('images').getPublicUrl(path)
+
+    return data
+  }
+
+  async deleteAvatar (avatarPath: string) {
+    const { data, error } = await useSupabase()
+      .storage
+      .from('images')
+      .remove([avatarPath])
+
+    if (error) {
+      throw error
+    }
 
     return data
   }
