@@ -1,5 +1,8 @@
 <template>
-  <div class="h-full">
+  <div
+    v-loading="loading"
+    class="h-full"
+  >
     <header class="flex justify-between shadow-lg mb-12 px-2 py-5">
       <AppLogo class="flex items-center" />
 
@@ -76,6 +79,8 @@ const authStore = useAuthStore()
 const { loadUser } = authStore
 const { currentUser } = storeToRefs(authStore)
 
+const loading = ref(false)
+
 const profileFormRef = useElFormRef()
 const profileModel = useElFormModel<IProfile>({
   // Do not create type for auth table,
@@ -122,27 +127,35 @@ async function onFileChange (e: Event) {
 function submit (formRef) {
   formRef.validate(async (valid) => {
     if (valid) {
-      if (profileModel.avatar_file) {
-        const pathToImage = currentUser.value?.user_metadata.avatar_url.split('images/')[1]
+      try {
+        loading.value = true
 
-        const [{ path }] = await Promise.all([settingsService.uploadAvatar(profileModel.avatar_file),
-          settingsService.deleteAvatar(pathToImage)])
+        if (profileModel.avatar_file) {
+          const pathToImage = currentUser.value?.user_metadata.avatar_url.split('images/')[1]
 
-        const avatarUrl = (await settingsService.getAvatarUrl(path)).publicUrl
+          const [{ path }] = await Promise.all([settingsService.uploadAvatar(profileModel.avatar_file),
+            settingsService.deleteAvatar(pathToImage)])
 
-        URL.revokeObjectURL(profileModel.avatar_url)
+          const avatarUrl = (await settingsService.getAvatarUrl(path)).publicUrl
 
-        profileModel.avatar_url = avatarUrl
+          URL.revokeObjectURL(profileModel.avatar_url)
+
+          profileModel.avatar_url = avatarUrl
+
+          await settingsService.updateProfile({
+            ...profileModel,
+            avatar_url: avatarUrl
+          })
+        }
 
         await settingsService.updateProfile({
-          ...profileModel,
-          avatar_url: avatarUrl
+          ...profileModel
         })
+      } catch (err) {
+        console.log(err)
+      } finally {
+        loading.value = false
       }
-
-      await settingsService.updateProfile({
-        ...profileModel
-      })
     }
   })
 }
