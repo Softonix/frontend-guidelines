@@ -3,7 +3,7 @@ import { chatService } from './chat.service'
 export const useChatStore = defineStore('chatStore', () => {
   const chats = ref<TChatData>([])
   const messages = ref<IMessage[]>([])
-  const maxMessagesPerRequest = 500
+  const maxMessagesPerRequest = 20
 
   const chatsLoading = ref(false)
 
@@ -18,7 +18,10 @@ export const useChatStore = defineStore('chatStore', () => {
   const { currentUser } = storeToRefs(authStore)
 
   async function loadMessageBatch (chatId: string) {
-    messages.value = (await chatService.getMessages(0, maxMessagesPerRequest - 1, chatId)) as unknown as IMessage[]
+    const messageBatch = await chatService.getMessages(messages.value.length,
+      messages.value.length + maxMessagesPerRequest, chatId) as unknown as IMessage[]
+
+    messages.value = [...messageBatch.reverse(), ...messages.value]
   }
 
   async function getChats () {

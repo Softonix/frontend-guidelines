@@ -30,7 +30,7 @@ class ChatService {
     read,
     users(id, fullname, username, avatar_url)
     `
-    ).eq('chat_id', chatId).range(from, to).order('created_at')
+    ).eq('chat_id', chatId).order('created_at', { ascending: false }).range(from, to)
 
     if (error) {
       throw error

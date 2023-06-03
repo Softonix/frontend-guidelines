@@ -4,8 +4,10 @@
     class="flex flex-col justify-items-center items-center pt-2 pb-2 md:pb-5 overflow-hidden h-full"
   >
     <div
+      ref="messagesList"
       class="overflow-y-auto no-scrollbar flex-1 w-full px-5 md:px-20 pb-5 flex flex-col gap-6"
     >
+      <div v-loading="messagesBatchLoading" />
       <Message
         v-for="message in messages"
         :key="message.id" :message="message"
@@ -37,6 +39,7 @@ const authStore = useAuthStore()
 const chatStore = useChatStore()
 
 const messagesLoading = ref(false)
+const messagesBatchLoading = ref(false)
 
 const { currentUser } = storeToRefs(authStore)
 const { messages, lastReadMessage, chats, chatsLoading } = storeToRefs(chatStore)
@@ -44,6 +47,17 @@ const { messages, lastReadMessage, chats, chatsLoading } = storeToRefs(chatStore
 const { loadMessageBatch, getChats } = chatStore
 
 const router = useRouter()
+
+const messagesList = ref<HTMLDivElement | null>(null)
+
+useInfiniteScroll(messagesList, async () => {
+  const chatId = route.params.id as string
+  if (chatId && !messagesLoading.value) {
+    messagesBatchLoading.value = true
+    await loadMessageBatch(chatId)
+    messagesBatchLoading.value = false
+  }
+}, { distance: 10, direction: 'top', preserveScrollPosition: true })
 
 watch(currentUser, async () => {
   try {
@@ -104,6 +118,7 @@ function addMessage (newMessage: IMessage, chatId: string) {
 
 watch(route, async (route) => {
   const chatId = route.params.id as string
+  messages.value = []
 
   if (chatId) {
     try {
