@@ -1,7 +1,7 @@
 import { chatService } from './chat.service'
 
 export const useChatStore = defineStore('chatStore', () => {
-  const chats = ref<IDatabase['public']['Views']['chat_view']['Row'][]>([])
+  const chats = ref<TChatData>([])
   const messages = ref<IMessage[]>([])
   const maxMessagesPerRequest = 500
 
@@ -29,11 +29,20 @@ export const useChatStore = defineStore('chatStore', () => {
     }
   }
 
+  async function findChat (searchQuery: string) {
+    if (currentUser.value) {
+      const wantedChats = await chatService.findChats(searchQuery, currentUser.value.id)
+
+      return wantedChats
+    }
+  }
+
   return {
     chats,
     messages,
     lastReadMessage,
     loadMessageBatch,
-    getChats
+    getChats,
+    findChat
   }
 })

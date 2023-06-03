@@ -11,12 +11,17 @@
       </el-icon>
     </el-button>
 
-    <el-input class="search-input w-full h-8 text-sm mb-2 px-6" placeholder="Search" :prefix-icon="MagnifyingGlass" />
+    <el-input
+      v-model="userInput"
+      class="search-input w-full h-8 text-sm mb-2 px-6"
+      placeholder="Search"
+      :prefix-icon="MagnifyingGlass"
+    />
 
     <!-- TODO: Add v-infinite-scroll directive -->
     <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
       <ContactItem
-        v-for="chat in chats"
+        v-for="chat in chatsToShow"
         :key="chat.chat_id!"
         :open="chat.chat_id === $route.params.id"
         :chat="chat"
@@ -42,7 +47,25 @@ const authStore = useAuthStore()
 
 const { onlineUsers } = storeToRefs(authStore)
 const { chats } = storeToRefs(chatStore)
+const { findChat } = chatStore
 
+const userInput = ref('')
+const filteredChats = ref<TChatData>([])
+const searchQuery = computed(() => userInput.value.split(/\s+/g).join('|')
+)
+const chatsToShow = computed(() => filteredChats.value.length ? filteredChats.value : chats.value)
+
+watch(searchQuery, () => {
+  runSearch()
+})
+
+const debouncedFindChat = useDebounceFn(async () => {
+  filteredChats.value = await findChat(searchQuery.value) ?? []
+}, 1000)
+
+function runSearch () {
+  debouncedFindChat()
+}
 </script>
 
 <style lang="scss">
