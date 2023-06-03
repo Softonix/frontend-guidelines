@@ -168,6 +168,64 @@ interface IDatabase {
           unread_messages_count: number
         }[]
       }
+      helper: {
+        Args: {
+          current_user_id: string
+        }
+        Returns: {
+          chat_id: string
+          chat_created_at: string
+          type: string
+          description: string
+          updated_at: string
+          message_id: string
+          message_created_at: string
+          message: string
+          user_id: string
+          bio: string
+          fullname: string
+          tagname: string
+          username: string
+          avatar_url: string
+          unread_messages_count: number
+        }[]
+      }
+      username_fullname_tagname:
+      | {
+        Args: {
+          '': unknown
+        }
+        Returns: string
+      }
+      | {
+        Args: {
+          user_id: string
+        }
+        Returns: string
+      }
+      | {
+        Args: {
+          search_query: string
+          user_id: string
+        }
+        Returns: {
+          chat_id: string
+          chat_created_at: string
+          type: string
+          description: string
+          updated_at: string
+          message_id: string
+          message_created_at: string
+          message: string
+          user_id: string
+          bio: string
+          fullname: string
+          tagname: string
+          username: string
+          avatar_url: string
+          unread_messages_count: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

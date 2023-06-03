@@ -33,7 +33,7 @@ export const useChatStore = defineStore('chatStore', () => {
     if (currentUser.value) {
       const wantedChats = await chatService.findChats(searchQuery, currentUser.value.id)
 
-      return wantedChats
+      return wantedChats as TChatData
     }
   }
 
