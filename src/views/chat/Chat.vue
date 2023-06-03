@@ -1,5 +1,6 @@
 <template>
   <div
+    v-loading="messagesLoading"
     class="flex flex-col justify-items-center items-center pt-2 pb-2 md:pb-5 overflow-hidden h-full"
   >
     <div
@@ -35,23 +36,32 @@ const route = useRoute()
 const authStore = useAuthStore()
 const chatStore = useChatStore()
 
+const messagesLoading = ref(false)
+
 const { currentUser } = storeToRefs(authStore)
-const { messages, lastReadMessage, chats } = storeToRefs(chatStore)
+const { messages, lastReadMessage, chats, chatsLoading } = storeToRefs(chatStore)
 
 const { loadMessageBatch, getChats } = chatStore
 
 const router = useRouter()
 
 watch(currentUser, async () => {
-  const fetchedChats = await getChats()
+  try {
+    chatsLoading.value = true
+    const fetchedChats = await getChats()
 
-  if (fetchedChats?.length) {
-    router.replace({
-      name: routeNames.chatRoom,
-      params: {
-        id: fetchedChats[0].chat_id
-      }
-    })
+    if (fetchedChats?.length) {
+      router.replace({
+        name: routeNames.chatRoom,
+        params: {
+          id: fetchedChats[0].chat_id
+        }
+      })
+    }
+  } catch (err) {
+    console.log(err)
+  } finally {
+    chatsLoading.value = false
   }
 }, { immediate: true })
 
@@ -96,7 +106,14 @@ watch(route, async (route) => {
   const chatId = route.params.id as string
 
   if (chatId) {
-    await loadMessageBatch(chatId)
+    try {
+      messagesLoading.value = true
+      await loadMessageBatch(chatId)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      messagesLoading.value = false
+    }
 
     chatService.onNewMessage((newMessage) => {
       addMessage(newMessage, chatId)

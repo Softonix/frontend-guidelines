@@ -19,7 +19,7 @@
     />
 
     <!-- TODO: Add v-infinite-scroll directive -->
-    <div class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
+    <div v-loading="chatsLoading" class="overflow-y-auto h-full pb-2 md:pb-6 no-scrollbar">
       <ContactItem
         v-for="chat in chatsToShow"
         :key="chat.chat_id!"
@@ -46,11 +46,12 @@ const chatStore = useChatStore()
 const authStore = useAuthStore()
 
 const { onlineUsers } = storeToRefs(authStore)
-const { chats } = storeToRefs(chatStore)
+const { chats, chatsLoading } = storeToRefs(chatStore)
 const { findChat } = chatStore
 
 const userInput = ref('')
 const filteredChats = ref<TChatData>([])
+
 const searchQuery = computed(() => userInput.value.split(/\s+/g).join('|')
 )
 const chatsToShow = computed(() => filteredChats.value.length ? filteredChats.value : chats.value)
@@ -60,7 +61,14 @@ watch(searchQuery, () => {
 })
 
 const debouncedFindChat = useDebounceFn(async () => {
-  filteredChats.value = await findChat(searchQuery.value) ?? []
+  try {
+    chatsLoading.value = true
+    filteredChats.value = await findChat(searchQuery.value) ?? []
+  } catch (err) {
+    console.log(err)
+  } finally {
+    chatsLoading.value = false
+  }
 }, 1000)
 
 function runSearch () {
