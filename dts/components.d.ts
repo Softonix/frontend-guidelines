@@ -29,7 +29,6 @@ declare module '@vue/runtime-core' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
-    ElUpload: typeof import('element-plus/es')['ElUpload']
     Gear: typeof import('./../src/components/icons/Gear.vue')['default']
     Header: typeof import('./../src/components/Header.vue')['default']
     LeftSidebar: typeof import('./../src/components/LeftSidebar.vue')['default']
@@ -43,6 +42,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
   }
   export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
