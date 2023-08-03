@@ -8,3 +8,11 @@
   transform: translateX(225px);
   opacity: 0;
 }
+.gradient {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 10.32%,
+      rgba(0, 0, 0, 0.5) 88.02%
+    ),
+    #245554;
+}

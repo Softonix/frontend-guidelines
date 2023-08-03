@@ -11,3 +11,15 @@ export enum EElComponentSize {
   default = 'default',
   large = 'large'
 }
+
+export enum EButtonType {
+  primary = 'primary',
+  secondary = 'secondary',
+  link = 'link'
+}
+
+export enum EButtonSize {
+  large = 'large',
+  default = 'default',
+  small = 'small'
+}

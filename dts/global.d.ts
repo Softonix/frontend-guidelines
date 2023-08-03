@@ -21,6 +21,9 @@ declare module '@vue/runtime-core' {
     // todo: These ones are used only for element library for size and type props;
     $elComponentSize: typeof EElComponentSize
     $elComponentType: typeof EElComponentType
+
+    $buttonSize: typeof globalProperties.$buttonSize
+    $buttonType: typeof globalProperties.$buttonType
   }
 }
 

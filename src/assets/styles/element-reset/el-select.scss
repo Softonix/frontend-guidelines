@@ -1,0 +1,30 @@
+@use "element-plus/theme-chalk/src/select";
+@use "element-plus/theme-chalk/src/option";
+
+.el-select__popper {
+  @apply overflow-hidden;
+}
+
+.el-select {
+  &__caret {
+    @apply text-[8px] #{!important};
+  }
+}
+
+.el-select-dropdown {
+  &__list {
+    @apply p-0 overflow-hidden;
+  }
+
+  &__item {
+    @apply font-medium h-10 leading-normal flex items-center px-4 transition-colors duration-100;
+
+    &:not(:last-child) {
+      @apply border-gray-400 border-b;
+    }
+
+    &.hover {
+      @apply bg-primary text-white;
+    }
+  }
+}

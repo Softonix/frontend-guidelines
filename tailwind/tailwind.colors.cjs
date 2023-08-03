@@ -6,9 +6,10 @@ module.exports = {
   red: colors.red,
   green: colors.green,
   orange: colors.orange,
+  flame: '#aa4203',
+  primary: '#245554',
 
   // todo: with the following code you can use element colors
-  primary: 'var(--el-color-primary)',
   success: 'var(--el-color-success)',
   warning: 'var(--el-color-warning)',
   danger: 'var(--el-color-danger)'

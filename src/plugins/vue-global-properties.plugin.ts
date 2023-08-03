@@ -1,11 +1,14 @@
 import type { Plugin } from 'vue'
 import { routeNames } from '@/router/route-names'
-import { EElComponentSize, EElComponentType } from '@/types/enums'
+import { EElComponentSize, EElComponentType, EButtonSize, EButtonType } from '@/types/enums'
 
 export const globalProperties = {
   $elComponentSize: EElComponentSize,
   $elComponentType: EElComponentType,
-  $routeNames: routeNames
+  $routeNames: routeNames,
+  $buttonSize: EButtonSize,
+  $buttonType: EButtonType
+
 }
 
 export const VueGlobalPropertiesPlugin: Plugin = {

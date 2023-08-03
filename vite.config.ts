@@ -14,7 +14,12 @@ export default defineConfig({
     host: '0.0.0.0'
   },
   plugins: [
-    vue(),
+    vue({
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    }),
     visualizer({
       open: true
     }),
