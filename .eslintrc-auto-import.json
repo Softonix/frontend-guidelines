@@ -4,7 +4,6 @@
     "ComponentPublicInstance": true,
     "ComputedRef": true,
     "EffectScope": true,
-    "ElBadge": true,
     "InjectionKey": true,
     "PropType": true,
     "Ref": true,
