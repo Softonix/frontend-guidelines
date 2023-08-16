@@ -7,9 +7,7 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "test:cy": "start-server-and-test 'vite' http://localhost:5173 'cypress open'",
-    "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
@@ -29,11 +27,9 @@
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
     "autoprefixer": "^10.4.14",
-    "cypress": "^12.9.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-vue": "^9.11.0",
     "npm-run-all": "^4.1.5",
     "pathe": "^1.1.0",
