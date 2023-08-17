@@ -27,6 +27,8 @@
 
     <hr class="my-4">
 
+    <Counter />
+
     <div>
       <label>Translation example</label>
       <p>{{ t('exampleView.exampleViewKey') }}</p>
