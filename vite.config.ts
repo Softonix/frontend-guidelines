@@ -35,11 +35,12 @@ export default defineConfig({
     include: ['colors']
   },
 
+  // for more details visit https://vitest.dev/config/#configuration
   test: {
-    environment: 'jsdom',
+    environment: 'jsdom', // this is an environment for testing. It can be jsdom or happy-dom or node
     exclude: [...configDefaults.exclude, 'e2e/*'],
     root: fileURLToPath(new URL('./', import.meta.url)),
-    transformMode: {
+    transformMode: { // for optimization tests
       web: [/\.[jt]sx$/]
     }
   }

@@ -2,6 +2,11 @@ import { test } from 'vitest'
 import { render, fireEvent, screen } from '@testing-library/vue'
 import Counter from '../Counter.vue'
 
+// This is an simple example of testing a vue component. Try to write your own tests.
+// Vitest docs https://vitest.dev/guide/
+// Testing library docs 
+// For mocking requests https://mswjs.io/docs/
+
 test('increments value on click', async () => {
   render(Counter)
 
