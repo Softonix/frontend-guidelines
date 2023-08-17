@@ -37,7 +37,7 @@ export default defineConfig({
 
   test: {
     environment: 'jsdom',
-    exclude: [...configDefaults.exclude, 'e2e/*'],
+    exclude: [...configDefaults.exclude, '**/playwright/**'],
     root: fileURLToPath(new URL('./', import.meta.url)),
     transformMode: {
       web: [/\.[jt]sx$/]
