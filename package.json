@@ -9,8 +9,8 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "test:unit": "vitest",
-    "test:coverage": "vitest run --environment jsdom --coverage",
-    "test:coverage-ui": "vitest --environment jsdom --coverage --ui"
+    "test:coverage": "vitest run --coverage",
+    "test:coverage-ui": "vitest --coverage --ui"
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
