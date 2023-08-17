@@ -4,7 +4,7 @@ import Counter from '../Counter.vue'
 
 // This is an simple example of testing a vue component. Try to write your own tests.
 // Vitest docs https://vitest.dev/guide/
-// Testing library docs 
+// Testing library docs https://testing-library.com/docs/
 // For mocking requests https://mswjs.io/docs/
 
 test('increments value on click', async () => {
