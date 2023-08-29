@@ -17,18 +17,6 @@ module.exports = {
     parser: '@typescript-eslint/parser'
   },
 
-  overrides: [
-    {
-      files: ['tests/cypress/**/*.{js,ts}'],
-      extends: [
-        'plugin:cypress/recommended'
-      ],
-      rules: {
-        'no-unused-expressions': 'off'
-      }
-    }
-  ],
-
   ignorePatterns: ['dts/*.d.ts'],
 
   rules: {
