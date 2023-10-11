@@ -9,8 +9,8 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "test": "npx playwright test --ui",
-    "test:cy": "start-server-and-test 'vite' http://localhost:5173 'cypress open'",
-    "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'"
+    "test:cy": "server-test 'dev' http://localhost:5173 'cypress open'",
+    "test:cy:h": "server-test 'dev' http://localhost:5173 'cypress run'"
   },
   "dependencies": {
     "pinia": "^2.1.3",

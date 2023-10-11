@@ -17,10 +17,6 @@ declare module '@vue/runtime-core' {
     // todo: Here you define you global vue definitions.
     $portalNames: typeof portalNames
     $routeNames: typeof routeNames
-
-    // todo: These ones are used only for element library for size and type props;
-    $elComponentSize: typeof EElComponentSize
-    $elComponentType: typeof EElComponentType
   }
 }
 

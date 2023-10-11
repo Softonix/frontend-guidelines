@@ -16,7 +16,7 @@
         </el-form-item>
 
         <div>
-          <el-button :type="$elComponentType.primary" @click="submitForm">{{ t('auth.login') }}</el-button>
+          <el-button :type="'primary'" @click="submitForm">{{ t('auth.login') }}</el-button>
           <el-button @click="resetForm">{{ t('auth.reset') }}</el-button>
           <el-button @click="$router.push({ name: $routeNames.rootPage })">{{ t('auth.backToHome') }}</el-button>
         </div>
