@@ -116,8 +116,10 @@ function changeExampleViewVar () {
 async function getSomeExampleVar () {
   try {
     loading.value = true
-  } finally {
     await exampleStore.getExampleVar()
+  } catch (err) {
+    console.error(err)
+  } finally {
     loading.value = false
   }
 }
