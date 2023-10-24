@@ -30,7 +30,7 @@ afterEach(() => {
 })
 
 describe('Login component', () => {
-  describe('login flow general tests', () => {
+  describe('login flow tests', () => {
     it('should validate required fields', async () => {
       const submitButton = screen.getByTestId('loginBtn')
 
@@ -143,5 +143,10 @@ describe('Login component', () => {
       expect(mockRouter.push).toHaveBeenCalledOnce()
       expect(mockRouter.push).toHaveBeenCalledWith({ name: routeNames.rootPage })
     })
+  })
+
+  it('should create a Login component snapshot', () => {
+    const rootContainer = screen.getByTestId('login-root')
+    expect(rootContainer).toMatchSnapshot()
   })
 })

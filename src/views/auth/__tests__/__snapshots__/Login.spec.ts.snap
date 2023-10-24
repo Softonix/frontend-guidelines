@@ -1,0 +1,194 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Login component > should create a Login component snapshot 1`] = `
+<div
+  class="h-full flex items-center justify-center"
+  data-testid="login-root"
+>
+  <div
+    class="el-card is-always-shadow w-[450px] max-w-full m-auto"
+  >
+    <!--v-if-->
+    <div
+      class="el-card__body"
+      style=""
+    >
+      
+      <form
+        class="el-form el-form--default el-form--label-top"
+      >
+        
+        <div
+          class="el-form-item is-required asterisk-left"
+        >
+          
+          
+          <label
+            class="el-form-item__label"
+            for="el-id-6357-34"
+            id="el-id-6357-32"
+          >
+            
+            Email
+            
+          </label>
+          
+          
+          <div
+            class="el-form-item__content"
+          >
+            
+            <div
+              class="el-input"
+            >
+              <!-- input -->
+              
+              <!-- prepend slot -->
+              <!--v-if-->
+              <div
+                class="el-input__wrapper"
+              >
+                <!-- prefix slot -->
+                <!--v-if-->
+                <input
+                  autocomplete="off"
+                  class="el-input__inner"
+                  id="el-id-6357-34"
+                  tabindex="0"
+                  type="text"
+                />
+                <!-- suffix slot -->
+                <!--v-if-->
+              </div>
+              <!-- append slot -->
+              <!--v-if-->
+              
+            </div>
+            
+            <transition-group-stub
+              appear="false"
+              css="true"
+              name="el-zoom-in-top"
+              persisted="false"
+            >
+              <!--v-if-->
+            </transition-group-stub>
+          </div>
+        </div>
+        <div
+          class="el-form-item is-required asterisk-left"
+        >
+          
+          
+          <label
+            class="el-form-item__label"
+            for="el-id-6357-35"
+            id="el-id-6357-33"
+          >
+            
+            Password
+            
+          </label>
+          
+          
+          <div
+            class="el-form-item__content"
+          >
+            
+            <div
+              class="el-input"
+            >
+              <!-- input -->
+              
+              <!-- prepend slot -->
+              <!--v-if-->
+              <div
+                class="el-input__wrapper"
+              >
+                <!-- prefix slot -->
+                <!--v-if-->
+                <input
+                  autocomplete="off"
+                  class="el-input__inner"
+                  id="el-id-6357-35"
+                  tabindex="0"
+                  type="text"
+                />
+                <!-- suffix slot -->
+                <!--v-if-->
+              </div>
+              <!-- append slot -->
+              <!--v-if-->
+              
+            </div>
+            
+            <transition-group-stub
+              appear="false"
+              css="true"
+              name="el-zoom-in-top"
+              persisted="false"
+            >
+              <!--v-if-->
+            </transition-group-stub>
+          </div>
+        </div>
+        <div>
+          <button
+            ariadisabled="false"
+            class="el-button el-button--primary"
+            data-testid="loginBtn"
+            type="button"
+          >
+            <!--v-if-->
+            <span
+              class=""
+            >
+              
+              Login
+              
+            </span>
+          </button>
+          <button
+            ariadisabled="false"
+            class="el-button"
+            data-testid="resetBtn"
+            type="button"
+          >
+            <!--v-if-->
+            <span
+              class=""
+            >
+              
+              Reset
+              
+            </span>
+          </button>
+          <button
+            ariadisabled="false"
+            class="el-button"
+            data-testid="backToHomeBtn"
+            type="button"
+          >
+            <!--v-if-->
+            <span
+              class=""
+            >
+              
+              Back to home page
+              
+            </span>
+          </button>
+        </div>
+        <div
+          class="mt-3"
+          data-testid="feature-flag"
+        >
+          <!--v-if-->
+        </div>
+        
+      </form>
+      
+    </div>
+  </div>
+</div>
+`;
