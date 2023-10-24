@@ -7,7 +7,7 @@
         :rules="formRules"
         label-position="top"
       >
-        <el-form-item label="email" prop="email">
+        <el-form-item label="Email" prop="email">
           <el-input v-model="formModel.email" />
         </el-form-item>
 
@@ -16,9 +16,26 @@
         </el-form-item>
 
         <div>
-          <el-button :type="$elComponentType.primary" @click="submitForm">{{ t('auth.login') }}</el-button>
-          <el-button @click="resetForm">{{ t('auth.reset') }}</el-button>
-          <el-button @click="$router.push({ name: $routeNames.rootPage })">{{ t('auth.backToHome') }}</el-button>
+          <el-button
+            :type="$elComponentType.primary"
+            data-testid="loginBtn"
+            @click="submitForm"
+          >
+            {{ t('auth.login') }}
+          </el-button>
+          <el-button
+            data-testid="resetBtn"
+            @click="resetForm"
+          >
+            {{ t('auth.reset') }}
+          </el-button>
+
+          <el-button
+            data-testid="backToHomeBtn"
+            @click="$router.push({ name: $routeNames.rootPage })"
+          >
+            {{ t('auth.backToHome') }}
+          </el-button>
         </div>
 
         <div class="mt-3" data-testid="feature-flag">
