@@ -103,11 +103,11 @@ describe('Login component', () => {
     })
 
     it('should show an error message if invalid password provided', async () => {
-      const emailField = screen.queryByLabelText('Email') as HTMLInputElement
+      const passwordField = screen.queryByLabelText('Password') as HTMLInputElement
       const invalidPassword = 'sdc'
       const errorMessage = 'Min length 5'
 
-      await fireEvent.update(emailField, invalidPassword)
+      await fireEvent.update(passwordField, invalidPassword)
 
       await waitFor(() => {
         const emailError = screen.findByText(errorMessage, { selector: 'div' })
