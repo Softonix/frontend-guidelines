@@ -33,14 +33,5 @@ export default defineConfig({
 
   optimizeDeps: {
     include: ['colors']
-  },
-
-  test: {
-    environment: 'jsdom',
-    exclude: [...configDefaults.exclude, '**/playwright/**'],
-    root: fileURLToPath(new URL('./', import.meta.url)),
-    transformMode: {
-      web: [/\.[jt]sx$/]
-    }
   }
 })
