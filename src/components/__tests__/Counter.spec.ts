@@ -1,6 +1,10 @@
-import { it, expect } from 'vitest'
-import { render, fireEvent } from '@testing-library/vue'
+import { it, expect, afterEach } from 'vitest'
+import { render, fireEvent, cleanup } from '@testing-library/vue'
 import Counter from '../Counter.vue'
+
+afterEach(() => {
+  cleanup()
+})
 
 it('should increments value on click', async () => {
   const { getByText } = render(Counter)
@@ -43,4 +47,10 @@ it('should renders the default title if prop does not provided', () => {
 
   // Assert that the title is rendered correctly
   expect(html()).toContain(defaultTitle)
+})
+
+it('should create a Counter component snapshot', () => {
+  const { getByTestId } = render(Counter)
+  const rootContainer = getByTestId('root-wrapper')
+  expect(rootContainer).toMatchSnapshot()
 })

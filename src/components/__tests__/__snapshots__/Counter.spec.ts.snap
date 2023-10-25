@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should create a Login component snapshot 1`] = `
+<div
+  class="my-2"
+  data-testid="root-wrapper"
+>
+  <h2>
+    <b>
+      This is a demo for unit testing
+    </b>
+  </h2>
+  <p>
+    Times clicked: 0
+  </p>
+  <button
+    ariadisabled="false"
+    class="el-button"
+    type="button"
+  >
+    <!--v-if-->
+    <span
+      class=""
+    >
+      
+      increment
+      
+    </span>
+  </button>
+</div>
+`;
