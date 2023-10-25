@@ -11,8 +11,8 @@
     "test": "npx playwright test --ui",
     "test:cy": "start-server-and-test 'vite' http://localhost:5173 'cypress open'",
     "test:cy:h": "start-server-and-test 'vite' http://localhost:5173 'cypress run'",
-    "test:unit:h": "vitest",
-    "test:unit:coverage": "vitest run --coverage",
+    "test:unit": "vitest",
+    "test:unit:h": "vitest run",
     "test:unit:coverage-ui": "vitest --coverage --ui"
   },
   "dependencies": {
