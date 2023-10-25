@@ -3,7 +3,7 @@
     <el-button
       v-for="nav in components"
       :key="nav.label"
-      :type="$elComponentType.primary"
+      type="primary"
       plain
       class="hover:underline capitalize"
       @click="$router.push({ name: nav.name })"

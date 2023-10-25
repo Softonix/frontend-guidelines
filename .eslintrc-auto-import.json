@@ -4,11 +4,15 @@
     "ComponentPublicInstance": true,
     "ComputedRef": true,
     "EffectScope": true,
-    "ElBadge": true,
+    "ExtractDefaultPropTypes": true,
+    "ExtractPropTypes": true,
+    "ExtractPublicPropTypes": true,
     "InjectionKey": true,
     "PropType": true,
     "Ref": true,
+    "TFlagName": true,
     "VNode": true,
+    "WritableComputedRef": true,
     "acceptHMRUpdate": true,
     "asyncComputed": true,
     "authService": true,
@@ -47,6 +51,7 @@
     "h": true,
     "ignorableWatch": true,
     "inject": true,
+    "injectLocal": true,
     "isDefined": true,
     "isProxy": true,
     "isReactive": true,
@@ -81,6 +86,7 @@
     "onUpdated": true,
     "pausableWatch": true,
     "provide": true,
+    "provideLocal": true,
     "reactify": true,
     "reactifyObject": true,
     "reactive": true,
@@ -311,6 +317,8 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true
+    "whenever": true,
+    "useSeoMeta": true,
+    "ElBadge": true
   }
 }

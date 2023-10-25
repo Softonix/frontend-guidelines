@@ -17,7 +17,7 @@
 
         <div>
           <el-button
-            :type="$elComponentType.primary"
+            :type="'primary'"
             data-testid="loginBtn"
             @click="submitForm"
           >
