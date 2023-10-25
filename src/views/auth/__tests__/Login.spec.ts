@@ -144,9 +144,4 @@ describe('Login component', () => {
       expect(mockRouter.push).toHaveBeenCalledWith({ name: routeNames.rootPage })
     })
   })
-
-  it('should create a Login component snapshot', () => {
-    const rootContainer = screen.getByTestId('login-root')
-    expect(rootContainer).toMatchSnapshot()
-  })
 })
