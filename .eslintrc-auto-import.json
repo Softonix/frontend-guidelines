@@ -319,6 +319,8 @@
     "watchWithFilter": true,
     "whenever": true,
     "useSeoMeta": true,
-    "ElBadge": true
+    "ElBadge": true,
+    "useLogin": true,
+    "useForm": true
   }
 }
