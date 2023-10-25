@@ -14,9 +14,6 @@ beforeEach(() => {
     global: {
       plugins: [i18n],
       mocks: {
-        $elComponentType: {
-          primary: 'primary'
-        },
         $routeNames: routeNames,
         $route: mockRoute,
         $router: mockRouter
