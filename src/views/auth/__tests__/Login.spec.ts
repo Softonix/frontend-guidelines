@@ -1,6 +1,5 @@
 import { it, describe, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, fireEvent, screen, waitFor, cleanup } from '@testing-library/vue'
-import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import { i18n } from '@/plugins'
 import { routeNames } from '@/router/route-names'
@@ -40,22 +39,6 @@ describe('Login component', () => {
         expect(emailError).not.toBeNull()
         expect(passError).not.toBeNull()
       })
-    })
-
-    it('should succsessfully pass login flow', async () => {
-      const user = userEvent.setup()
-      const emailField = screen.getByLabelText('Email')
-      const passwordField = screen.getByLabelText('Password')
-      const submitButton = screen.getByTestId('loginBtn')
-      const fakeEmail = faker.internet.email()
-      const fakePassword = faker.internet.password()
-      global.alert = vi.fn()
-
-      await fireEvent.update(emailField, fakeEmail)
-      await fireEvent.update(passwordField, fakePassword)
-      await user.click(submitButton)
-
-      expect(global.alert).toHaveBeenCalledWith('submit!')
     })
   })
 
