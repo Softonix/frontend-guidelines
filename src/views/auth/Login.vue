@@ -19,14 +19,14 @@
           <el-button
             :type="'primary'"
             data-testid="loginBtn"
-            @click="submitForm(formRef.validate)"
+            @click="submitForm"
           >
             {{ t('auth.login') }}
           </el-button>
 
           <el-button
             data-testid="resetBtn"
-            @click="resetForm(formRef.resetFields)"
+            @click="resetForm"
           >
             {{ t('auth.reset') }}
           </el-button>
@@ -50,7 +50,6 @@
 </template>
 
 <script lang="ts" setup>
-const { submitForm, resetForm } = useForm()
 const { t } = useI18n()
 
 const formRef = useElFormRef()
@@ -69,4 +68,16 @@ const formRules = useElFormRules({
     useMinLenRule(5)
   ]
 })
+
+function submitForm () {
+  formRef.value.validate((isValid: boolean) => {
+    if (isValid) {
+      alert('Submit!')
+    }
+  })
+}
+
+function resetForm () {
+  formRef.value.resetFields()
+}
 </script>
