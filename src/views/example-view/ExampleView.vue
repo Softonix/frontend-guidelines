@@ -10,8 +10,6 @@
       <AuthButton />
     </div>
 
-    <ExampleViewComponent />
-
     <hr class="my-4">
 
     <div>
@@ -76,34 +74,12 @@
 
     <hr class="my-4">
 
-    <div
-      v-loading="generalLoading"
-      data-testid="general-loading"
-      class="inline-flex flex-col items-start"
-    >
-      <label>General store example</label>
-      <p
-        data-testid="general-store-text"
-        class="mb-2"
-      >
-        {{ exampleGeneralVar }}
-      </p>
-      <el-button
-        data-testid="general-store-button"
-        type="success"
-        @click="generalStore.getGeneralStoreVar"
-      >
-        get general store value
-      </el-button>
-    </div>
+    <ExampleViewComponent />
   </div>
 </template>
 
 <script lang="ts" setup>
 const { availableLocales, locale, t } = useI18n()
-
-const generalStore = useGeneralStore()
-const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
 const loading = ref(false)
 

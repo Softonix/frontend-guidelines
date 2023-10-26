@@ -3,7 +3,7 @@ import { render, cleanup } from '@testing-library/vue'
 import { i18n } from '@/plugins'
 import { useGeneralStore } from '@/store/modules/general.store'
 import { createTestingPinia } from '@pinia/testing'
-import ExampleView from '../ExampleView.vue'
+import ExampleViewComponent from '../ExampleViewComponent.vue'
 
 /*
   Read this very handy article with good example of how we should test component with store.
@@ -16,7 +16,7 @@ afterEach(() => {
 
 describe('ExampleView', () => {
   it('exampleGeneralVar should be undefined by default', () => {
-    render(ExampleView, {
+    render(ExampleViewComponent, {
       global: {
         mocks: {
           $portalNames: {
@@ -40,7 +40,7 @@ describe('ExampleView', () => {
       title: 'test title',
       body: 'test body'
     }
-    render(ExampleView, {
+    render(ExampleViewComponent, {
       global: {
         mocks: {
           $portalNames: {
@@ -64,7 +64,7 @@ describe('ExampleView', () => {
 
   it('defaul exampleGeneralVar value shoud be in template', () => {
     const initialMockData = 'test content'
-    const { getByTestId } = render(ExampleView, {
+    const { getByTestId } = render(ExampleViewComponent, {
       global: {
         mocks: {
           $portalNames: {
@@ -81,7 +81,7 @@ describe('ExampleView', () => {
         }), i18n]
       }
     })
-    const getExampleButton = getByTestId('general-store-text')
-    expect(getExampleButton.textContent).toBe(initialMockData)
+    const generalStoreExampleText = getByTestId('general-store-var')
+    expect(generalStoreExampleText.textContent).toBe(initialMockData)
   })
 })
