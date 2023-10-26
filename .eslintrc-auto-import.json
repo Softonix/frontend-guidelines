@@ -320,7 +320,6 @@
     "whenever": true,
     "useSeoMeta": true,
     "ElBadge": true,
-    "useLogin": true,
-    "useForm": true
+    "useLogin": true
   }
 }

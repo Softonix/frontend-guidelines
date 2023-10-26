@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AuthButton: typeof import('./../src/views/auth/components/AuthButton.vue')['default']
     Compute: typeof import('./../src/components/Compute.vue')['default']
-    Counter: typeof import('./../src/components/Counter.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
