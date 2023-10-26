@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.2.0",
+    "@pinia/testing": "^0.1.3",
     "@playwright/test": "^1.39.0",
     "@rushstack/eslint-patch": "^1.5.1",
     "@testing-library/vue": "^7.0.0",
