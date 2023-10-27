@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
+import { configDefaults } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 
 import { IconsPluginCustom } from './vite.config.icons'
