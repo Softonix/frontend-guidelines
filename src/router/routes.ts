@@ -29,7 +29,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/react-vs-vue',
     component: DefaultLayout,
-    children: [{ path: '', name: 'react-vs-vue', component: () => import('@/views/react-vs-vue/index.vue') }]
+    children: [{ path: '', name: 'react-vs-vue', component: () => import('@/views/react-vs-vue/Index.vue') }]
+
+  },
+  {
+    path: '/tree-structure',
+    component: DefaultLayout,
+    children: [{ path: '', name: 'tree-structure', component: () => import('@/views/task-tree-structure/Index.vue') }]
 
   }
 ]
