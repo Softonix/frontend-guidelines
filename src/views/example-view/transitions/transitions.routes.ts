@@ -10,7 +10,7 @@ export const transitionViewRoutes: Array<RouteRecordRaw> = [
   {
     path: 'fade',
     name: transitionViewRouteNames.fade,
-    component: () => import('./fade.vue')
+    component: () => import('./Fade.vue')
   },
   {
     path: 'slide',

@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test'
+import { type Page, type Locator, expect } from '@playwright/test'
 import { GeneralCommands } from './general-commands.page'
 
 export class ColorsPage extends GeneralCommands {
