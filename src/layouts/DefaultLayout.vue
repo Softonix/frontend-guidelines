@@ -3,9 +3,9 @@
     This layout is just an example.
     Please create your own depending on your projects needs
   -->
-  <div class="flex flex-col h-full overflow-hidden">
+  <div class="default-layout flex flex-col h-full overflow-hidden">
     <header
-      class="p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-testid="page-header"
+      class="header p-4 bg-orange-200 text-white capitalize shadow flex items-center" data-testid="page-header"
     >
       <div class="w-40 mr-10">
         <img src="/images/logo.png" alt="logo">
@@ -57,3 +57,9 @@ const navigation = [
   }
 ]
 </script>
+
+<style lang="scss" scoped>
+  .default-layout:has(.alert) .header {
+    @apply border-b-2 border-danger bg-red-200
+  }
+</style>

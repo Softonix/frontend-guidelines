@@ -38,3 +38,22 @@ export {
   routes,
   defaultLayoutRoutes
 }
+
+const a = {
+  pub: {
+    action: 'taskCompleted',
+    data: {
+      dayIndex: 0,
+      executionTimeData: null,
+      logo: '/uploads/quest_points_discipline/login-2x.png',
+      name: 'Join Quest',
+      prize: {
+        coins: 5000,
+        entries: 0,
+        points: 10,
+        taskIndex: 0
+      },
+      type: 'questPoints'
+    }
+  }
+}
