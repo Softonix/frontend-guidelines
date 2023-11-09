@@ -5,7 +5,8 @@ export const exampleViewRouteNames = {
   exampleView: 'exampleView',
   exampleColors: 'exampleColors',
   exampleFlags: 'exampleFlags',
-  exampleTransitions: 'exampleTransitions'
+  exampleTransitions: 'exampleTransitions',
+  exampleCss: 'exampleCss'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
@@ -42,5 +43,13 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
     },
     redirect: { name: transitionViewRouteNames.fade },
     children: transitionViewRoutes
+  },
+  {
+    path: 'example-css',
+    name: exampleViewRouteNames.exampleCss,
+    component: () => import('./ExampleCss.vue'),
+    meta: {
+      label: 'Css Examples'
+    }
   }
 ]
