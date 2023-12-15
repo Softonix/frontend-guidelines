@@ -36,8 +36,10 @@ declare module 'vue' {
     FF: typeof import('./../src/components/FF.vue')['default']
     IconCar: typeof import('~icons/icon/car')['default']
     IconCart: typeof import('~icons/icon/cart')['default']
+    ItemObserver: typeof import('./../src/views/example-view/components/ItemObserver.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TestComponent: typeof import('./../src/views/example-view/components/TestComponent.vue')['default']
     Text: typeof import('./../src/views/example-view/components/ExampleCss/Text.vue')['default']
   }
   export interface ComponentCustomProperties {
