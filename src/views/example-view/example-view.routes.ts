@@ -20,7 +20,7 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
         component: () => import('./ExampleView.vue')
     },
     {
-        path: 'lazy-loading-example',
+        path: 'example-lazy-loading',
         name: exampleViewRouteNames.exampleLazyLoading,
         meta: {
             label: 'Lazy Loading Example'

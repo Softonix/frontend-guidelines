@@ -1,50 +1,60 @@
 <template>
-  <div ref="intersectionTarget">
-    <slot :intersecting="isIntersecting"/>
+  <div ref="intersectionTargetRef">
+    <slot v-if="isVisible"/>
+
+    <slot v-else name="placeholder"/>
   </div>
 </template>
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  options?: any
-  removeAfterRender?: boolean
+  options?: {
+    root?: HTMLElement
+    rootMargin?: string
+    threshold: number
+  }
+  removeIfInvisible?: boolean
+  needToWatchComponentUpdating?: boolean
 }>(), {
-  removeAfterRender: true
+  removeIfInvisible: true,
+  needToWatchComponentUpdating: false
 })
 
-const intersectionTarget = ref<HTMLElement | null>(null);
-const isIntersecting = ref(false);
+const intersectionTargetRef = ref<HTMLElement | null>(null);
+const isVisible = ref(false);
 
 const handleIntersection: IntersectionObserverCallback = ([entry]) => {
-  if (props.removeAfterRender) {
-    isIntersecting.value = entry.isIntersecting;
+  if (props.removeIfInvisible) {
+    isVisible.value = entry.isIntersecting;
   } else {
-    isIntersecting.value = isIntersecting.value || entry.isIntersecting
+    isVisible.value = isVisible.value || entry.isIntersecting
   }
 }
 
 let observer: IntersectionObserver
 
 onMounted(() => {
-  if (intersectionTarget.value) {
+  if (intersectionTargetRef.value) {
     observer = new IntersectionObserver(handleIntersection, {...props.options});
-    observer.observe(intersectionTarget.value);
+    observer.observe(intersectionTargetRef.value);
   }
 });
 
 onUpdated(() => {
-  observer.disconnect()
+  if (props.needToWatchComponentUpdating) {
+    observer.disconnect()
 
-  nextTick(() => {
-    if (intersectionTarget.value) {
-      observer.observe(intersectionTarget.value)
-    }
-  })
+    nextTick(() => {
+      if (intersectionTargetRef.value) {
+        observer.observe(intersectionTargetRef.value)
+      }
+    })
+  }
 })
 
 onUnmounted(() => {
-  if (observer && intersectionTarget.value) {
-    observer.unobserve(intersectionTarget.value);
+  if (observer && intersectionTargetRef.value) {
+    observer.unobserve(intersectionTargetRef.value);
     observer.disconnect();
   }
 });
