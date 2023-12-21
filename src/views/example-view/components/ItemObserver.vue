@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
     threshold: number
   }
   removeIfInvisible?: boolean
-  needToWatchComponentUpdating?: boolean
+  needToWatchComponentUpdating?: boolean // this props need for draggable elements
 }>(), {
   removeIfInvisible: true,
   needToWatchComponentUpdating: false
