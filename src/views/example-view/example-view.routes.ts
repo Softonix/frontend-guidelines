@@ -7,7 +7,8 @@ export const exampleViewRouteNames = {
     exampleFlags: 'exampleFlags',
     exampleTransitions: 'exampleTransitions',
     exampleCss: 'exampleCss',
-    exampleLazyLoading: 'exampleLazyLoading'
+    exampleLazyLoading: 'exampleLazyLoading',
+  exampleAccessibility: 'exampleAccessibility'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
@@ -61,4 +62,13 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
             label: 'Css Examples'
         }
     }
+  },
+  {
+    path: 'example-accessibility',
+    name: exampleViewRouteNames.exampleAccessibility,
+    component: () => import('./accessibility/ExampleAccessibility.vue'),
+    meta: {
+      label: 'Accessibility'
+    }
+  }
 ]
