@@ -58,6 +58,6 @@ function onDelete (name: string) {
 
 <style scoped>
 .link {
-  @apply text-primary hover:underline cursor-pointer;
+  @apply text-primary hover:underline cursor-pointer ;
 }
 </style>

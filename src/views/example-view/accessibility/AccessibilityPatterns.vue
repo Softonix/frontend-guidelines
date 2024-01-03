@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableContent" style="{ width: 50% }">
+  <el-table :data="tableContent" class="table-class" style="{ width: 50% }">
     <el-table-column
       #="{ row }"
       label="Name"
@@ -72,8 +72,11 @@ function onDelete (name: string) {
 }
 </script>
 
-<style scoped>
+<style>
 .link {
   @apply text-primary hover:underline;
+}
+.table-class > * {
+  font-size: 1rem;
 }
 </style>
