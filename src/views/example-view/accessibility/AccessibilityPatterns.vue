@@ -1,5 +1,8 @@
 <template>
-  <el-table :data="tableContent" class="table-class" style="{ width: 50% }">
+  <el-table
+    :data="tableContent"
+    :class="['table-class', exampleViewStore.highContrastMode ? 'table-high-contrast' : '']"
+  >
     <el-table-column
       #="{ row }"
       label="Name"
@@ -43,8 +46,9 @@
 
 <script setup lang="ts">
 import pencilIcon from '@/assets/icons/pencil.svg'
-
 import AccessibilityExampleModal from './AccessibilityExampleModal.vue'
+
+const exampleViewStore = useExampleViewStore()
 
 const tableContent = [
   { name: 'Item 1', description: 'Some description' },
@@ -72,11 +76,31 @@ function onDelete (name: string) {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .link {
   @apply text-primary hover:underline;
 }
 .table-class > * {
   font-size: 1rem;
+}
+.table-high-contrast * {
+  button {
+    @apply bg-[#0000FF] text-white font-bold;
+
+    img {
+      // filter to make it white
+      filter: brightness(0) saturate(100%) invert(89%) sepia(61%) saturate(897%);
+    }
+  }
+
+  &:focus {
+    @apply bg-[#FFFF00] text-[#0000FF] font-bold;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(9%) sepia(98%)
+        saturate(6545%) hue-rotate(248deg) brightness(100%) contrast(147%) !important;
+    }
+  }
+
 }
 </style>

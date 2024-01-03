@@ -1,6 +1,7 @@
 // the first argument is a unique id of the store across your application
 export const useExampleViewStore = defineStore('exampleViewStore', () => {
   const exampleVar = ref<Partial<IExampleInterface>>({})
+  const highContrastMode = ref(false)
 
   function setExampleVar () {
     exampleVar.value.title = 'changed title'
@@ -11,6 +12,7 @@ export const useExampleViewStore = defineStore('exampleViewStore', () => {
   }
 
   return {
+    highContrastMode,
     exampleVar,
     setExampleVar,
     getExampleVar

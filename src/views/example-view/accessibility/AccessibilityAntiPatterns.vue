@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableContent" style="{ width: 50% }">
+  <el-table :data="tableContent" class="table-class">
     <el-table-column #="{ row }" label="Name" width="200">
       <span class="link" @click="useModal.open(row.name)">
         {{ row.name }}
@@ -59,5 +59,8 @@ function onDelete (name: string) {
 <style scoped>
 .link {
   @apply text-primary hover:underline cursor-pointer ;
+}
+.table-class > * {
+  font-size: 16px;
 }
 </style>

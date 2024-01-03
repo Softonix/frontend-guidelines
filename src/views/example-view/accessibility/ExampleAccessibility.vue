@@ -8,6 +8,11 @@
     />
   </el-tabs>
 
+  <el-switch
+    v-model="exampleViewStore.highContrastMode"
+    active-text="High contrast"
+  />
+
   <component :is="activeComponent" />
 </template>
 
@@ -16,6 +21,8 @@ import AccessibilityAntiPatterns from './AccessibilityAntiPatterns.vue'
 import AccessibilityPatterns from './AccessibilityPatterns.vue'
 
 enum ETabs { ANTI_PATTERNS = 1, PATTERNS }
+
+const exampleViewStore = useExampleViewStore()
 
 const activeTab = ref(ETabs.ANTI_PATTERNS)
 
