@@ -80,7 +80,7 @@ function onDelete (name: string) {
 .link {
   @apply text-primary hover:underline;
 }
-.table-class > * {
+.el-table {
   font-size: 1rem;
 }
 .table-high-contrast * {
