@@ -1,10 +1,14 @@
 import axios from 'axios'
+
+import {
+  requestErrorInterceptor,
+  requestInterceptor
+} from './interceptors/request.interceptor'
+
 import {
   errorInterceptor,
-  requestErrorInterceptor,
-  requestInterceptor,
   responseInterceptor
-} from './interceptors'
+} from './interceptors/response.interceptor'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL
