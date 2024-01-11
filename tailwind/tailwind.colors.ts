@@ -1,11 +1,11 @@
-const colors = require('tailwindcss/colors')
+import twColors from 'tailwindcss/colors'
 
-module.exports = {
-  white: colors.white,
-  gray: colors.gray,
-  red: colors.red,
-  green: colors.green,
-  orange: colors.orange,
+export const colors = {
+  white: twColors.white,
+  gray: twColors.gray,
+  red: twColors.red,
+  green: twColors.green,
+  orange: twColors.orange,
 
   // todo: with the following code you can use element colors
   primary: 'var(--el-color-primary)',
