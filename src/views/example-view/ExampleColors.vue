@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import colors from 'colors'
+import { colors } from '@colors'
 
 const transformColors = (c: typeof colors): { name: string; color: string}[] => {
   return Object.entries(c).flatMap(([key, value]) => {

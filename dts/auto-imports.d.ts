@@ -36,6 +36,7 @@ declare global {
   const defineStore: typeof import('pinia')['defineStore']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
+  const errorInterceptor: typeof import('../src/composables/http/interceptors/response.interceptor')['errorInterceptor']
   const exampleGeneralService: typeof import('../src/services/example-general.service')['exampleGeneralService']
   const exampleViewService: typeof import('../src/views/example-view/example-view.service')['exampleViewService']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -94,9 +95,12 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const requestErrorInterceptor: typeof import('../src/composables/http/interceptors/request.interceptor')['requestErrorInterceptor']
+  const requestInterceptor: typeof import('../src/composables/http/interceptors/request.interceptor')['requestInterceptor']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
+  const responseInterceptor: typeof import('../src/composables/http/interceptors/response.interceptor')['responseInterceptor']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const shallowReactive: typeof import('vue')['shallowReactive']
@@ -147,6 +151,7 @@ declare global {
   const useBrowserLocation: typeof import('@vueuse/core')['useBrowserLocation']
   const useCached: typeof import('@vueuse/core')['useCached']
   const useClipboard: typeof import('@vueuse/core')['useClipboard']
+  const useClipboardItems: typeof import('@vueuse/core')['useClipboardItems']
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
@@ -318,4 +323,5 @@ declare global {
 declare global {
   // @ts-ignore
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
+  import('vue')
 }

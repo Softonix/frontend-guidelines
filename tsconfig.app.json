@@ -4,16 +4,24 @@
     "dts/*",
     "src/**/*",
     "src/**/*.vue",
-    "tests"
+    "tests",
+    "tailwind/tailwind.colors.ts"
   ],
   "compilerOptions": {
     "composite": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@colors": [
+        "./tailwind/tailwind.colors.ts"
       ]
     },
-    "types": ["unplugin-icons/types/vue"]
+    "types": [
+      "unplugin-icons/types/vue"
+    ]
   }
 }

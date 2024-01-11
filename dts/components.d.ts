@@ -28,7 +28,6 @@ declare module 'vue' {
     ExampleCssClamp: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssClamp.vue')['default']
     ExampleCssContainerQuery: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssContainerQuery.vue')['default']
     ExampleCssContainerStyle: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssContainerStyle.vue')['default']
-    ExampleCssFirstLetter: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssFirstLetter.vue')['default']
     ExampleCssGradient: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssGradient.vue')['default']
     ExampleCssNestingBind: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssNestingBind.vue')['default']
     ExampleCssScroll: typeof import('./../src/views/example-view/components/ExampleCss/ExampleCssScroll.vue')['default']
@@ -43,7 +42,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestComponent: typeof import('./../src/views/example-view/components/TestComponent.vue')['default']
-    Text: typeof import('./../src/views/example-view/components/ExampleCss/Text.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
