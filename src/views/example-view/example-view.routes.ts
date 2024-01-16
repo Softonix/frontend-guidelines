@@ -59,7 +59,7 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
   {
     path: 'example-css',
     name: exampleViewRouteNames.exampleCss,
-    component: () => import('./ExampleCss.vue'),
+    component: () => import('./css-features/ExampleCss.vue'),
     meta: {
       label: 'Css Examples'
     }
