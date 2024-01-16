@@ -1,8 +1,8 @@
 <template>
   <div ref="intersectionTargetRef">
-    <slot v-if="isVisible"/>
+    <slot v-if="isVisible" />
 
-    <slot v-else name="placeholder"/>
+    <slot v-else name="placeholder" />
   </div>
 </template>
 
@@ -20,12 +20,12 @@ const props = withDefaults(defineProps<{
   needToWatchComponentUpdating: false
 })
 
-const intersectionTargetRef = ref<HTMLElement | null>(null);
-const isVisible = ref(false);
+const intersectionTargetRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
 
 const handleIntersection: IntersectionObserverCallback = ([entry]) => {
   if (props.removeIfInvisible) {
-    isVisible.value = entry.isIntersecting;
+    isVisible.value = entry.isIntersecting
   } else {
     isVisible.value = isVisible.value || entry.isIntersecting
   }
@@ -35,10 +35,10 @@ let observer: IntersectionObserver
 
 onMounted(() => {
   if (intersectionTargetRef.value) {
-    observer = new IntersectionObserver(handleIntersection, {...props.options});
-    observer.observe(intersectionTargetRef.value);
+    observer = new IntersectionObserver(handleIntersection, { ...props.options })
+    observer.observe(intersectionTargetRef.value)
   }
-});
+})
 
 onUpdated(() => {
   if (props.needToWatchComponentUpdating) {
@@ -54,8 +54,8 @@ onUpdated(() => {
 
 onUnmounted(() => {
   if (observer && intersectionTargetRef.value) {
-    observer.unobserve(intersectionTargetRef.value);
-    observer.disconnect();
+    observer.unobserve(intersectionTargetRef.value)
+    observer.disconnect()
   }
-});
+})
 </script>
