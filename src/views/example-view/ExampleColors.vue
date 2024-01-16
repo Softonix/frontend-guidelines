@@ -12,9 +12,17 @@
 <script setup lang="ts">
 import { colors } from '@colors'
 
-const transformColors = (c: typeof colors): { name: string; color: string}[] => {
-  return Object.entries(c).flatMap(([key, value]) => {
-    return typeof value === 'string' ? { name: key, color: value } : transformColors(value)
+const transformColors = (obj: any, prefix = ''): { name: string; color: string }[] => {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    const name = prefix ? `${prefix}-${key}` : key
+
+    if (typeof value === 'string') {
+      return [{ name, color: value }]
+    } else if (typeof value === 'object' && value !== null) {
+      return transformColors(value, name)
+    } else {
+      return []
+    }
   })
 }
 
