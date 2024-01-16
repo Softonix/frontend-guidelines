@@ -18,6 +18,7 @@
       v-for="checkbox in checkboxArray.data"
       :key="checkbox.id"
       v-model="checkboxArray.model"
+      :value="checkbox.id"
       :data="checkbox"
       class="max-w-64"
     />
