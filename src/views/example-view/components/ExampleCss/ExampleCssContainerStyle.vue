@@ -1,6 +1,11 @@
 <template>
   <ul class="card-list p-3">
-    <li v-for="(item, index) in days" :key="index" class="card-container" :style="item.style">
+    <li
+      v-for="(item, index) in days"
+      :key="index"
+      class="card-container"
+      :style="item.style"
+    >
       <div class="weather-card">
         <div class="day">{{ item.day }}</div>
         <div class="date">{{ item.month }} <span>{{ item.date }}</span></div>
@@ -25,7 +30,7 @@ const days = [
     high: '52',
     low: '43',
     desc: 'Afternoon showers',
-    style: { '--rain': true }
+    style: '--rain: true'
   },
   {
     day: 'Friday',
@@ -34,7 +39,7 @@ const days = [
     high: '45',
     low: '39',
     desc: 'Mostly cloudy',
-    style: { '--cloudy': true }
+    style: '--cloudy: true'
   },
   {
     day: 'Sunday',
@@ -43,7 +48,7 @@ const days = [
     high: '55',
     low: '47',
     desc: 'Partly cloudy',
-    style: { '--cloudy': true, '--sunny': true }
+    style: '--cloudy: true; --sunny: true'
   },
   {
     day: 'Saturday',
@@ -52,7 +57,7 @@ const days = [
     high: '55',
     low: '47',
     desc: 'Clear skies, sun',
-    style: { '--sunny': true }
+    style: '--sunny: true'
   }
 ]
 </script>

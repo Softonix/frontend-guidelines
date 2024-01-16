@@ -47,9 +47,3 @@
     <a class="text-gray-800 italic hover:underline" href="https://web.dev/articles/viewport-units">The large, small, and dynamic viewport units.</a>
   </p>
 </template>
-
-<style lang="scss" scoped>
-.text {
-  font-size: v-bind(fontStyle)
-}
-</style>

@@ -17,7 +17,7 @@
     >
   </div>
 
-  <a href="https://min-max-calculator.9elements.com/" class="cursor-pointer hover:underline" target="_blank">
+  <a href="https://min-max-calculator.9elements.com/" class="cursor-pointer underline" target="_blank">
     Calculate
   </a>
 </template>
