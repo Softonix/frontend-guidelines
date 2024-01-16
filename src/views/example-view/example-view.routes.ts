@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { transitionViewRouteNames, transitionViewRoutes } from './transitions/transitions.routes'
 
 export const exampleViewRouteNames = {
-  exampleView: 'exampleView',
+  exampleGeneral: 'exampleGeneral',
   exampleColors: 'exampleColors',
   exampleFlags: 'exampleFlags',
   exampleTransitions: 'exampleTransitions',
@@ -10,17 +10,17 @@ export const exampleViewRouteNames = {
   exampleLazyLoading: 'exampleLazyLoading',
   exampleAccessibility: 'exampleAccessibility',
   exampleWebWorker: 'exampleWebWorker',
-  customCheckbox: 'customCheckbox'
+  exampleCustomCheckbox: 'exampleCustomCheckbox'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
   {
-    path: 'example',
-    name: exampleViewRouteNames.exampleView,
+    path: 'general',
+    name: exampleViewRouteNames.exampleGeneral,
     meta: {
-      label: 'general.navigation.exampleView' // translation key
+      label: 'general.navigation.exampleGeneral' // translation key
     },
-    component: () => import('./ExampleView.vue')
+    component: () => import('./general/GeneralView.vue')
   },
   {
     path: 'example-lazy-loading',
@@ -82,7 +82,7 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: 'custom-checkbox',
-    name: exampleViewRouteNames.customCheckbox,
+    name: exampleViewRouteNames.exampleCustomCheckbox,
     component: () => import('./custom-checkbox/CustomCheckboxView.vue'),
     meta: {
       label: 'Custom Checkbox'

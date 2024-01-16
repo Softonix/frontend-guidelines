@@ -10,7 +10,7 @@
       <AuthButton />
     </div>
 
-    <ExampleViewComponent />
+    <GeneralExampleComponent />
 
     <hr class="my-4">
 
@@ -29,7 +29,7 @@
 
     <div>
       <label>Translation example</label>
-      <p>{{ t('exampleView.exampleViewKey') }}</p>
+      <p>{{ t('exampleGeneral.exampleViewKey') }}</p>
 
       <ElSelect ref="elementSelectRef" v-model="locale">
         <!--todo: create your own locales config, for example with full label, icon, etc...-->
