@@ -19,6 +19,8 @@ const transformColors = (c: typeof colors): { name: string; color: string}[] => 
 }
 
 const transformedColors = transformColors(colors)
+console.log(transformedColors)
+
 </script>
 
 <style lang="scss">

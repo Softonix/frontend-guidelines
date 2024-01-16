@@ -8,7 +8,9 @@ export const exampleViewRouteNames = {
   exampleTransitions: 'exampleTransitions',
   exampleCss: 'exampleCss',
   exampleLazyLoading: 'exampleLazyLoading',
-  exampleAccessibility: 'exampleAccessibility'
+  exampleAccessibility: 'exampleAccessibility',
+  exampleWebWorker: 'exampleWebWorker',
+  customCheckbox: 'customCheckbox'
 }
 
 export const exampleViewRoutes: Array<RouteRecordRaw> = [
@@ -68,6 +70,22 @@ export const exampleViewRoutes: Array<RouteRecordRaw> = [
     component: () => import('./accessibility/ExampleAccessibility.vue'),
     meta: {
       label: 'Accessibility'
+    }
+  },
+  {
+    path: 'web-worker',
+    name: exampleViewRouteNames.exampleWebWorker,
+    component: () => import('./web-worker/ExampleWebWorker.vue'),
+    meta: {
+      label: 'Web Worker'
+    }
+  },
+  {
+    path: 'custom-checkbox',
+    name: exampleViewRouteNames.customCheckbox,
+    component: () => import('./custom-checkbox/CustomCheckboxView.vue'),
+    meta: {
+      label: 'Custom Checkbox'
     }
   }
 ]
