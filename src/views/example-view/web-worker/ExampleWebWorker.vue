@@ -60,7 +60,7 @@ const columns = generateColumns()
 const filteredData = ref<any[]>([])
 
 const worker = new FilterWorker()
-worker.onmessage = function (e) {
+worker.onmessage = async (e) => {
   const [eventName, eventData] = e.data as [TEvents, any]
 
   if (eventName === 'loading') {
@@ -77,7 +77,12 @@ worker.onmessage = function (e) {
 }
 
 function onFilterChange (value: number | string) {
-  worker.postMessage(['filterData', value])
+  if (value) {
+    worker.postMessage(['filterData', value])
+  } else {
+    filteredData.value = []
+    worker.postMessage(['generateData', columns])
+  }
 }
 
 onMounted(() => {
