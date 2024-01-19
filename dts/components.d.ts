@@ -46,6 +46,7 @@ declare module 'vue' {
     ItemObserver: typeof import('./../src/views/example-view/components/ItemObserver.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./../src/components/layout/Sidebar.vue')['default']
     TestComponent: typeof import('./../src/views/example-view/components/TestComponent.vue')['default']
   }
   export interface ComponentCustomProperties {

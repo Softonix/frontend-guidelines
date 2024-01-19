@@ -4,6 +4,7 @@
     active-text="With lazy-loading"
     inactive-text="Without lazy-loading"
   />
+
   <div v-if="lazyLoadingEnabled" class="colors-wrapper grid gap-5">
     <template v-for="randomColor in randomColors" :key="randomColor">
       <ItemObserver :removeIfInvisible="false">
@@ -18,6 +19,7 @@
       </ItemObserver>
     </template>
   </div>
+
   <div v-else class="colors-wrapper grid gap-5">
     <TestComponent
       v-for="randomColor in randomColors"
@@ -41,10 +43,14 @@ function generateRandomHexColors (numColors: number) {
   return colors
 }
 
-const randomColors = generateRandomHexColors(1000)
+const randomColors = ref<string[]>([])
+
+onMounted(() => {
+  randomColors.value = generateRandomHexColors(1000)
+})
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .colors-wrapper {
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }

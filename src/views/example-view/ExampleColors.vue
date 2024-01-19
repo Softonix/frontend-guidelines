@@ -27,11 +27,9 @@ const transformColors = (obj: any, prefix = ''): { name: string; color: string }
 }
 
 const transformedColors = transformColors(colors)
-console.log(transformedColors)
-
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .colors-wrapper {
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
 }
