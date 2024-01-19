@@ -70,6 +70,10 @@ worker.onmessage = function (e) {
   if (eventName === 'generateData') {
     filteredData.value = [...filteredData.value, ...eventData]
   }
+
+  if (eventName === 'filterData') {
+    filteredData.value = eventData
+  }
 }
 
 function onFilterChange (value: number | string) {
