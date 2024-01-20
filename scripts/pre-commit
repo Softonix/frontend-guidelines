@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "*****Running linter and type-check******"
+
+npm run lint
+npm run type-check

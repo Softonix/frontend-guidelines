@@ -9,6 +9,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",    
+    "set-git-hooks": "cp scripts/* .git/hooks && chmod +x .git/hooks/* && git config --local core.hooksPath .git/hooks",
+    "postinstall": "npm run set-git-hooks",
     "test": "npx playwright test --ui",
     "test:cy": "server-test 'dev' http://localhost:5173 'cypress open'",
     "test:cy:h": "server-test 'dev' http://localhost:5173 'cypress run'"
