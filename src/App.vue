@@ -6,7 +6,7 @@
     }"
   >
     <router-view />
-  </ElConfigProvider> 
+  </ElConfigProvider>
 </template>
 
 <script lang="ts" setup>
