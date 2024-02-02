@@ -38,7 +38,8 @@ module.exports = {
       ignoreTrailingComments: true,
       ignoreUrls: true,
       ignoreStrings: true,
-      ignoreRegExpLiterals: true
+      ignoreRegExpLiterals: true,
+      ignorePattern: 'url\\('
     }],
     'no-undef': 'off',
     'no-prototype-builtins': 'off',
