@@ -8,7 +8,6 @@ import { IconsPluginCustom } from './vite.config.icons'
 import { ComponentsBuilder } from './vite.config.components'
 import { ImportsBuilder } from './vite.config.imports'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),

@@ -29,6 +29,3 @@ coverage
 *.sw?
 
 stats.html
-# Type check info
-tsconfig.app.tsbuildinfo
-tsconfig.node.tsbuildinfo
