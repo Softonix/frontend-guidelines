@@ -318,6 +318,7 @@
     "errorInterceptor": true,
     "requestErrorInterceptor": true,
     "requestInterceptor": true,
-    "responseInterceptor": true
+    "responseInterceptor": true,
+    "useApiClient": true
   }
 }
