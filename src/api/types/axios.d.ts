@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig, type InternalAxiosRequestConfig } from 'axios'
 
 export interface TAxiosRequestConfig<Path extends TPathKeys = string, Method extends TPathMethods<Path> = string> extends AxiosRequestConfig  {
-  query?: TRequestParameters<Path, Method>['query']
+  params?: TRequestParameters<Path, Method>['query']
   dynamicKeys?: TRequestParameters<Path, Method>['path']
 }
 
