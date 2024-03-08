@@ -5,6 +5,13 @@ export type TRequestHash = Record<string, AbortController>
 export const useRequestAbort = () => {
   const requestsList: Ref<TRequestHash> = ref({})
 
+  const newAbortSignal = (timeoutMs?: number) => {
+    const abortController = new AbortController()
+    setTimeout(() => abortController.abort(), timeoutMs || 0)
+
+    return abortController
+  }
+
   const abortAll = (): void => {
     if (Object.keys(requestsList.value).length > 0) {
       Object.values(requestsList.value).forEach(requestSaver => {
@@ -25,10 +32,10 @@ export const useRequestAbort = () => {
     }
   }
 
-  const setCancellation = (id: string): AxiosRequestConfig => {
+  const setCancellation = (id: string, { timeout } = { timeout: 0 }): AxiosRequestConfig => {
     if (requestsList.value?.[id]) abort(id)
 
-    const abortController = new AbortController()
+    const abortController = newAbortSignal(timeout)
 
     requestsList.value[id] = abortController
 

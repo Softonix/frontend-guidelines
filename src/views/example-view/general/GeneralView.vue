@@ -133,7 +133,7 @@ function changeExampleViewVar () {
 async function getSomeExampleVar (id: number) {
   try {
     loading.value = true
-    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR'))
+    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR', { timeout: 1000 }))
   } catch (err) {
     console.error(err)
   } finally {
