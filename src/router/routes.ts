@@ -25,13 +25,13 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   authRoutes,
-  defaultLayoutRoutes,
-  {
-    path: '/react-vs-vue',
-    component: DefaultLayout,
-    children: [{ path: '', name: 'react-vs-vue', component: () => import('@/views/react-vs-vue/Index.vue') }]
+  defaultLayoutRoutes
+  // {
+  //   path: '/react-vs-vue',
+  //   component: DefaultLayout,
+  //   children: [{ path: '', name: 'react-vs-vue', component: () => import('@/views/react-vs-vue/Index.vue') }]
 
-  }
+  // }
 ]
 
 export {

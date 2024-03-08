@@ -10,6 +10,16 @@
       <AuthButton />
     </div>
 
+    <hr class="my-4">
+
+    <div>
+      <label>Search post by id</label>
+
+      <el-input v-model="postId" @input="[requestAbort.abort('GET_EXAMPLE_VAR'), debouncedGetSomeExampleVar()]" />
+    </div>
+
+    <hr class="my-4">
+
     <GeneralExampleComponent />
 
     <hr class="my-4">
@@ -89,12 +99,19 @@
 </template>
 
 <script lang="ts" setup>
+import { useRequestAbort } from '@/composables/http/useRequestAbort'
+import { useDebounceFn } from '@vueuse/core'
+
 const { availableLocales, locale, t } = useI18n()
 
 const generalStore = useGeneralStore()
 const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
+const requestAbort = useRequestAbort()
+
 const loading = ref(false)
+
+const postId = ref()
 
 const exampleElementRef = ref()
 const elementSelectRef = ref()
@@ -113,10 +130,10 @@ function changeExampleViewVar () {
   exampleStore.setExampleVar()
 }
 
-async function getSomeExampleVar () {
+async function getSomeExampleVar (id: number) {
   try {
     loading.value = true
-    await exampleStore.getExampleVar()
+    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR'))
   } catch (err) {
     console.error(err)
   } finally {
@@ -124,10 +141,18 @@ async function getSomeExampleVar () {
   }
 }
 
+const debouncedGetSomeExampleVar = useDebounceFn(() => {
+  getSomeExampleVar(postId.value)
+}, 500)
+
 onMounted(() => {
-  getSomeExampleVar()
+  getSomeExampleVar(1)
 
   // Element input ref blur method
   elementSelectRef.value?.blur()
+})
+
+onBeforeUnmount(() => {
+  requestAbort.abortAll()
 })
 </script>

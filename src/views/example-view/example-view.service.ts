@@ -1,6 +1,8 @@
+import type { AxiosRequestConfig } from 'axios'
+
 class ExampleViewService {
-  getSomeData (id = 1) {
-    return useHttp.get<IExampleInterface>(`/posts/${id}`)
+  getSomeData (id = 1, config: AxiosRequestConfig = {}) {
+    return useHttp.get<IExampleInterface>(`/posts/${id}`, { ...config })
   }
 }
 

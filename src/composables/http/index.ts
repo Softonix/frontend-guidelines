@@ -16,5 +16,4 @@ instance.interceptors.response.use(
 )
 
 instance.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
-
 export const useHttp = instance
