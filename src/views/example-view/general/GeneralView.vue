@@ -15,7 +15,24 @@
     <div>
       <label>Search post by id</label>
 
-      <el-input v-model="postId" @input="[requestAbort.abort('GET_EXAMPLE_VAR'), debouncedGetSomeExampleVar()]" />
+      <el-input
+        v-model="searchQuery"
+        class="mb-5"
+        placeholder="Search by title"
+        @input="[requestAbort.abort('SEARCH_POST'), debouncedGetSomeExampleVar()]"
+      />
+
+      <div class="flex flex-col gap-2">
+        <el-card v-for="post in filteredPosts" :key="post.id" class="mb-2">
+          <template #header>
+            <div class="flex justify-between">
+              <span>{{ post?.title }}</span>
+              <el-button type="primary" plain>{{ post?.userId }}</el-button>
+            </div>
+          </template>
+          <p>{{ post?.body }}</p>
+        </el-card>
+      </div>
     </div>
 
     <hr class="my-4">
@@ -111,7 +128,9 @@ const requestAbort = useRequestAbort()
 
 const loading = ref(false)
 
-const postId = ref()
+const searchQuery = ref('')
+
+const filteredPosts = ref<IExampleInterface[]>([])
 
 const exampleElementRef = ref()
 const elementSelectRef = ref()
@@ -133,7 +152,7 @@ function changeExampleViewVar () {
 async function getSomeExampleVar (id: number) {
   try {
     loading.value = true
-    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR', { timeout: 1000 }))
+    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR', { timeout: 3000 }))
   } catch (err) {
     console.error(err)
   } finally {
@@ -141,8 +160,12 @@ async function getSomeExampleVar (id: number) {
   }
 }
 
+async function searchPost (searchQuery: string) {
+  filteredPosts.value = await exampleViewService.getPostsStartsFrom(searchQuery, requestAbort.setCancellation('SEARCH_POST', { timeout: 3000 }))
+}
+
 const debouncedGetSomeExampleVar = useDebounceFn(() => {
-  getSomeExampleVar(postId.value)
+  searchPost(searchQuery.value)
 }, 500)
 
 onMounted(() => {

@@ -1,13 +1,16 @@
 import type { AxiosRequestConfig } from 'axios'
 
-export type TRequestHash = Record<string, AbortController>
+export type TRequestHash = Record<string | symbol, AbortController>
 
 export const useRequestAbort = () => {
   const requestsList: Ref<TRequestHash> = ref({})
 
-  const newAbortSignal = (timeoutMs?: number) => {
+  const newAbortSignal = (timeoutMs: number) => {
     const abortController = new AbortController()
-    setTimeout(() => abortController.abort(), timeoutMs || 0)
+
+    if (timeoutMs) {
+      setTimeout(() => abortController.abort(), timeoutMs)
+    }
 
     return abortController
   }
