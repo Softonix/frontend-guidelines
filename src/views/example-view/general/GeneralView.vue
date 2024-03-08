@@ -116,7 +116,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useRequestAbort } from '@/composables/http/useRequestAbort'
+import { useRequestAbort } from '@/composables/http/request-abort.composable'
 import { useDebounceFn } from '@vueuse/core'
 
 const { availableLocales, locale, t } = useI18n()
