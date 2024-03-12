@@ -1,3 +1,5 @@
+import type { AxiosRequestConfig } from 'axios'
+
 // the first argument is a unique id of the store across your application
 export const useExampleViewStore = defineStore('exampleViewStore', () => {
   const exampleVar = ref<Partial<IExampleInterface>>({})
@@ -7,8 +9,8 @@ export const useExampleViewStore = defineStore('exampleViewStore', () => {
     exampleVar.value.title = 'changed title'
   }
 
-  async function getExampleVar () {
-    exampleVar.value = await exampleViewService.getSomeData()
+  async function getExampleVar (id: number, config?: AxiosRequestConfig) {
+    exampleVar.value = await exampleViewService.getSomeData(id, config)
   }
 
   return {
