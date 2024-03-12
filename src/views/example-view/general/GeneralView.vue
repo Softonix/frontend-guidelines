@@ -17,10 +17,10 @@
     <div>
       <label>Compute Example</label>
       <Compute
-        #default="{ lastLevel }"
-        :lastLevel="computeExample.firstLevel.secondLevel.thirdLevel"
+        #default="{ data: {lastLevel} }"
+        :data="{lastLevel: computeExample.firstLevel.secondLevel.thirdLevel}"
       >
-        <p>{{ lastLevel }}</p>
+        <p>{{ lastLevel}}</p>
         <p>{{ lastLevel }} with additional string</p>
       </Compute>
     </div>
