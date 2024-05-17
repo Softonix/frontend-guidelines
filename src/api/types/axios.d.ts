@@ -2,7 +2,6 @@ import axios, { type AxiosRequestConfig, type InternalAxiosRequestConfig } from 
 
 export interface TAxiosRequestConfig<Path extends TPathKeys = string, Method extends TPathMethods<Path> = string> extends AxiosRequestConfig  {
   params?: TRequestParameters<Path, Method>['query']
-  dynamicKeys?: TRequestParameters<Path, Method>['path']
 }
 
 declare module 'axios' {
