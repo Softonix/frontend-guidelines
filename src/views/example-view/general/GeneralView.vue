@@ -10,6 +10,33 @@
       <AuthButton />
     </div>
 
+    <hr class="my-4">
+
+    <div>
+      <label>Search post by id</label>
+
+      <el-input
+        v-model="searchQuery"
+        class="mb-5"
+        placeholder="Search by title"
+        @input="[requestAbort.abort('SEARCH_POST'), debouncedGetSomeExampleVar()]"
+      />
+
+      <div class="flex flex-col gap-2">
+        <el-card v-for="post in filteredPosts" :key="post.id" class="mb-2">
+          <template #header>
+            <div class="flex justify-between">
+              <span>{{ post?.title }}</span>
+              <el-button type="primary" plain>{{ post?.userId }}</el-button>
+            </div>
+          </template>
+          <p>{{ post?.body }}</p>
+        </el-card>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
     <GeneralExampleComponent />
 
     <hr class="my-4">
@@ -89,12 +116,21 @@
 </template>
 
 <script lang="ts" setup>
+import { useRequestAbort } from '@/composables/http/request-abort.composable'
+import { useDebounceFn } from '@vueuse/core'
+
 const { availableLocales, locale, t } = useI18n()
 
 const generalStore = useGeneralStore()
 const { exampleGeneralVar, generalLoading } = storeToRefs(generalStore)
 
+const requestAbort = useRequestAbort()
+
 const loading = ref(false)
+
+const searchQuery = ref('')
+
+const filteredPosts = ref<IExampleInterface[]>([])
 
 const exampleElementRef = ref()
 const elementSelectRef = ref()
@@ -113,10 +149,10 @@ function changeExampleViewVar () {
   exampleStore.setExampleVar()
 }
 
-async function getSomeExampleVar () {
+async function getSomeExampleVar (id: number) {
   try {
     loading.value = true
-    await exampleStore.getExampleVar()
+    await exampleStore.getExampleVar(id, requestAbort.setCancellation('GET_EXAMPLE_VAR', { timeout: 3000 }))
   } catch (err) {
     console.error(err)
   } finally {
@@ -124,10 +160,22 @@ async function getSomeExampleVar () {
   }
 }
 
+async function searchPost (searchQuery: string) {
+  filteredPosts.value = await exampleViewService.getPostsStartsFrom(searchQuery, requestAbort.setCancellation('SEARCH_POST', { timeout: 3000 }))
+}
+
+const debouncedGetSomeExampleVar = useDebounceFn(() => {
+  searchPost(searchQuery.value)
+}, 500)
+
 onMounted(() => {
-  getSomeExampleVar()
+  getSomeExampleVar(1)
 
   // Element input ref blur method
   elementSelectRef.value?.blur()
+})
+
+onBeforeUnmount(() => {
+  requestAbort.abortAll()
 })
 </script>
