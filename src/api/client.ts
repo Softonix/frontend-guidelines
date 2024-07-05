@@ -1,8 +1,9 @@
 import axios from 'axios'
+
 import {
-  errorInterceptor,
   requestErrorInterceptor,
   requestInterceptor,
+  errorInterceptor,
   responseInterceptor
 } from './interceptors'
 
@@ -17,4 +18,4 @@ instance.interceptors.response.use(
 
 instance.interceptors.request.use(requestInterceptor, requestErrorInterceptor)
 
-export const useHttp = instance
+export const useApiClient = instance

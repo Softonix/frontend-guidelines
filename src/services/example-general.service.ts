@@ -1,6 +1,6 @@
 class ExampleGeneralService {
   getSomeData () {
-    return useHttp.get<IExampleInterface>('/posts/1')
+    return useApiClient.get('/api/attachments/')
   }
 }
 

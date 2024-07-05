@@ -1,10 +1,12 @@
 // the first argument is a unique id of the store across your application
 export const useExampleViewStore = defineStore('exampleViewStore', () => {
-  const exampleVar = ref<Partial<IExampleInterface>>({})
+  const exampleVar = ref<Partial<TBook>>()
   const highContrastMode = ref(false)
 
   function setExampleVar () {
-    exampleVar.value.title = 'changed title'
+    if (exampleVar.value) {
+      exampleVar.value.description = 'changed description'
+    }
   }
 
   async function getExampleVar () {

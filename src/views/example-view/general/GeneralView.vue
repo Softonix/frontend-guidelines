@@ -61,10 +61,10 @@
         <template #header>
           <div class="flex justify-between">
             <span>{{ exampleVar?.title }}</span>
-            <el-button type="primary" plain>{{ exampleVar?.userId }}</el-button>
+            <el-button type="primary" plain>{{ exampleVar?.id }}</el-button>
           </div>
         </template>
-        <p>{{ exampleVar?.body }}</p>
+        <p>{{ exampleVar?.description }}</p>
       </el-card>
 
       <el-button type="success" @click="changeExampleViewVar">
