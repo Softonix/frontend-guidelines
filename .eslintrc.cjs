@@ -29,7 +29,7 @@ module.exports = {
     }
   ],
 
-  ignorePatterns: ['dts/*.d.ts'],
+  ignorePatterns: ['dts/*.d.ts', 'src/api/types/schema.d.ts', 'src/api/types/axios.d.ts'],
 
   rules: {
     'max-len': ['error', {

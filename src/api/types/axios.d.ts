@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig, type InternalAxiosRequestConfig } from 'axios'
 
-export interface IAxiosRequestConfig<Path extends TPathKeys = string, Method extends TPathMethods<Path> = string> extends AxiosRequestConfig  {
+export interface IAxiosRequestConfig<Path extends TPathKeys = string, Method extends TPathMethods<Path> = string> extends AxiosRequestConfig {
   dynamicKeys?: TRequestParameters<Path, Method>
   params?: TRequestQuery<Path, Method>
 }
