@@ -1,5 +1,3 @@
-import type { Column } from 'element-plus'
-
 export type TEvents = 'generateData' | 'filterData' | 'loading'
 
 export const generateColumns = (props?: any) => [
@@ -18,7 +16,7 @@ export const generateColumns = (props?: any) => [
   }
 ]
 
-export const generateData = (columns: Column[]) => Array.from({ length: 1000000 }).map((_, rowIndex) => {
+export const generateData = (columns: TElementPlus['Column'][]) => Array.from({ length: 1000000 }).map((_, rowIndex) => {
   return columns.reduce((acc, col, colIndex) => {
     acc[col.dataKey as string] = colIndex < 7
       ? `Row ${rowIndex} - Col ${colIndex}`

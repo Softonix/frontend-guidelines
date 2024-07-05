@@ -2,7 +2,7 @@
   <ElConfigProvider
     :locale="{
       name: locale,
-      el: messages[locale]?.el as TranslatePair
+      el: messages[locale]?.el as TElementPlus['TranslatePair']
     }"
   >
     <router-view />
@@ -10,7 +10,5 @@
 </template>
 
 <script lang="ts" setup>
-import type { TranslatePair } from 'element-plus/es/locale'
-
 const { messages, locale } = useI18n()
 </script>
