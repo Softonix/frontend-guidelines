@@ -17,7 +17,8 @@ type TElementPlus = {
   LoadingOptions: import('element-plus').LoadingOptions
   Column: import('element-plus').Column
 
-  EpPropMergeType: import('element-plus/es/utils/index.mjs').EpPropMergeType
   LoadingInstance: import('element-plus/es/components/loading/src/loading').LoadingInstance
   TranslatePair: import('element-plus/es/locale').TranslatePair
 }
+
+type TElEpPropMergeType<Type, Value, Validator> = import('element-plus/es/utils/index.mjs').EpPropMergeType<Type, Value, Validator>
