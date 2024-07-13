@@ -1,3 +1,7 @@
+import { i18n } from '@/plugins/i18n'
+
+const { t } = i18n.global
+
 // --------------------------------------------- F O R M  R E F --------------------------------------------------------
 export function useElFormRef (initialValue: any = null) {
   return ref<TElementPlus['FormInstance']>(initialValue)
@@ -14,21 +18,17 @@ export function useElFormRules (model: TElementPlus['FormRules']) {
 }
 
 export function useRequiredRule ({ required = true } = {}) {
-  const { t } = useI18n()
   return { required, message: t('validation.required'), trigger: 'change' } as TElementPlus['FormItemRule']
 }
 
 export function useEmailRule () {
-  const { t } = useI18n()
   return { type: 'email', message: t('validation.email'), trigger: ['change', 'blur'] } as TElementPlus['FormItemRule']
 }
 
 export function useMinLenRule (min: number): TElementPlus['FormItemRule'] {
-  const { t } = useI18n()
   return { min, message: t('validation.minLength', { number: min }), trigger: 'change' }
 }
 
 export function useMaxLenRule (max: number): TElementPlus['FormItemRule'] {
-  const { t } = useI18n()
   return { max, message: t('validation.maxLength', { number: max }), trigger: 'change' }
 }
